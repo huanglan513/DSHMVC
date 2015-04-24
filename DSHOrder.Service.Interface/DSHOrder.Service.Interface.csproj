@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2306096E-8527-43FC-9261-7D4FF00D82CA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DSHOrder.Service.Interface</RootNamespace>
+    <AssemblyName>DSHOrder.Service.Interface</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ICityService.cs" />
+    <Compile Include="ICodeTableService.cs" />
+    <Compile Include="ICustomerService.cs" />
+    <Compile Include="IDepartmentService.cs" />
+    <Compile Include="IDistrictService.cs" />
+    <Compile Include="IFormsAuthenticationService.cs" />
+    <Compile Include="IFunctionService.cs" />
+    <Compile Include="IGroupByCityService.cs" />
+    <Compile Include="IGroupByGroupService.cs" />
+    <Compile Include="IGroupByItemService.cs" />
+    <Compile Include="IGroupByPortalService.cs" />
+    <Compile Include="IGroupBySalesService.cs" />
+    <Compile Include="IIndustryService.cs" />
+    <Compile Include="IOrderDetailService.cs" />
+    <Compile Include="IPaymentService.cs" />
+    <Compile Include="IPhoneFeeInfoService.cs" />
+    <Compile Include="IPrivilegeService.cs" />
+    <Compile Include="IRoleService.cs" />
+    <Compile Include="ISubIndustryService.cs" />
+    <Compile Include="ISystemParamService.cs" />
+    <Compile Include="IUserDepartmentService.cs" />
+    <Compile Include="IUserRoleService.cs" />
+    <Compile Include="IUserService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ILogisticsService.cs" />
+    <Compile Include="IUploadFileService.cs" />
+    <Compile Include="IApproveRecordGroupByService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DSHOrder.Common\DSHOrder.Common.csproj">
+      <Project>{BB5F5310-72E2-433D-B8C0-E814FA591715}</Project>
+      <Name>DSHOrder.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DSHOrder.Entity\DSHOrder.Entity.csproj">
+      <Project>{C25A03D1-1A31-42AE-A8DD-49E6BE0D3F3C}</Project>
+      <Name>DSHOrder.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DSHOrder.Repository\DSHOrder.Repository.csproj">
+      <Project>{438E63BB-8CF1-4B69-80DC-5D23DC4D23C4}</Project>
+      <Name>DSHOrder.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

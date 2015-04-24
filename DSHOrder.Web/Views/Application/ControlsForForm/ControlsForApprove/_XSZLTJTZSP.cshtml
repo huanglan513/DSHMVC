@@ -1,0 +1,192 @@
+﻿@model DSHOrder.Web.Models.GroupByFlowInfo
+@using DSHOrder.Web.Common;
+@using DSHOrder.Web.Common.Application.GroupByGroup;
+@using DSHOrder.Entity;
+@{
+    GBGField fh = ViewData["fh"] as GBGField;
+}
+@if (Model.CurrentNode == GBGFlowEnumFLowNode.XSZLTJTZSP)
+{
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            _XSZLTJTZSP_Init();
+        });
+
+        function _XSZLTJTZSP_Init() {
+            $("#ApproveXSZLContractFile").uploadify({
+                'uploader': '/Scripts/uploadify.swf',
+                'script': '/Ashx/ApplicationFileHandler.ashx?Data=3',
+                'folder': '/UploadFile/',
+                'cancelImg': '/Content/cancel.png',
+                'fileExt': '*.jpg;*.jpeg;*.png;',
+                'fileDesc': '*.jpg;*.jpeg;*.png;',
+                'sizeLimit': 1024 * 1024 * 10, //10M
+                'multi': false,
+                'onComplete': _XSZLTJTZSP_AfterUploadedFile
+            });
+
+            var vXSZLResult = $("#GroupByGroup_ApproveXSZLResult").val();
+            if (vXSZLResult == "" || vXSZLResult == "XSZLTJTZSP_NotSubmit") {
+                $("#Helper_XSZLTJTZSP_SubmitStatus[value='0']").attr("checked", "checked");
+            }
+            else if (vXSZLResult == "XSZLTJTZSP_Submit") {
+                $("#Helper_XSZLTJTZSP_SubmitStatus[value='1']").attr("checked", "checked");
+            }
+
+            $("#Helper_XSZLTJTZSP_SubmitStatus[value='0']").change(
+            function () {
+                _XSZLTJTZSP_ChangeSubmitStatus("NotSubmit");
+            });
+
+            $("#Helper_XSZLTJTZSP_SubmitStatus[value='1']").change(
+            function () {
+                _XSZLTJTZSP_ChangeSubmitStatus("Submit");
+            });
+
+        }
+
+        function _XSZLTJTZSP_ChangeSubmitStatus(v) {
+            $(":submit[id^='Submit:XSZLTJTZSP']").attr("name", "Submit:XSZLTJTZSP_" + v);
+            $(":submit[id^='Submit:XSZLTJTZSP']").attr("id", "Submit:XSZLTJTZSP_" + v);
+        }
+
+        function _XSZLTJTZSP_AfterUploadedFile(event, queueID, fileObj, response, data) {
+            var jsonData = JSON.parse(response);
+            $("#ImgContractFile").attr("src", jsonData.Path);
+            $("#GroupByGroup_ApproveXSZLContractFileID").val(jsonData.UploadFileID);
+        }
+    </script>
+}
+
+    <script language="javascript" type="text/javascript">
+        function _XSZLTJTZSP_SendEmail(GroupByID, cc) {
+            var cc = $("#_XSZLTJTZSP_CCEmail").val();
+            var url ="@Url.Action("_XSZLTJTZSP_SendEmail", "Application")"; 
+            var params = { 'GroupByID': GroupByID, 'cc': cc };
+            
+            $.getJSON(url, params, function (data) {
+                alert(data);
+            });     
+        }
+
+         //導出Excel
+        function _XSZLTJTZSP_Expert(GroupByGroupId) {
+
+            var url = "@Url.Action("_XSZLTJTZSP_Expert", "Application")"; 
+            var params = { 'GroupByGroupId': GroupByGroupId };
+            
+            $.getJSON(url, params, function (data) {
+                if (data.Timeout != undefined && data.Timeout) {
+                    alert(data.Msg);
+                }
+                else {
+                    if (data.IsOK == "false") {
+                        alert("导出失败！");
+                    }
+
+                    if (typeof (this.iframe) == "undefined") {
+                        this.iframe = document.createElement("iframe");
+                        this.iframe.style.display = "none";
+                        document.body.appendChild(this.iframe);
+                    }
+
+                    var urlDownload = "@Url.Action("DownloadDoc", "Application")"; 
+                    // alert(data.Url);
+                    this.iframe.src = urlDownload + "/" + data.Url;
+                    // this.iframe.src = urlDownload + "/";
+                };
+            });     
+        }
+    </script>
+
+
+<table id="GeneralTable">
+    <tr>
+        <td class="title" colspan="2">
+            <b>销售助理提交团长审批</b>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            是否已提交
+        </td>
+        <td>
+            @fh.ShowField(m => m.Helper_XSZLTJTZSP_SubmitStatus, GBGFlowEnumEditType.CodeTableRadioButtonList, CodeTableHelper.CodeTableXSZLTJTZSP)
+            @Html.HiddenFor(m => m.GroupByGroup.ApproveXSZLResult)
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            是否跨城市
+        </td>
+        <td>
+            @Html.Partial("ControlsForForm/_SelectCrossCityUser", Model)
+        </td>
+    </tr>
+    <tr>
+        <td class="title" width="180">
+            合同扫描件
+        </td>
+        <td>
+            <table id="NoBorderTable" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    @if (fh.CalcField(m => m.GroupByGroup.ApproveXSZLContractFileID) == GBGFlowEnumPermission.CanWrite)
+                    {
+                        <td width="400" valign="top">
+                            <input id="ApproveXSZLContractFile" name="ApproveXSZLContractFile" type="file" />
+                            @Html.HiddenFor(m => m.GroupByGroup.ApproveXSZLContractFileID)
+                            @Html.ValidationMessageFor(m => m.GroupByGroup.ApproveXSZLContractFileID)
+                        </td>
+                        <td width="100" align="left" valign="middle">
+                            <a href="javascript:if(checkImport('ApproveXSZLContractFile')){$('#ApproveXSZLContractFile').uploadifyUpload();}" class="button" style="width: 60px; height: 20px; font-size: large; text-align: center">上传</a>
+                        </td>
+                    }
+                    <td valign="middle">
+                        @{
+                            UploadFile ApproveXSZLContractFile = null;
+                            if (Model != null && Model.GroupByGroup != null)
+                            {
+                                ApproveXSZLContractFile = Model.GroupByGroup.ApproveXSZLContractFile;
+                            }
+                        }
+                        &nbsp;&nbsp;&nbsp;&nbsp;<img id="ImgContractFile" width="100" height="100" src="@Url.UploadFileUrl(ApproveXSZLContractFile)" />
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            商家Email
+        </td>
+        <td>
+            @Html.DisplayFor(m => m.GroupByGroup.Customer.ContactEmail)
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            CC
+        </td>
+        <td>
+            <input type="text" id="_XSZLTJTZSP_CCEmail" />
+            <input value="导出Excel" class="button" onclick="_XSZLTJTZSP_Expert(@Model.GroupByGroup.GroupByGroupID)" style="width: 65px" />
+            <input value="Send Email" class="button" onclick="_XSZLTJTZSP_SendEmail(@Model.GroupByGroup.GroupByGroupID)" style="width: 70px" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            备注
+        </td>
+        <td style="height: 100px" align="left" valign="top">
+            @fh.ShowField(m => m.GroupByGroup.ApproveXSZLMemo, GBGFlowEnumEditType.TextArea)
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            处理时间
+        </td>
+        <td>
+            @fh.ShowField(m => m.GroupByGroup.ApproveXSZLActionTime)
+        </td>
+    </tr>
+</table>

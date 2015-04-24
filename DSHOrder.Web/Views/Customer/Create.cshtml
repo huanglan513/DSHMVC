@@ -1,0 +1,566 @@
+﻿@model DSHOrder.Entity.Customer
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script language="javascript" type="text/javascript" src="@Url.Content("~/My97DatePicker/WdatePicker.js")"></script>
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("#DefaultPaymentDate").click(function () {
+            WdatePicker({ dateFmt: 'yyyy-MM-dd' });
+        });
+         $("#CityID").change(function(){ //City选项改变时激活
+            var selec = $(this).val();  //获取改变的选项值
+            var url ="@Url.Action("GetDistrict", "Customer", new { area = "SGManage" })";  //参数依次类型(action,Controller,area）
+
+            $("#DistrictID").find("option").remove();  //清空
+            $.getJSON(url, { 'cityID': selec }, function (data) {  //orgID是参数名和Controllers中的action参数名相同
+                $.each(data, function (i, item) {
+                    $("<option></option>").val(item["Value"]).text(item["Text"]).appendTo($("#DistrictID"));
+                });  
+            });    
+        });
+
+        $("#IndustryList").change(function(){ //City选项改变时激活
+            var selec = $(this).val();  //获取改变的选项值
+            var url ="@Url.Action("GetSubIndustry", "Customer", new { area = "SGManagess" })";  //参数依次类型(action,Controller,area）
+
+            $("#SubIndustryList").find("option").remove();  //清空
+            $.getJSON(url, { 'IndustryID': selec }, function (data) {  //orgID是参数名和Controllers中的action参数名相同
+                $.each(data, function (i, item) {
+                    $("<option></option>").val(item["Value"]).text(item["Text"]).appendTo($("#SubIndustryList"));
+                });  
+            });    
+        });
+
+        $("#DefaultPaymentType").change(function(){
+            if($(this).children('option:selected').text()=="月结")
+            {
+                $("#trDefaultPayment").attr("style","display:block");
+            }
+            else
+            {
+                $("#trDefaultPayment").attr("style","display:none");
+            }
+        });
+
+        $("#Evaluation").keydown(function(){
+             obj=$(this)[0];
+         var max = obj.maxlength; 
+        if(max == null || max == "" || max == undefined) {
+            return;
+        }
+        if(obj.value.length > max) {
+            alert("请不要超过最大长度:" + max);
+            obj.value=obj.value.substring(0,(max-1));
+            return;
+        }    
+       });
+
+       $("#CustomerName").blur(function(){
+            var customerId=0;
+            if($("#CustomerID").lenth>0)
+            {
+                customerId=$("#CustomerID").val();
+            }
+            
+            $.ajax({ 
+                type: "Get",
+                url: "/Customer/ExistCustomerName/",
+                data:  {"customerName":$("#CustomerName").val(),"customerId":customerId},
+                success: function (msg) {
+                    if(msg=="True")
+                    {
+                        alert("该公司名称已存在，请重新输入新的商家名称");
+                        $("#CustomerName")[0].focus();
+                    }
+                }
+            });
+       });
+});
+
+
+</script><br />
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    
+   if(Model != null)
+   {
+       @Html.HiddenFor(model=>model.CustomerID)
+   }
+    <fieldset>
+        <table width="100%" class="tbList" style="border: solid 1px  #BDBDBD;">
+            <tr>
+                <td style="width:130px">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CustomerName)
+                    </div>
+                </td>
+                <td colspan="3" nowrap="nowrap">
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.CustomerName, new { width = "300px" })
+                        @Html.ValidationMessageFor(model => model.CustomerName, "*")
+                         *请务必确保商家公司全称与营业执照注册名称完全相同
+                    </div>
+                </td>
+            </tr>
+            <tr>
+            <td valign="top">
+             <div class="editor-label">
+                        @Html.LabelFor(model => model.BrandName)
+                    </div>
+                </td>
+                <td valign="top">
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.BrandName)
+                        @Html.ValidationMessageFor(model => model.BrandName, "*")
+                    </div>
+             </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DefaultPaymentType)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.DefaultPaymentType, ViewData["paymentTypeSelectList"] as IEnumerable<SelectListItem>)
+                    </div>
+                </td>
+            </tr>
+            @{ string isShow="none";
+               if (Model!=null && Model.DefaultPaymentType == int.Parse(ViewData["MonthPayment"].ToString()))
+               {
+                   isShow = "block";
+               }
+            <tr id="trDefaultPayment" style="display:@isShow">
+                <td>&nbsp;</td><td>&nbsp;</td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DefaultPaymentDate)
+                        @Html.Hidden("MonthPayment")
+                    </div>
+                </td>
+                 <td>
+                    <div class="editor-field">
+                       @Html.DropDownListFor(model=>model.DefaultPaymentDate,ViewData["MonthDayList"] as IEnumerable<SelectListItem>)
+                    </div>
+             </td>
+            </tr>
+            }
+              <tr>
+                <td>
+                    <div class="editor-label">
+                        商家行业类别
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("IndustryList")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        行业细类
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("SubIndustryList")
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CityID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.CityID, ViewData["citySelectList"] as IEnumerable<SelectListItem>)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.BankName)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                       @* @Html.DropDownListFor(model => model.BankName,ViewData["bankSelectType"] as IEnumerable<SelectListItem>)*@
+                       @Html.EditorFor(model => model.BankName)
+                        @Html.ValidationMessageFor(model => model.BankName, "*")
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DistrictID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.DistrictID, ViewData["districtSelectList"] as IEnumerable<SelectListItem>)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.BankAccount)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.BankAccount)
+                        @Html.ValidationMessageFor(model => model.BankAccount, "*")
+                    </div>
+                </td>
+            </tr>
+            <tr>
+             <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.BankReceiver)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.BankReceiver)
+                        @Html.ValidationMessageFor(model => model.BankReceiver, "*")
+                    </div>
+                </td>
+                 <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ContactName)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ContactName)
+                        @Html.ValidationMessageFor(model => model.ContactName, "*")
+                    </div>
+                </td>
+           </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ContactPhoneNo)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ContactPhoneNo)
+                        @Html.ValidationMessageFor(model => model.ContactPhoneNo, "*")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ContactEmail)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ContactEmail)
+                        @Html.ValidationMessageFor(model => model.ContactEmail, "*")
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Address)
+                    </div>
+                </td>
+                <td colspan="3">
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Address)
+                        @Html.ValidationMessageFor(model => model.Address, "*")
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+           <table width="100%" class="tbList" style="border: solid 1px  #BDBDBD;">
+             <tr>
+                <td valign="top" style="width:130px">
+                  
+                        @Html.LabelFor(model => model.BusinessLisenceImg)
+                   
+                </td>
+                <td>
+                @{
+                    ViewDataDictionary dictionaryBusinessLisence= new ViewDataDictionary();
+                    dictionaryBusinessLisence["Name"] = "BusinessLisenceImg";
+                    dictionaryBusinessLisence["Folder"]="/UploadFile/CustomerImage";
+                  }
+                  @Html.Partial("UploadCtrl", Model==null?"":Model.BusinessLisenceImg, dictionaryBusinessLisence)
+                </td>
+            </tr>
+             <tr>
+                  <td valign="top">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.TaxRegisterCertificateImg)
+                    </div>
+                </td>
+                <td>
+                @{
+                    ViewDataDictionary dictionaryTaxRegisterCertificate= new ViewDataDictionary();
+                    dictionaryTaxRegisterCertificate["Name"] = "TaxRegisterCertificateImg";
+                    dictionaryTaxRegisterCertificate["Folder"] = "/UploadFile/CustomerImage";
+                  }
+                  @Html.Partial("UploadCtrl", Model == null ? "" : Model.TaxRegisterCertificateImg, dictionaryTaxRegisterCertificate)
+                </td>
+            </tr>
+             <tr>
+                  <td valign="top">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.HealthPermitImg)
+                    </div>
+                </td>
+                <td>
+                @{
+                    ViewDataDictionary dictionaryHealthPermit= new ViewDataDictionary();
+                    dictionaryHealthPermit["Name"] = "HealthPermitImg";
+                    dictionaryHealthPermit["Folder"] = "/UploadFile/CustomerImage";
+                  }
+                  @Html.Partial("UploadCtrl", Model == null ? "" : Model.HealthPermitImg, dictionaryHealthPermit)
+                </td>
+            </tr>
+             <tr>
+                  <td valign="top">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.LisenceImg)
+                    </div>
+                </td>
+                <td>
+                @{
+                    ViewDataDictionary dictionaryLisence= new ViewDataDictionary();
+                    dictionaryLisence["Name"] = "LisenceImg";
+                    dictionaryLisence["Folder"] = "/UploadFile/CustomerImage";
+                  }
+                  @Html.Partial("UploadCtrl", Model == null ? "" : Model.LisenceImg, dictionaryLisence)
+                </td>
+            </tr>
+             <tr>
+                  <td valign="top">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PowerofAttorneyImg)
+                    </div>
+                </td>
+                <td>
+                @{
+                    ViewDataDictionary dictionaryPowerofAttorney= new ViewDataDictionary();
+                    dictionaryPowerofAttorney["Name"] = "PowerofAttorneyImg";
+                    dictionaryPowerofAttorney["Folder"] = "/UploadFile/CustomerImage";
+                  }
+                  @Html.Partial("UploadCtrl", Model == null ? "" : Model.PowerofAttorneyImg, dictionaryPowerofAttorney)
+                </td>
+            </tr>
+             <tr>
+                  <td valign="top">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.OtherProfQualificationImg)
+                    </div>
+                </td>
+                <td>
+                @{
+                    ViewDataDictionary dictionaryOtherProfQualification= new ViewDataDictionary();
+                    dictionaryOtherProfQualification["Name"] = "OtherProfQualificationImg";
+                    dictionaryOtherProfQualification["Folder"] = "/UploadFile/CustomerImage";
+                  }
+                  @Html.Partial("UploadCtrl", Model == null ? "" : Model.OtherProfQualificationImg, dictionaryOtherProfQualification)
+                </td>
+            </tr>
+            <tr>
+                 <td colspan="2">店面环境</td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <div class="editor-label">
+                        @Html.LabelFor(model=>model.ExternalEnvImg)
+                    </div>
+                </td>
+                <td>
+                @{
+                   ViewDataDictionary dictionaryExternalEnv= new ViewDataDictionary();
+                   dictionaryExternalEnv["Name"] = "ExternalEnvImg";
+                   dictionaryExternalEnv["Folder"] = "/UploadFile/CustomerImage";
+                  }
+                  @Html.Partial("UploadCtrl", Model == null ? "" : Model.ExternalEnvImg, dictionaryExternalEnv)            
+                </td>
+            </tr>
+             <tr valign="top">
+                  <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.InternalEnvImg)
+                    </div>
+                </td>
+                <td>
+                @{
+                    ViewDataDictionary dictionaryInternalEnv= new ViewDataDictionary();
+                    dictionaryInternalEnv["Name"] = "InternalEnvImg";
+                    dictionaryInternalEnv["Folder"] = "/UploadFile/CustomerImage";
+                  }
+                  @Html.Partial("UploadCtrl", Model == null ? "" : Model.InternalEnvImg, dictionaryInternalEnv)
+                </td>
+            </tr>
+            <tr>
+                <td><div class="editor-label">@Html.LabelFor(model=>model.IsCertified)</div></td>
+                <td>
+                   @Html.RadioButtonFor(model=>model.IsCertified,false)未认证
+                   @Html.RadioButtonFor(model=>model.IsCertified,true)已认证
+                </td>
+            </tr>
+            <tr>
+                <td><div class="editor-label">@Html.LabelFor(model=>model.Evaluation)</div></td>
+                <td><div class="editor-field">@Html.TextAreaFor(model => model.Evaluation, new { rows = "8", cols = "70", maxlength = "300" })</div></td>
+            </tr>
+            </table>
+        <table class="tbList" style="border: solid 1px  #BDBDBD;">
+            <tr>
+                <td>&nbsp;</td>
+                <td>联系人名称</td>
+                <td>固定电话</td>
+                <td>联系电话</td>
+                <td>Email</td>
+                <td>QQ</td>
+            </tr>
+            <tr>
+               <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PageDesignContact)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PageDesignContact)
+                    </div>
+                </td>
+                  <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PageDesignPhone)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PageDesignMobile)
+                    </div>
+                </td>
+                  <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PageDesignEmail)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PageDesignQQ)
+                    </div>
+                </td>
+         </tr>
+         <tr>
+               <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PageExecuteContact)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PageExecuteContact)
+                    </div>
+                </td>
+                 <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PageExecutePhone)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PageExecuteMobile)
+                    </div>
+                </td>
+                 <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PageExecuteEmail)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PageExecuteQQ)
+                    </div>
+                </td>             
+            </tr>
+           <tr>
+               <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ComplaintHandlingContact)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ComplaintHandlingContact)
+                    </div>
+                </td>
+              <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ComplaintHandlingPhone)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ComplaintHandlingMobile)
+                    </div>
+                </td>
+                  <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ComplaintHandlingEmail)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ComplaintHandlingQQ)
+                    </div>
+                </td>
+            </tr>
+                    <tr>
+               <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.FinancialContact)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.FinancialContact)
+                    </div>
+                </td>
+           
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.FinancialPhone)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.FinancialMobile)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.FinancialEmail)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.FinancialQQ)
+                    </div>
+                </td>
+            </tr>
+        </table>
+     
+         <p style="text-align:center">
+            <input type="submit" value="保存" class="button" />&nbsp;&nbsp;&nbsp;&nbsp;
+             <input type="button" id="btnBack" value="返回" class="button" onclick="javascript:window.history.go(-1);" />
+             
+        </p>
+    </fieldset>
+}
+      
+

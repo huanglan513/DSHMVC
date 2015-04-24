@@ -1,0 +1,101 @@
+﻿@model DSHOrder.Entity.OrderDetail
+@{
+    ViewBag.Title = "买家问题处理";
+}
+<h2>
+    买家问题处理</h2>
+<script language="javascript" type="text/javascript" src="@Url.Content("~/My97DatePicker/WdatePicker.js")"></script>
+ <script type="text/javascript" src="@Url.Content("~/Scripts/autoNumeric.js")"></script>
+ <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.metadata.js")"></script>
+ <script language="javascript" type="text/javascript">
+    $(function () {
+        $(":text[id$='DealTime']").click(function () {
+            WdatePicker();
+        });
+        $(":text[id$='RefundFee']").autoNumeric({ aSep: '', pSign: 's' });
+   });
+</script>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <fieldset>
+    @Html.HiddenFor(model => model.OrderDetailID)
+    @Html.HiddenFor(model=>model.GroupByItemID)
+        <table width="100%">
+            <tr>
+                <td>
+                    <label>
+                        团购名称
+                    </label>
+                </td>
+                <td colspan="3">
+                    <label>@ViewData["GroupByName"]</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    买家名称
+                </td>
+                <td>@Model.BuyerNick
+                </td>
+                <td>
+                    订单编号
+                </td>
+          
+                <td>@Model.Oid
+                </td>  </tr>
+            <tr>
+                <td>
+                    购买日期
+                </td>
+                <td>@Model.PayTime
+                </td>
+                <td>
+                    付款金额
+                </td>
+                <td>@String.Format("{0:F}", Model.Payment) 元
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    问题类型
+                </td>
+                <td>@Html.DropDownListFor(model => model.IssueType, ViewData["IssueType"] as IEnumerable<SelectListItem>)
+                </td>
+                <td>
+                    状态
+                </td>
+                <td>@Html.DropDownListFor(model => model.RefundStatus, ViewData["RefundStatus"] as IEnumerable<SelectListItem>)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    处理日期
+                </td>
+                <td>@Html.EditorFor(model => model.DealTime)
+                @Html.ValidationMessageFor(model=>model.DealTime,"*")
+                </td>
+                <td>
+                    退款金额
+                </td>
+                <td>@Html.EditorFor(model => model.RefundFee)
+                @Html.ValidationMessageFor(model => model.RefundFee, "*")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    备注
+                </td>
+                <td colspan="3">@Html.TextAreaFor(model => model.Remark)
+                </td>
+            </tr>
+        </table>
+        <p>
+            <input type="submit" value="保存" class="button" />
+        </p>
+    </fieldset>
+}
+<p>
+     <input type="submit" id="btnBack" value="返回" class="button" 
+     onclick="window.location='@Url.Action("OrderDetail", "GroupBy", new { itemId = Model.GroupByItemID })'" />
+</p>

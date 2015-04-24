@@ -1,0 +1,174 @@
+﻿@model IEnumerable<DSHOrder.Entity.OrderDetail>
+@using DSHOrder.Entity;
+@{
+    ViewBag.Title = "团购订单";
+}
+<script language="javascript" type="text/javascript">
+    $(function () {
+        var k = 0;
+        $("#tags li").each(function () {
+            
+            if (k.toString() == $("#hdIndex").val()) {
+                $(this).attr("class", "selectTag");
+            }
+            else {
+                $(this).attr("class", "");
+            }
+            k++;
+        });
+    });
+    function selectTag(showContent, selfObj,index) {
+        // 操作标签
+        var tag = document.getElementById("tags").getElementsByTagName("li");
+        var taglength = tag.length;
+        for (i = 0; i < taglength; i++) {
+            tag[i].className = "";
+        }
+        selfObj.parentNode.className = "selectTag";
+        // 操作内容
+//        for (i = 0; j = document.getElementById("tagContent" + i); i++) {
+//            j.style.display = "none";
+//        }
+        document.getElementById(showContent).style.display = "block";
+        $("#hdIndex").val(index);
+        //window.location = '@Url.Action("OrderDetail")'
+    }
+    function aa() {
+        alert('aaaa');
+    }
+</script>
+<h2>团购订单</h2>
+@using (Html.BeginForm())
+{
+    <div>
+      <table width="100%" border="0">
+            <tr>
+                <td>团购名称</td>
+                <td><label>@ViewData["GroupByName"]</label></td>
+                <td>业务员</td>
+                <td><label>@ViewData["Sellers"]</label></td>
+                <td>价格</td>
+                <td>@ViewData["Price"]</td>
+            </tr>
+            <tr>
+                <td>
+                    买家名称
+                </td>
+                <td>@Html.TextBox("txtBuyerName")
+                </td>
+                <td>
+                    地址/电话
+                </td>
+                <td>@Html.TextBox("txtAddr")
+                </td>
+                <td>&nbsp;</td><td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    办理日期 从
+                </td>
+                <td>@Html.TextBox("txtFromDate")
+                </td>
+                <td>
+                    至
+                </td>   
+                <td>@Html.TextBox("txtEndDate")
+                </td>
+                 <td>&nbsp;</td><td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <input type="submit" id="btnSearch" value="查询" class="button" name="search" />
+                </td>
+            </tr>
+        </table>
+    </div>
+       <ul   id="tags" width="100%">
+                    <li  class="selectTag"><a  id="baseInfo" onclick="selectTag('tagContent0',this,'0')"  href="#">成功办理</a> </li>
+                    <li><a onclick="selectTag('tagContent0',this,'1')"  href="@Url.Action("OrderDetailFilter","GroupBy",new{@type=0})">
+                        未办理</a></li>
+                    <li><a onclick="selectTag('tagContent0',this,'2')" href="#">全部订单</a></li>
+                  
+                </ul>
+    @Html.Hidden("hdIndex", ViewData["Index"])
+}
+       <div id="tagContent">
+                        <div class="tagContent selectTag" id="tagContent0">
+<table width="100%">
+    <tr>
+        <td>
+            买家名称
+        </td>
+        <td>
+            支付金额
+        </td>
+        <td>
+            收货地址
+        </td>
+        <td>
+            联系电话
+        </td>
+        <td>
+            状态
+        </td>
+        <td>
+            办理日期
+        </td>
+        <td>
+            办理人
+        </td>
+        <td>
+            备注
+        </td>
+        <td></td>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        
+        <td>
+            @item.BuyerNick
+        </td>
+        <td>
+             @String.Format("{0:F}", item.TotalFee)
+        </td>
+        <td>
+            @item.Address
+        </td>
+        <td>
+
+        </td>
+        <td>
+        @if (ViewData["CodeTableList"] != null)
+        {
+            if (item.RefundStatus.HasValue)
+            {
+                var status = item.RefundStatus.Value.ToString();
+                CodeTable ct = ((IList<CodeTable>)ViewData["CodeTableList"]).FirstOrDefault(p => p.CodeValue == status);
+                <label>@ct.CodeDesc</label>
+            }
+        }
+        </td>
+        <td>
+            @item.DealBy
+        </td>
+        <td>
+            @item.DealTime
+        </td>
+        <td>
+            @item.Remark
+        </td>
+       <td>
+            @Html.ActionLink("处理退款", "Edit", new { id = item.OrderDetailID }) 
+        </td>
+          @*  @String.Format("{0:g}", item.UpdateRefundTime)*@
+
+    </tr>
+}
+
+</table>
+</div>
+</div>
+
+

@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<link href="../../Content/uploadify.css" rel="stylesheet" type="text/css" />
+    <script src="../../Scripts/swfobject.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.uploadify.v2.1.0.min.js" type="text/javascript"></script>
+
+    <style type="text/css">
+        .textstyle1
+        {
+            color: Red;
+            font-weight: bold;
+        }
+        .textstyle2
+        {
+            color: Green;
+            font-weight: bold;
+        }
+    </style>
+<script language="javascript" type="text/javascript">
+    $(function () {
+        //上传
+        $('#fileInput1').uploadify({
+            'uploader': '/Scripts/uploadify.swf',
+            'script': '/Ashx/FileHandler.ashx',
+            'folder': '/UploadFiles',
+            'cancelImg': '/Content/cancel.png',
+            'fileExt': '*.xls',
+            'fileDesc': '*.xls',
+            'sizeLimit': 1024 * 1024 * 4, //4M
+            'multi': false,
+            'onComplete': fun
+        });
+
+    });
+    function fun(event, queueID, fileObj, response, data) {
+        if (response != "") {
+            showInfo("成功上传" + response, true); //showInfo方法设置上传结果     
+        }
+        else {
+            showInfo("文件上传出错！", false);
+        }
+    }
+    //显示提示信息，textstyle2为绿色，即正确信息；textstyl1为红色，即错误信息
+    function showInfo(msg, type) {
+        var msgClass = type == true ? "textstyle2" : "textstyle1";
+        $("#result").removeClass();
+        $("#result").addClass(msgClass);
+        $("#result").html(msg);
+    }
+    //如果点击‘导入文件’时选择文件为空，则提示
+    function checkImport() {
+        if ($.trim($('#fileInput1Queue').html()) == "") {
+            alert('请先选择要导入的文件！');
+            return false;
+        }
+        return true;
+    } 
+    </script>
+<p>
+    To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+</p>
+@using(Html.BeginForm())
+{
+ 
+}
+  <div>
+    <input type="text" id="test" />
+    <p><input id="fileInput1" name="fileInput1" type="file"/></p>
+    <p style="margin-top:5px;font-size:14px;font-weight:bold;">
+    <a href="javascript:if(checkImport()){$('#fileInput1').uploadifySettings('scriptData',{'name':$('#test').val()});$('#fileInput1').uploadifyUpload();}">导入文件</a></p>
+    <p style="margin-top:5px;font-size:14px;font-weight:bold;"><span id="result"></span></p>
+</div> 

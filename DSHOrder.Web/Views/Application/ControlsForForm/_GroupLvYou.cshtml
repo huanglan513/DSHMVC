@@ -1,0 +1,99 @@
+﻿@model DSHOrder.Web.Models.GroupByFlowInfo
+@using DSHOrder.Web.Common;
+@using DSHOrder.Web.Common.Application.GroupByGroup;
+@{
+    GBGField fh = ViewData["fh"] as GBGField;
+}
+<style type="text/css">
+    #spanData
+    {
+        background-color: #C4DCAB;
+        font-weight: bold;
+    }
+</style>
+@if (Model.CurrentNode == GBGFlowEnumFLowNode.YWYTXTGSQB)
+{
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            $("#detailTable input[type!='radio']").width(40);
+            // $("#detailTable input[type='radio']").width(20);
+            $("#detailTable textarea").width("99%");
+
+            $("#GroupGeneralModel_EffectiveDayBegin").width("120").datepicker();
+            $("#GroupGeneralModel_EffectiveDayEnd").width("120").datepicker();
+            $("#GroupGeneralModel_ReceiveTime").width("120").datepicker();
+        });
+    </script>
+}
+<table id="detailTable" width="100%" border="1" cellspacing="0">
+    
+    <tr>
+        <td class="title" width="178">
+            旅游产品线路安排
+        </td>
+        <td>
+        @fh.ShowField(m => m.GroupLvYouModel.LYCPXLAP, GBGFlowEnumEditType.TextArea) @Html.ValidationMessageFor(m => m.GroupLvYouModel.LYCPXLAP)
+        </td>
+    </tr>
+    <tr>
+        <td class="title" width="178">
+           费用已包含
+        </td>
+        <td>
+        @fh.ShowField(m => m.GroupLvYouModel.FYYBH, GBGFlowEnumEditType.TextArea) @Html.ValidationMessageFor(m => m.GroupLvYouModel.FYYBH)
+        </td>
+    </tr>
+     <tr>
+        <td class="title" width="178">
+           费用未包含
+        </td>
+        <td>
+        @fh.ShowField(m => m.GroupLvYouModel.FYWBH, GBGFlowEnumEditType.TextArea) @Html.ValidationMessageFor(m => m.GroupLvYouModel.FYWBH)
+        </td>
+    </tr>
+    <tr>
+        <td class="title" rowspan="4">
+            旅游产品线路详情
+        </td>
+        <td>
+            入住酒店级别 <span id="spanData">@fh.ShowField(m => m.GroupLvYouModel.JiuDianJB)</span> @Html.ValidationMessageFor(m => m.GroupLvYouModel.JiuDianJB) 餐标 <span id="spanData">@fh.ShowField(m => m.GroupLvYouModel.CanBiao)</span> @Html.ValidationMessageFor(m => m.GroupLvYouModel.CanBiao)人/元  需提前预约天数 <span id="spanData">@fh.ShowField(m => m.GroupLvYouModel.PreDays)</span> @Html.ValidationMessageFor(m => m.GroupLvYouModel.PreDays)天
+            可接待人数   <span id="spanData">@fh.ShowField(m => m.GroupLvYouModel.KeJieDaiCount)</span> @Html.ValidationMessageFor(m => m.GroupLvYouModel.KeJieDaiCount)人 
+        </td>
+    </tr>
+    <tr>
+        <td>
+            交通工具 @fh.ShowField(m => m.GroupLvYouModel.JiaTongGongJu, GBGFlowEnumEditType.CodeTableRadioButtonList, CodeTableHelper.CodeTableJTGJ)@Html.ValidationMessageFor(m => m.GroupLvYouModel.JiaTongGongJu)其他 <span id="spanData">@fh.ShowField(m => m.GroupLvYouModel.JiaTongGongJuOther)</span> @Html.ValidationMessageFor(m => m.GroupLvYouModel.JiaTongGongJuOther)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            出团时间<span id="spanData">@fh.ShowField(m => m.GroupLvYouModel.ChuTuanTime)</span>@Html.ValidationMessageFor(m => m.GroupLvYouModel.ChuTuanTime)  
+            有效期起止（包括限制使用日期） <span id="spanData">@fh.ShowField(m => m.GroupLvYouModel.ExpireDate)</span>@Html.ValidationMessageFor(m => m.GroupLvYouModel.ExpireDate)
+          
+        </td>
+    </tr>
+    <tr>
+        <td>
+            是否进购物店 @fh.ShowField(m => m.GroupLvYouModel.Shopping, GBGFlowEnumEditType.CodeTableRadioButtonList, CodeTableHelper.CodeTableSFJGWD)@Html.ValidationMessageFor(m => m.GroupLvYouModel.Shopping) 
+            进<span id="spanData">@fh.ShowField(m => m.GroupLvYouModel.ShoppingCount)</span>@Html.ValidationMessageFor(m => m.GroupLvYouModel.ShoppingCount) 个购物店
+            要求成团人数 <span id="spanData">@fh.ShowField(m => m.GroupLvYouModel.ChenTuanReShu)</span>@Html.ValidationMessageFor(m => m.GroupLvYouModel.ChenTuanReShu)
+            是否参加聚无忧： @fh.ShowField(m => m.GroupLvYouModel.CanJiaJWY, GBGFlowEnumEditType.CodeTableRadioButtonList, CodeTableHelper.CodeTableJoinJWY)@Html.ValidationMessageFor(m => m.GroupLvYouModel.CanJiaJWY)
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            其它补充说明
+        </td>
+        <td style="height: 100px" align="left" valign="top">
+            @fh.ShowField(m => m.GroupLvYouModel.Other, GBGFlowEnumEditType.TextArea) @Html.ValidationMessageFor(m => m.GroupLvYouModel.Other)
+        </td>
+    </tr>
+    <tr>
+        <td class="title" >
+            品质保障
+        </td>
+        <td>
+            当最终评分低于 <span id="spanData">@fh.ShowField(m => m.GroupLvYouModel.IfBelowScore)</span> @Html.ValidationMessageFor(m => m.GroupLvYouModel.IfBelowScore)分的情况下， 乙方愿意赔偿 <span id="spanData">@fh.ShowField(m => m.GroupLvYouModel.YiPayJia)</span> @Html.ValidationMessageFor(m => m.GroupLvYouModel.YiPayJia)元给予甲方
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,12 @@
+﻿@model IEnumerable<DSHOrder.Web.Models.UserModel>
+@{
+    ViewBag.Title = "列表";
+    var grid = new WebGrid(source: Model);
+}
+
+<div style="width:100%">
+    @grid.GetHtml(columns:grid.Columns(grid.Column("UserName","用户名",null,null, true),
+                                       grid.Column("Title", "称呼", null, null, false),
+                                       grid.Column("Sex", "性别", null, null, true),
+                                       grid.Column("Status", "状态", null, null, true)))
+</div>

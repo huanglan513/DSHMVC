@@ -1,0 +1,83 @@
+﻿@model DSHOrder.Web.Models.GroupByFlowInfo
+@using DSHOrder.Web.Common;
+@using DSHOrder.Web.Common.Application.GroupByGroup;
+@{
+    GBGField fh = ViewData["fh"] as GBGField;
+}
+<style type="text/css">
+    #spanData
+    {
+        background-color: #C4DCAB;
+        font-weight: bold;
+    }
+</style>
+@if (Model.CurrentNode == GBGFlowEnumFLowNode.YWYTXTGSQB)
+{
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            $("#detailTable input[type!='radio']").width(40);
+            // $("#detailTable input[type='radio']").width(20);
+            $("#detailTable textarea").width("99%");
+
+            $("#GroupGeneralModel_EffectiveDayBegin").width("120").datepicker();
+            $("#GroupGeneralModel_EffectiveDayEnd").width("120").datepicker();
+            $("#GroupGeneralModel_ReceiveTime").width("120").datepicker();
+        });
+    </script>
+}
+<table id="detailTable" width="100%" border="1" cellspacing="0">
+    <tr>
+        <td class="title" width="178">
+            服务产品描述
+        </td>
+        <td style="height: 100px" align="left" valign="top">
+            @fh.ShowField(m => m.GroupGeneralModel.Description, GBGFlowEnumEditType.TextArea)
+            @Html.ValidationMessageFor(m => m.GroupGeneralModel.Description)
+        </td>
+    </tr>
+    <tr>
+        <td class="title" rowspan="4">
+            服务产品详情
+        </td>
+        <td>
+            每券可供 <span id="spanData">@fh.ShowField(m => m.GroupGeneralModel.UserCountPerTicket)</span> @Html.ValidationMessageFor(m => m.GroupGeneralModel.UserCountPerTicket)人使用， 每次可使用 <span id="spanData">@fh.ShowField(m => m.GroupGeneralModel.TicketCountPerTime)</span> @Html.ValidationMessageFor(m => m.GroupGeneralModel.TicketCountPerTime)张团购券， 需提前预约天数 <span id="spanData">@fh.ShowField(m => m.GroupGeneralModel.DayCountAhead)</span> @Html.ValidationMessageFor(m => m.GroupGeneralModel.DayCountAhead)天， 每天可接待人数
+            <span id="spanData">@fh.ShowField(m => m.GroupGeneralModel.TimeCountPerDay)</span> @Html.ValidationMessageFor(m => m.GroupGeneralModel.TimeCountPerDay)人
+        </td>
+    </tr>
+    <tr>
+        <td>
+            有效期起始日期 <span id="spanData">@fh.ShowField(m => m.GroupGeneralModel.EffectiveDayBegin)</span>@Html.ValidationMessageFor(m => m.GroupGeneralModel.EffectiveDayBegin)， 有效期终止日期 <span id="spanData">@fh.ShowField(m => m.GroupGeneralModel.EffectiveDayEnd)</span>@Html.ValidationMessageFor(m => m.GroupGeneralModel.EffectiveDayEnd)， 团购数量上限 <span id="spanData">@fh.ShowField(m => m.GroupGeneralModel.UpperLimitCount)</span> @Html.ValidationMessageFor(m => m.GroupGeneralModel.UpperLimitCount)人
+        </td>
+    </tr>
+    <tr>
+        <td>
+            接待时间 <span id="spanData">@fh.ShowField(m => m.GroupGeneralModel.ReceiveTime)</span>@Html.ValidationMessageFor(m => m.GroupGeneralModel.ReceiveTime)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            是否参加聚无忧： @fh.ShowField(m => m.GroupGeneralModel.JoinJWY, GBGFlowEnumEditType.CodeTableRadioButtonList, CodeTableHelper.CodeTableJoinJWY)@Html.ValidationMessageFor(m => m.GroupGeneralModel.JoinJWY)
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            其它补充说明
+        </td>
+        <td style="height: 100px" align="left" valign="top">
+            @fh.ShowField(m => m.GroupGeneralModel.Other, GBGFlowEnumEditType.TextArea) @Html.ValidationMessageFor(m => m.GroupGeneralModel.Other)
+        </td>
+    </tr>
+    <tr>
+        <td class="title" rowspan="2">
+            品质保障
+        </td>
+        <td>
+            <b>天猫：</b>当本团最终评分低于 <span id="spanData">@fh.ShowField(m => m.GroupGeneralModel.IfBelowScoreTM)</span> @Html.ValidationMessageFor(m => m.GroupGeneralModel.IfBelowScoreTM)分的情况下， 乙方愿意赔偿 <span id="spanData">@fh.ShowField(m => m.GroupGeneralModel.YiPayJiaTM)</span> @Html.ValidationMessageFor(m => m.GroupGeneralModel.YiPayJiaTM)员甲方造成的相关损失。
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b>淘宝：</b>当本团最差评占比高于本团总评数的 <span id="spanData">@fh.ShowField(m => m.GroupGeneralModel.IfBelowScoreTB)</span>%@Html.ValidationMessageFor(m => m.GroupGeneralModel.IfBelowScoreTB)情况下， 乙方愿意赔偿 <span id="spanData">@fh.ShowField(m => m.GroupGeneralModel.YiPayJiaTB)</span> @Html.ValidationMessageFor(m => m.GroupGeneralModel.YiPayJiaTB)员甲方造成的相关损失。
+        </td>
+    </tr>
+</table>

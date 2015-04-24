@@ -1,0 +1,274 @@
+﻿@model DSHOrder.Entity.OrderDetail
+
+@{
+    ViewBag.Title = "OrderDetail";
+}
+
+<h2>OrderDetail</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>OrderDetail</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GroupByItemID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GroupByItemID)
+            @Html.ValidationMessageFor(model => model.GroupByItemID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LockBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LockBy)
+            @Html.ValidationMessageFor(model => model.LockBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BuyerID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BuyerID)
+            @Html.ValidationMessageFor(model => model.BuyerID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BuyerNick)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BuyerNick)
+            @Html.ValidationMessageFor(model => model.BuyerNick)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ShippingType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ShippingType)
+            @Html.ValidationMessageFor(model => model.ShippingType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tid)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Tid)
+            @Html.ValidationMessageFor(model => model.Tid)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Oid)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Oid)
+            @Html.ValidationMessageFor(model => model.Oid)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AlipayNo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AlipayNo)
+            @Html.ValidationMessageFor(model => model.AlipayNo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TotalFee)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TotalFee)
+            @Html.ValidationMessageFor(model => model.TotalFee)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ApplyRefundTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ApplyRefundTime)
+            @Html.ValidationMessageFor(model => model.ApplyRefundTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UpdateRefundTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UpdateRefundTime)
+            @Html.ValidationMessageFor(model => model.UpdateRefundTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HasGoodReturn)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HasGoodReturn)
+            @Html.ValidationMessageFor(model => model.HasGoodReturn)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RefundFee)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RefundFee)
+            @Html.ValidationMessageFor(model => model.RefundFee)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Payment)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Payment)
+            @Html.ValidationMessageFor(model => model.Payment)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Reason)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Reason)
+            @Html.ValidationMessageFor(model => model.Reason)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Desc)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Desc)
+            @Html.ValidationMessageFor(model => model.Desc)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GoodReturnTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GoodReturnTime)
+            @Html.ValidationMessageFor(model => model.GoodReturnTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PayTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PayTime)
+            @Html.ValidationMessageFor(model => model.PayTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DealTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DealTime)
+            @Html.ValidationMessageFor(model => model.DealTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Remark)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Remark)
+            @Html.ValidationMessageFor(model => model.Remark)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreateBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreateBy)
+            @Html.ValidationMessageFor(model => model.CreateBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreateTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreateTime)
+            @Html.ValidationMessageFor(model => model.CreateTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastModifyBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastModifyBy)
+            @Html.ValidationMessageFor(model => model.LastModifyBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastModifyTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastModifyTime)
+            @Html.ValidationMessageFor(model => model.LastModifyTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DeleteInd)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DeleteInd)
+            @Html.ValidationMessageFor(model => model.DeleteInd)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LockTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LockTime)
+            @Html.ValidationMessageFor(model => model.LockTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DealBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DealBy)
+            @Html.ValidationMessageFor(model => model.DealBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrderStatus)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OrderStatus)
+            @Html.ValidationMessageFor(model => model.OrderStatus)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RefundStatus)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RefundStatus)
+            @Html.ValidationMessageFor(model => model.RefundStatus)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IssueType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IssueType)
+            @Html.ValidationMessageFor(model => model.IssueType)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

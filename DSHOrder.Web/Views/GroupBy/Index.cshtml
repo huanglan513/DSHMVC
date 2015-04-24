@@ -1,0 +1,273 @@
+﻿@model DSHOrder.Web.Models.GroupByItemSearchModel
+@{
+    ViewBag.Title = "团购信息管理";
+}
+@using Webdiyer.WebControls.Mvc;
+@using DSHOrder.Entity;
+@helper Truncate(string input, int length)
+    {
+        if (input.Length <= length)
+        {
+    @input
+        }
+        else
+        {
+    @input.Substring(0, length)<text>...</text>
+        }
+}
+@helper ParseGroupByGroupStatus(int? status)
+    {   
+       
+        if (!status.HasValue || status.Value == 0)
+        {
+            
+        }
+        else
+        {
+            switch (status.Value)
+            {
+                case (int)GroupByGroupStatus.Returning:
+                    @:未停止退款
+                    break;
+                case (int)GroupByGroupStatus.Returned:
+                    @:停止退款
+                    break;
+                case (int)GroupByGroupStatus.FirstPay:
+                    @:第一次打款
+                    break;
+                case (int)GroupByGroupStatus.SecondPay:
+                    @:第二次打款
+                    break;
+                default:
+                    break;
+            }
+        }
+}
+@*<h2>
+    团购信息管理</h2>*@
+@using (Html.BeginForm("Index", "GroupBy", FormMethod.Get))
+{
+    <div>
+        <table width="100%" border="0" class="tbList">
+            <tr>
+                <th>
+                    商家所在城市
+                </th>
+                <td>@Html.DropDownListFor(o => o.CitySelected, Model.CityList, "---所有城市---")
+                </td>
+                <th>
+                    团购平台
+                </th>
+                <td>@Html.DropDownListFor(o => o.PortalSelected, Model.PortalList, "---所有平台---")
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    团购编号/名称
+                </th>
+                <td>@Html.TextBoxFor(o => o.GroupByName)
+                </td>
+                <th>
+                    业务员
+                </th>
+                <td>@Html.TextBoxFor(o => o.GroupBySale)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    商家名称
+                </th>
+                <td colspan="3">@Html.TextBoxFor(o => o.CustomerName)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <input type="submit" id="btnSearch" value="查询" class="button" name="search" />
+                </td>
+            </tr>
+        </table>
+    </div>
+}
+<div>
+    @using (Html.BeginForm())
+    { 
+        <input type="submit" id="btnNew" value="新增" class="button" name="new" />
+@*<input type="submit" id="btnDelete" value="删除" class="button" name="delete" />*@
+    }
+    <div class="content-box-header">
+        <ul id="groupby-nav" class="content-box-tabs" style="float: left">
+            @if (!@Model.GroupByStatus.HasValue || Model.GroupByStatus == 0)
+            {
+                <li><a href="@Url.Action("Index", "GroupBy", new { @CitySelected = Request["CitySelected"], @PortalSelected = Request["PortalSelected"], @GroupBySale = Request["GroupBySale"], @GroupByName = Request["GroupByName"], @CustomerName = Request["CustomerName"], @FilterType = "0" })" class="default-tab">
+                    全部团购</a></li>
+            }
+            else
+            {
+                <li><a href="@Url.Action("Index", "GroupBy", new { @CitySelected = Request["CitySelected"], @PortalSelected = Request["PortalSelected"], @GroupBySale = Request["GroupBySale"], @GroupByName = Request["GroupByName"], @CustomerName = Request["CustomerName"], @FilterType = "0" })">
+                    全部团购</a></li>
+            }
+            @if (Model.GroupByStatus == (int)DSHOrder.Entity.GroupBySearchStatus.GroupBying)
+            {
+                <li><a href="@Url.Action("Index", "GroupBy", new { @CitySelected = Request["CitySelected"], @PortalSelected = Request["PortalSelected"], @GroupBySale = Request["GroupBySale"], @GroupByName = Request["GroupByName"], @CustomerName = Request["CustomerName"], @FilterType = "1" })" class="default-tab">
+                    进行中的团购</a></li>
+            }
+            else
+            { 
+                <li><a href="@Url.Action("Index", "GroupBy", new { @CitySelected = Request["CitySelected"], @PortalSelected = Request["PortalSelected"], @GroupBySale = Request["GroupBySale"], @GroupByName = Request["GroupByName"], @CustomerName = Request["CustomerName"], @FilterType = "1" })">
+                    进行中的团购</a></li>
+            }
+            @if (Model.GroupByStatus == (int)DSHOrder.Entity.GroupBySearchStatus.GroupByed)
+            {
+                <li><a href="@Url.Action("Index", "GroupBy", new { @CitySelected = Request["CitySelected"], @PortalSelected = Request["PortalSelected"], @GroupBySale = Request["GroupBySale"], @GroupByName = Request["GroupByName"], @CustomerName = Request["CustomerName"], @FilterType = "2" })" class="default-tab">
+                    往期的团购</a></li>
+            }
+            else
+            { 
+                <li><a href="@Url.Action("Index", "GroupBy", new { @CitySelected = Request["CitySelected"], @PortalSelected = Request["PortalSelected"], @GroupBySale = Request["GroupBySale"], @GroupByName = Request["GroupByName"], @CustomerName = Request["CustomerName"], @FilterType = "2" })">
+                    往期的团购</a></li>
+            }
+            @if (Model.GroupByStatus == (int)DSHOrder.Entity.GroupBySearchStatus.GroupBypay)
+            {
+                <li><a href="@Url.Action("Index", "GroupBy", new { @CitySelected = Request["CitySelected"], @PortalSelected = Request["PortalSelected"], @GroupBySale = Request["GroupBySale"], @GroupByName = Request["GroupByName"], @CustomerName = Request["CustomerName"], @FilterType = "3" })" class="default-tab">
+                    需打款的团购</a></li>
+            }
+            else
+            {
+                <li><a href="@Url.Action("Index", "GroupBy", new { @CitySelected = Request["CitySelected"], @PortalSelected = Request["PortalSelected"], @GroupBySale = Request["GroupBySale"], @GroupByName = Request["GroupByName"], @CustomerName = Request["CustomerName"], @FilterType = "3" })" >
+                    需打款的团购</a></li>
+            }
+            @if (Model.GroupByStatus == (int)DSHOrder.Entity.GroupBySearchStatus.GroupBypending)
+            {
+                <li><a href="@Url.Action("Index", "GroupBy", new { @CitySelected = Request["CitySelected"], @PortalSelected = Request["PortalSelected"], @GroupBySale = Request["GroupBySale"], @GroupByName = Request["GroupByName"], @CustomerName = Request["CustomerName"], @FilterType = "4" })" class="default-tab">
+                    未开始的团购</a></li>
+            }
+            else
+            {
+                <li><a href="@Url.Action("Index", "GroupBy", new { @CitySelected = Request["CitySelected"], @PortalSelected = Request["PortalSelected"], @GroupBySale = Request["GroupBySale"], @GroupByName = Request["GroupByName"], @CustomerName = Request["CustomerName"], @FilterType = "4" })">
+                    未开始的团购</a></li>
+            }
+        </ul>
+    </div>
+    <div class="tab-content default-tab" id="tab">
+        @using (Html.BeginForm())
+        {
+            <table class="tbList">
+                <tr>
+                    <th>
+                        团购名称
+                    </th>
+                    <th>
+                        商家名称
+                    </th>
+                    <th>
+                        状态
+                    </th>
+                    <th>
+                        部门
+                    </th>
+                    <th>
+                        业务员
+                    </th>
+                    <th>
+                        团购平台
+                    </th>
+                    <th>
+                        所在城市
+                    </th>
+                    <th>
+                        开始日期
+                    </th>
+                    <th>
+                        结束日期
+                    </th>
+                    <th>
+                    </th>
+                    <th>
+                    </th>
+                    <th>
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var g in Model.GroupByItemList)
+                {                
+                    <tr>
+                        <td>
+                            <span title="@g.GroupByGroup.GroupByGroupName" style="font-weight: bold;">@Truncate(g.GroupByGroup.GroupByGroupName, 50)</span>
+                        </td>
+                        <td>
+                            @if (g.GroupByGroup.Customer != null)
+                            {
+                                @: @g.GroupByGroup.Customer.CustomerName
+                            }
+                        </td>
+                        <td>@ParseGroupByGroupStatus(g.GroupByGroup.Status)
+                        </td>
+                        <td>
+                            @if (g.GroupByGroup.GroupBySales.Count > 0)
+                            {
+                                foreach (var u in g.GroupByGroup.GroupBySales)
+                                {
+
+                                    foreach (var d in u.User.Department)
+                                    {
+                                <span>@d.DepartmentName</span><br />
+                                    }
+                                }
+                            }
+                        </td>
+                        <td>
+                            @if (g.GroupByGroup.GroupBySales.Count > 0)
+                            {
+                                foreach (var u in g.GroupByGroup.GroupBySales)
+                                {
+                                <span>@u.User.UserName</span><br />
+                                }
+                            }
+                        </td>
+                        <td>@g.GroupByPortal.PortalName
+                        </td>
+                        <td>
+                            @foreach (var city in g.GroupByCity)
+                            { 
+                                <span>@city.City.CityName</span>                                
+                            }
+                        </td>
+                        <td>
+                            @if (g.StartDay.HasValue)
+                            {
+                                @g.StartDay.Value.ToShortDateString()
+                            }
+                        </td>
+                        <td>
+                            @if (g.EndDay.HasValue)
+                            { 
+                                @g.EndDay.Value.ToShortDateString()
+                            }
+                        </td>
+                        <td>
+                            <input type="submit" id="edit:@g.GroupByGroupID" value="编辑|查询" class="button" name="edit:@g.GroupByGroupID"/>
+                        </td>
+                        <td>
+                            @if(g.GroupByGroup.Status > (int)DSHOrder.Entity.GroupByGroupStatus.Returning)
+                            {
+                                <input type="submit" id="pay:@g.GroupByGroupID" value="打款" class="button" name="pay:@g.GroupByGroupID"/>
+                            }
+                        </td>
+                        <td>
+                            <input type="submit" id="order:@g.GroupByItemID" value="订单" class="button" name="order:@g.GroupByItemID"/>
+                        </td>
+                        <td>
+                             @if(!g.GroupByGroup.Status.HasValue || g.GroupByGroup.Status <= (int)DSHOrder.Entity.GroupByGroupStatus.Returning)
+                             {
+                                <input type="submit" id="refund:@g.GroupByGroupID" value="停止退款" class="button" name="refund:@g.GroupByGroupID"/> 
+                             }
+                            
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        @Html.Pager(Model.GroupByItemList, new PagerOptions { PageIndexParameterName = "pageIndex" }, new { @class = "pagination" })
+    </div>
+</div>

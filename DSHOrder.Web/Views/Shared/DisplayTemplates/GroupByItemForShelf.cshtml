@@ -1,0 +1,71 @@
+﻿@model DSHOrder.Web.Models.GroupByItemForShelf
+    <div style=" background-color:#DFF4F5; height:30px; vertical-align:middle"><label id="lblPlatForm" style="vertical-align:middle">
+    <label  style="vertical-align:middle">@(Model.GroupByGroupName + " (" + Model.PortalName + " 平台)")</label>
+    </label></div>
+   <table  class="tbList" style="border: solid 1px  #BDBDBD;">
+    <tr><td  style="width:120px">@Html.LabelFor(model => model.GroupByGroupName)</td><td colspan="5">@Model.GroupByGroupName</td></tr>
+     <tr><td>确认下线</td>
+        <td colspan="2">
+               已下线
+            </td>
+        <td>@Html.LabelFor(model => model.IsFinalPayment)</td>
+        <td colspan="2">
+        @Model.IsFinalPayment
+        </td>
+            </tr>
+     <tr>
+        <td>@Html.LabelFor(model => model.OriginalPrice)</td>
+        <td colspan="2">@string.Format("{0:g}", Model.OriginalPrice)  元</td>
+        <td>@Html.LabelFor(model => model.LogisticCharge)</td>
+        <td colspan="2">@Model.LogisticCharge 元</td>
+     </tr>
+     <tr>
+        <td>@Html.LabelFor(model => model.SellingPrice)</td>
+        <td colspan="2">@Model.SellingPrice  元</td>
+        <td>@Html.LabelFor(model => model.OtherCharge)</td>
+        <td colspan="2">@string.Format("{0:F}", Model.OtherCharge) 元</td>
+     </tr>
+     <tr>
+         <td  style="width:120px" rowspan="2">线上退款数量</td>
+         <td style="width:120px">@Html.LabelFor(model => model.OnlineRefundNum)</td>
+         <td style="width:200px">@Model.OnlineRefundNum</td>
+         <td  style="width:120px" rowspan="2">线下退款数量</td>
+         <td style="width:120px">@Html.LabelFor(model => model.OfflineRefundNum)</td>
+         <td style="width:200px">@Model.OfflineRefundNum</td>
+    </tr>
+     <tr>
+         <td style="width:120px">@Html.LabelFor(model => model.ActualOnlineRefundNum)</td>
+         <td style="width:200px">@Model.ActualOnlineRefundNum</td>
+         <td style="width:120px">@Html.LabelFor(model => model.ActualOfflineRefundNum)</td>
+         <td style="width:200px">@Model.ActualOfflineRefundNum</td>
+    </tr>
+     <tr>
+         <td rowspan="2">销售数量</td>
+         <td>@Html.LabelFor(model => model.SellNum)</td>
+         <td>@Model.SellNum</td>
+         <td rowspan="2">退款费用</td>
+         <td>@Html.LabelFor(model => model.RefundPrice)</td>
+         <td>@string.Format("{0:N}", Model.RefundPrice) 元</td>
+    </tr>
+      <tr>  
+         <td>@Html.LabelFor(model => model.ActualSellNum)</td>
+         <td>@Model.ActualSellNum</td>
+         <td>@Html.LabelFor(model => model.ActualRefundPrice)</td>
+         <td>@string.Format("{0:N}", Model.ActualRefundPrice) 元</td>
+    </tr>
+     <tr>
+         <td rowspan="2">利润</td>
+         <td>@Html.LabelFor(model => model.TotalProfit)</td>
+         <td>@string.Format("{0:N}", Model.TotalProfit) 元</td>
+         <td rowspan="2">总付款金额</td>
+         <td>@Html.LabelFor(model => model.TotalPayment)</td>
+         <td>@string.Format("{0:N}", Model.TotalPayment) 元</td>
+    </tr>
+      <tr>  
+         <td>@Html.LabelFor(model => model.ActualTotalProfit)</td>
+         <td>@string.Format("{0:N}", Model.ActualTotalProfit) 元</td>
+         <td>@Html.LabelFor(model => model.ActualTotalPayment)</td>
+         <td>@string.Format("{0:N}", Model.ActualTotalPayment) 元</td>
+    </tr>
+   </table>
+

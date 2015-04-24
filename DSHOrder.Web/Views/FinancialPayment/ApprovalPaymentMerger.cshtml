@@ -1,0 +1,129 @@
+﻿@model DSHOrder.Web.Models.ApprovalPaymentMergerModel
+
+@{
+    ViewBag.Title = "合并审批付款";
+}
+
+<script language="javascript" type="text/javascript" src="@Url.Content("~/My97DatePicker/WdatePicker.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/autoNumeric.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.metadata.js")"></script>
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $(":input[id^='PaymentDeadline']").click(function () {
+            WdatePicker({ dateFmt: 'yyyy-MM-dd' });
+        });
+        $(":text[id^='PaymentProportion']").autoNumeric({ aSign: ' %', pSign: 's', vMax: '100.00' });
+        $(":text[id^='PaymentPrice']").autoNumeric({ aSep: '', pSign: 's' });
+
+        $(":text[id^='PaymentPrice']").blur(function () {
+            var totalPayment = 0;
+            $(":text[id^='PaymentPrice']").each(function () {
+                totalPayment += parseFloat($(this).val(), 10);
+            });
+            $("#TotalPayment").val(totalPayment);
+        });
+    });
+
+    function ValidateInput() {
+        var flag = true;
+        $(":input[id^='PaymentDeadline']").each(function () {
+            if ($(this).val() == "") {
+                flag = false;
+                alert("请输入实际打款日");
+                return false;
+            }
+        });
+        if (!flag) {
+            return false;
+        }
+        $(":text[id^='PaymentProportion']").each(function () {
+            if ($(this).val() == "" || $(this).val().replace(/(^\s*)|(\s*$)/g, "") == "%") {
+                flag = false;
+                alert("请输入实际打款比例");
+                return false;
+            }
+        });
+        if (!flag) {
+            return false;
+        }
+        $(":text[id^='PaymentPrice']").each(function () {
+            if ($(this).val() == "") {
+                flag = false;
+                alert("请输入实际打款额度");
+                return false;
+            }
+        });
+        if (!flag) {
+            return false;
+        }
+        if ($("#Comment").val() == "") {
+            alert("请输入备注.");
+            return false;
+        }
+        return true;
+    }
+</script>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.PaymentIDs)
+    <fieldset>
+      
+         @Html.Partial("_GroupBaseInfoForPayment", Model.GroupBaseInfo)
+        @{
+            int i=0;
+            int count=Model.GroupItemInfoList.Count;
+            decimal totalPayment=0;
+            for (; i < count; i++)
+            {
+                int paymentID=Model.PaymentList[i].PaymentID;
+                if (Model.PaymentList[i].PaymentPrice.HasValue)
+                {
+                    totalPayment += Model.PaymentList[i].PaymentPrice.Value;
+                }
+             @Html.DisplayFor(model => model.GroupItemInfoList[i])
+     
+          <div style=" background-color:#DFF4F5; height:30px; vertical-align:middle"><label style="vertical-align:middle">
+    <label  style="vertical-align:middle">付款审批信息</label>
+    </label></div>
+      <table class="tbList" width="100%"  style="border: solid 1px  #BDBDBD;">
+    
+           <tr><td> 第 @Model.PaymentList[i].PaymentType 次计划打款日</td><td>@Model.PaymentList[i].PaymentDeadline.Value.ToString("yyyy-MM-dd")</td>
+                 <td>计划打款比例：</td><td>@(Model.PaymentList[i].PaymentProportion * 100 + "%")</td>
+                <td>计划打款额度：</td><td>@string.Format("{0:N}", Model.PaymentList[i].PaymentPrice) 元</td>
+             </tr>
+              <tr><td> 第 @Model.PaymentList[i].PaymentType 次实际打款日</td><td>@Html.TextBox("PaymentDeadline"+paymentID, Model.PaymentList[i].PaymentDeadline.Value.ToString("yyyy-MM-dd"))</td>
+                 <td>实际打款比例：</td><td>@Html.TextBox("PaymentProportion"+paymentID, Model.PaymentList[i].PaymentProportion * 100 + "%")</td>
+                <td>实际打款额度：</td><td>@Html.TextBox("PaymentPrice"+paymentID, Model.PaymentList[i].PaymentPrice) 元</td>
+             </tr>
+             @if (i == count - 1)
+             {
+                 <tr>
+                 <td rowspan="2">最终打款金额：</td><td>后台最终打款金额：</td><td colspan="4">@totalPayment 元</td>
+                 </tr>
+                 <tr>
+                    <td>实际最终打款金额：</td><td colspan="4">@Html.TextBox("TotalPayment", totalPayment, new { disabled = "disabled" }) 元</td>
+                 </tr>
+             }
+             </table>
+          }
+        }
+           <div style=" background-color:#DFF4F5; height:30px; vertical-align:middle"><label style="vertical-align:middle">
+    <label  style="vertical-align:middle">付款审批</label>
+    </label></div>
+            <table class="tbList" width="100%"  style="border: solid 1px  #BDBDBD;">
+             <tr>
+             <td style="width:120px">审批结果：</td>
+            <td  colspan="3"><input name="result" type="radio" value="2" checked="checked" />通过 &nbsp;&nbsp;&nbsp;
+                <input name="result" type="radio" value="3" />拒绝
+            </td></tr>
+        <tr><td valign="top">备注：</td><td  colspan="3">@Html.TextArea("Comment", new { rows = "5", cols = "70" }) <br /><p style=" color:Red">* 备注不能为空，请填写审批备注</p></td></tr>
+          <tr><td>审批人：</td><td style="width:200px">@Model.Approver</td><td>审批日期：</td><td>@DateTime.Today.ToString("yyyy-MM-dd") 默认为当天</td></tr>
+        </table>
+
+        <p style="text-align:center">
+            <input type="submit" value="保存" class="button" onclick="return ValidateInput();" />
+            <input type="button" value="取消" class="button" onclick="javascript:window.history.go(-1);" />
+        </p>
+    </fieldset>
+}
+

@@ -1,0 +1,41 @@
+﻿@using DSHOrder.Entity
+@model IList<DSHOrder.Entity.Function>
+@{
+        <script language="javascript" type="text/javascript">
+            function changeClass(obj) {
+                $(obj).parent().parent().children("li").children("a").removeClass().addClass("nav-top-item");
+                obj.className = "nav-top-item current";
+            }
+      </script>
+@*    <a href="#" onclick="AA();">baidu</a>*@
+    <ul id="main-nav">
+        <!-- Accordion Menu -->
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            Function item = Model[i];
+            if (item.ParentID != 0)
+            {
+                continue;
+            }
+            <li><a href="#" onclick="javascript:changeClass(this);" class="nav-top-item" >@item.FunctionName </a>
+        @{
+                IEnumerable<Function> childFunList = Model.Where(p => p.ParentID == item.FunctionID);
+                if (childFunList.Count() > 0)
+                {
+                    <ul>
+                        @{foreach (Function childItem in childFunList)
+                          {
+                           
+                            <li><a href="@childItem.Url">@childItem.FunctionName</a></li>
+                            
+                          }
+                        }
+                    </ul>
+                  }
+              }
+            </li>
+                  
+        }
+    </ul>
+  
+}

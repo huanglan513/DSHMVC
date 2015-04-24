@@ -1,0 +1,8 @@
+﻿@if(Request.IsAuthenticated) {
+    <text><b>@Context.User.Identity.Name</b>,您好,感谢登陆使用！
+    [ @Html.ActionLink("修改密码", "ChangePassword", "Home", new{},new { style = "color:white" }) ]
+    [ @Html.ActionLink("退出", "LogOff", "Home", new{},new { style = "color:white" }) ]</text>
+}
+else {
+    @:[ @Html.ActionLink("登录", "LogOn", "Home", new { }, new { style = "color:white" }) ]
+}

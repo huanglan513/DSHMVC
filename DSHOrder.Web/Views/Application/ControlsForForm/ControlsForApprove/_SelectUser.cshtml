@@ -1,0 +1,173 @@
+﻿@model DSHOrder.Web.Models.GroupByFlowInfo
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("select[id$='ddlCity']").change(
+            function(){ 
+                ChangeCity();
+        });
+
+        $("select[id$='ddlDept']").change(
+            function(){ 
+                ChangeDept();
+        });
+
+        $("input[id$='btnAddUser']").click(
+            function(){ 
+                AddUser();
+        });
+        $("input[id$='btnDeleteUser']").click(
+            function(){ 
+                DeleteUser();
+        });
+
+        $.ajaxSetup({ async: false });
+        ChangeCity();
+
+        SetControlSize();
+
+        // AddUser('@this.Model.Sales');
+        // AddUser('@Model.StartForm.UserID');
+        // AddUser('1');
+    })
+
+    function SetControlSize()
+    {
+        $("#ddlCity").width(150);
+        $("#ddlDept").width(150);
+        $("#UnSelectedUser").width(150);
+        $("#SelectedUser").width(150);
+    }
+
+    var LastSelectUserUrl = "";
+    var LastSelectUserParams = null;
+    function ChangeCity()
+    {
+        var cityId = $("select[id$='ddlCity']").val();
+        var url ="@Url.Action("GetUsersByCityId", "Application")"; 
+        var params = { 'cityId': cityId };
+        BindSelect("UnSelectedUser", url, params);
+        
+        LastSelectUserUrl = url;
+        LastSelectUserParams = params;
+
+        RefreshUnSelectUser();
+    }
+
+    function ChangeDept()
+    {
+        var deptId = $("select[id$='ddlDept']").val();
+        var url ="@Url.Action("GetUsersByDepartment", "GroupBy")"; 
+        var params = { 'departmentID': deptId };
+        BindSelect("UnSelectedUser", url, params);
+
+        LastSelectUserUrl = url;
+        LastSelectUserParams = params;
+
+        RefreshUnSelectUser();
+    }
+
+    function AddUser(value)
+    {
+        var toAdds = null;
+        if (value != undefined)
+        {
+            toAdds = $("#UnSelectedUser option[value='" + value + "']");
+        }
+        else
+        {
+            toAdds = $("#UnSelectedUser option:selected");  
+            // toAdds = $("#unSelectedServer option");  // 所有
+        }
+
+        if(toAdds.length == 0){  
+            alert("请选择要添加的业务员！");  
+            return;  
+        }
+
+        toAdds.each(function(){  
+            $("#SelectedUser").append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option");  
+            $(this).remove();    
+        });  
+
+        SetHiddenUserValue();
+    }
+
+    function DeleteUser()
+    {
+        var toDeletes;  
+        toDeletes = $("#SelectedUser option:selected");  
+
+        if(toDeletes.length == 0){  
+            alert("请选择要删除的业务员！");  
+            return;  
+        }
+
+        toDeletes.remove();
+
+        $.ajaxSetup({ async: false });
+        BindSelect("UnSelectedUser", LastSelectUserUrl, LastSelectUserParams);
+
+        RefreshUnSelectUser();
+
+        SetHiddenUserValue();
+    }
+
+    function RefreshUnSelectUser()
+    {
+        var toAdded = $("#SelectedUser option"); 
+
+        toAdded.each(
+            function()
+            {
+                var v = $(this).val();
+                $("#UnSelectedUser option[value='" + v + "']").remove();   
+            }
+        );
+    }
+
+    function SetHiddenUserValue()
+    {
+        var toAdded = $("#SelectedUser option"); 
+        var hv = "";
+
+        toAdded.each(
+            function()
+            {
+                var v = $(this).val();
+                hv += "|" + v;
+            }
+        );
+
+        $("#Sales").val(hv);   
+    }
+
+</script>
+@{
+    var htmlAttr = new { width = "150px" };
+}
+@Html.HiddenFor(m => m.Sales)
+<table id="NoBorderTable" border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 100%">
+    <tr>
+        <td width="150">
+            @Html.DropDownList("ddlCity", Model.CityList, htmlAttr)
+        </td>
+        <td width="30">
+        </td>
+        <td>
+            @Html.DropDownList("ddlDept", Model.DepartmentList, htmlAttr)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.ListBox("UnSelectedUser", Model.EmptySelectList, htmlAttr)
+        </td>
+        <td align="center">
+            <input id="btnAddUser" type="button" class="button" value="&gt;" />
+            <br /><br />
+            <input id="btnDeleteUser" type="button" class="button" value="&lt;" />
+        </td>
+        <td>
+            @Html.ListBox("SelectedUser", Model.EmptySelectList, htmlAttr)
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,159 @@
+﻿@model DSHOrder.Entity.Customer
+
+@{
+    ViewBag.Title = "修改客户";
+}
+ <script src="@Url.Content("~/Scripts/jquery.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+    $(function () {
+         $("#CityID").change(function(){ //City选项改变时激活
+            var selec = $(this).val();  //获取改变的选项值
+            var url ="@Url.Action("GetDistrict", "Customer", new { area = "SGManage" })";  //参数依次类型(action,Controller,area）
+
+            $("#DistrictID").find("option").remove();  //清空
+            $.getJSON(url, { 'cityID': selec }, function (data) {  //orgID是参数名和Controllers中的action参数名相同
+                $.each(data, function (i, item) {
+                    $("<option></option>").val(item["Value"]).text(item["Text"]).appendTo($("#DistrictID"));
+                });  
+            });    
+        });
+    });
+</script>
+@*<h2>修改客户</h2>*@<br />
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary()
+    <fieldset>
+
+        @Html.HiddenFor(model => model.CustomerID)
+
+           <table  class="tbList">
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CustomerName)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.CustomerName)
+                        @Html.ValidationMessageFor(model => model.CustomerName,"*")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DefaultPaymentType)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.DefaultPaymentType, ViewData["paymentTypeSelectList"] as IEnumerable<SelectListItem>)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CityID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.CityID, ViewData["citySelectList"] as IEnumerable<SelectListItem>)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.BankName)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                       @* @Html.DropDownListFor(model => model.BankName,ViewData["bankSelectType"] as IEnumerable<SelectListItem>)*@
+                       @Html.EditorFor(model=>model.BankName)
+                        @Html.ValidationMessageFor(model => model.BankName, "*")
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DistrictID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.DistrictID,ViewData["districtSelectList"] as IEnumerable<SelectListItem>)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.BankAccount)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.BankAccount)
+                        @Html.ValidationMessageFor(model => model.BankAccount, "*")
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ContactName)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ContactName)
+                        @Html.ValidationMessageFor(model => model.ContactName, "*")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.BankReceiver)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.BankReceiver)
+                        @Html.ValidationMessageFor(model => model.BankReceiver, "*")
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ContactPhoneNo)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ContactPhoneNo)
+                        @Html.ValidationMessageFor(model => model.ContactPhoneNo, "*")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Address)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Address)
+                        @Html.ValidationMessageFor(model => model.Address, "*")
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <p>
+            <input type="submit" value="保存" class="button" />
+              
+        </p>
+    </fieldset>
+}
+<input type="submit" id="btnBack" value="返回" class="button" onclick="window.location='@Url.Action("Index")'" />
+

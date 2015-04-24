@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "导入话费充值";
+}
+<script src="@Url.Content("~/Scripts/jquery.min.js")" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+
+$(document).ready(function(){ 
+　　if($('#tdMsg').html()!=""){ //Trim自定义的方法 
+    alert($('#tdMsg').html()); //可以用jQuery的消息框 
+　　　　$('#tdMsg').fadeOut(3000); 
+　　} 
+}); 
+
+    function checkFile() { //点击确定按钮的时候
+        var file_upl = document.getElementById('fileImportPhone');
+        file_upl.select();
+
+        var file = document.selection.createRange().text;
+        if (file == "") {
+            //$.messager.alert('系统提示', '请选择将要上传的文件!');
+            alert('请选择将要上传的文件!');
+            //document.forms[0].submit();
+            return false;
+        }
+        else {
+            var stuff = file.match(/^(.*)(\.)(.{1,8})$/)[3];
+            if (!(stuff == 'xls' || stuff == 'xlsx')) {
+                alert('文件类型不正确，请选择.xls或xlsx文件!');
+                // document.forms[0].submit();
+                return false;
+            }
+            else {
+                $('#btnImport')[0].disabled = true;
+                $('#btnImport').val("正在导入......");
+                document.forms[0].submit();
+                return true;
+                //                $.ajax({
+                //                    type: "POST",
+                //                    url: "/PhoneFee/ImportInfo/",
+                //                
+                //                    success: function (result) {
+                //                        // $.messager.alert('系统提示', result + "");
+                //                        $('#btnImport')[0].disabled = false;
+                //                        $('#btnImport').val("导入");
+                //                        alert(result);
+                //                    }
+                //                });
+            }
+        }
+    }
+
+</script>
+<br />
+<div id="tdMsg" style="display:none">@ViewData["Msg"]</div> 
+@using (Html.BeginForm("ImportInfo", "PhoneFee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<label>请导入话费充值的Excel文件：</label>
+    <input type="file"  name="file" id="fileImportPhone" style="width:300px"/>
+   <input id="btnImport" type="submit" class="button" style="width:100px" value="导入" onclick="return checkFile();" />@*onclick="return checkFile();" *@
+}

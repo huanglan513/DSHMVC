@@ -1,0 +1,65 @@
+﻿@model IEnumerable<DSHOrder.Entity.Function>
+<script type="text/javascript" language="javascript">
+    function changeClass(obj) {
+        $("#main-nav li a").removeClass("current")
+        $(obj).addClass("current");
+    }
+</script>
+@*<ul id="main-nav">
+ <!-- Accordion Menu -->
+        @foreach (var item in Model)
+        {
+            //if it is not the root node, skip it. Root node = 0.
+            if (item.ParentID != 0) { continue; }
+                        
+            <li><a href="#" class="nav-top-item" onclick="javascript:changeClass(this);">@item.FunctionName</a>
+            @{ IEnumerable<DSHOrder.Entity.Function> list = Model.Where(p => p.ParentID == item.FunctionID);
+                if(list.Count()>0)
+                {
+                    <ul>
+                    @foreach(var subItem in list)
+                    {
+                        <li><a href="@Url.Action("Navigation", "Common", new { @functionId=subItem.FunctionID})">@subItem.FunctionName</a></li>
+                    }
+                    </ul>
+                }
+               }
+            </li>
+        }
+</ul>*@
+
+ @foreach (var item in Model)
+ {
+     if (item.ParentID != 0) { continue; }
+  <h1 class="type"><a href="javascript:void(0)">@item.FunctionName</a></h1>
+      <div class="content">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr valign="top" style="height:5px">
+            <td><img src="../../Content/Images/menu_topline.gif" width="182" height="5" /></td>
+          </tr>
+        </table>
+           @{
+                                           IEnumerable<DSHOrder.Entity.Function> list = Model.Where(p => p.ParentID == item.FunctionID);
+                                           if (list.Count() > 0)
+                                           {
+                <ul class="MM">
+                  @foreach (var subItem in list)
+                  {
+                  <li><a href="@Url.Action("Navigation", "Common", new { @functionId = subItem.FunctionID })" >@subItem.FunctionName</a></li>
+                  }
+                </ul>
+                                           }
+            }
+      </div>
+ }
+ <script language="javascript" type="text/javascript">
+     $(function () {
+
+         $(".MM li a").click( // When a menu item with no sub menu is clicked...
+			function () {
+			    window.location.href = (this.href); // Just open the link instead of a sub menu
+			    return false;
+			}
+		);
+     });
+        </script>

@@ -1,0 +1,67 @@
+﻿@model DSHOrder.Web.Models.AppSearchModel
+@{
+    ViewBag.Title = "_SearchGroupByItem";
+}
+@Html.ValidationSummary(true)
+<fieldset>
+    @*@Html.HiddenFor(m => m.PageIndex)*@
+    @Html.HiddenFor(m => m.PageSize)
+    @*@Html.HiddenFor(m => m.TotalItemCount)*@
+    <table id="SearchTable" border="1" cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="title" colspan="4">
+                <b>查询条件</b>
+            </td>
+        </tr>
+        <tr>
+            <td class="title" style="width: 180px">
+                商家所在城市
+            </td>
+            <td style="width: 200px">
+                @Html.DropDownListFor(m => m.CustomerCityId, Model.CityList)
+            </td>
+            <td class="title" style="width: 180px">
+                团购平台
+            </td>
+            <td>
+                @Html.DropDownListFor(m => m.PortalId, Model.PortalList)
+            </td>
+        </tr>
+        <tr>
+            <td class="title">
+                团购编号/名称
+            </td>
+            <td>
+                @Html.EditorFor(m => m.GroupByCodeOrName)
+            </td>
+            <td class="title">
+                业务员
+            </td>
+            <td>
+                @Html.EditorFor(m => m.Sale)
+            </td>
+        </tr>
+        <tr>
+            <td class="title">
+                团购状态
+            </td>
+            <td>
+                @Html.DropDownListFor(m => m.SearchType, Model.SearchTypeList)
+            </td>
+            <td class="title">
+                商家公司全称
+            </td>
+            <td>
+                @Html.EditorFor(m => m.CustomerName)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" align="right">
+                <input id="NewApp:NewApp" name="NewApp:NewApp" type="submit" class="button" value="新增" style="width: 80px" />
+                &nbsp;&nbsp;
+                <input id="Search:Search" name="Search:Search" type="submit" class="button" value="查询" style="width: 80px" />
+                &nbsp;&nbsp;
+            </td>
+        </tr>
+    </table>
+</fieldset>

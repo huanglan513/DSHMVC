@@ -1,0 +1,123 @@
+﻿@model DSHOrder.Web.Models.SchedulerInfoModel
+@{
+    ViewBag.Title = "任务调度";
+}
+@using (Html.BeginForm())
+{
+    <div id="schedulerContainer">
+        <table style="width: 100%">
+            <tr>
+                <th>@Html.LabelFor(m => m.SchedulerName)
+                </th>
+                <td>@Html.DisplayFor(m => m.SchedulerName)
+                </td>
+                <th>@Html.LabelFor(m => m.Started)
+                </th>
+                <td>@Html.DisplayFor(m => m.Started)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.SchedulerRemote)
+                </th>
+                <td>@Html.DisplayFor(m => m.SchedulerRemote)
+                </td>
+                <th>@Html.LabelFor(m => m.RunningSince)
+                </th>
+                <td>@Html.DisplayFor(m => m.RunningSince)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.NumberOfTotalJobs)
+                </th>
+                <td>@Html.DisplayFor(m => m.NumberOfTotalJobs)
+                </td>
+                <th>@Html.LabelFor(m => m.NumberOfJobsExecuted)
+                </th>
+                <td>@Html.DisplayFor(m => m.NumberOfJobsExecuted)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <input type="submit" id="btnShutdown"  class="button" name="action" value="停止" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="jobsContainer">
+        <table style="width: 100%">
+            @foreach (var j in Model.JobInfos)
+            {
+                <tr>
+                    <th>
+                        任务名称
+                    </th>
+                    <td>@*@Html.Display(j.Job.Key.Name)*@
+                        @Html.Label(j.Job.Key.Name)
+                    </td>
+                    <th>
+                        任务组
+                    </th>
+                    <td>@Html.Label(j.Job.Key.Group)                        
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <table style="width: 100%">
+                            <tr>
+                                <th>
+                                    触发器名称
+                                </th>
+                                <th>
+                                    触发器组
+                                </th>
+                                <th>
+                                    开始时间
+                                </th>
+                                <th>
+                                    结束时间
+                                </th>
+                                <th>
+                                    上次触发时间
+                                </th>
+                                <th>
+                                    下次触发时间
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                            @foreach (var t in j.Triggers)
+                            {
+                                <tr>
+                                    <td>@Html.Label(t.Key.Name)
+                                    </td>
+                                    <td>@Html.Label(t.Key.Group)
+                                    </td>
+                                    <td>@Html.Label(t.StartTimeUtc.ToString())
+                                    </td>
+                                    <td>@Html.Label(t.EndTimeUtc.ToString())
+                                    </td>
+                                    <td>
+                                        @if (t.GetPreviousFireTimeUtc().HasValue)
+                                        { 
+                                            @Html.Label(t.GetPreviousFireTimeUtc().Value.ToString())                        
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (t.GetNextFireTimeUtc().HasValue)
+                                        { 
+                                            @Html.Label(t.GetNextFireTimeUtc().Value.ToString())                        
+                                        }
+                                    </td>
+                                    <td>
+                                        <input type="submit" id="btnResume" class="button" name="action" value="继续" />
+                                        <input type="submit" id="btnPause"  class="button" name="action" value="暂停" />
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </td>
+                </tr> 
+            }
+        </table>
+    </div>
+}

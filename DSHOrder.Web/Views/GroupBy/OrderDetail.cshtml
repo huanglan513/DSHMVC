@@ -1,0 +1,183 @@
+﻿@model DSHOrder.Web.Models.OrderDetailSearchModel
+@using DSHOrder.Entity;
+@using Webdiyer.WebControls.Mvc;
+@{
+    ViewBag.Title = "团购订单";
+}
+<script language="javascript" type="text/javascript">
+    $(function () {
+        var k = 0;
+        $("#tags li").each(function () {
+
+            if (k.toString() == $("#StatusType").val()) {
+                $(this).attr("class", "selectTag");
+            }
+            else {
+                $(this).attr("class", "");
+            }
+            k++;
+        });
+    });
+    function selectTag(showContent, selfObj,index) {
+        // 操作标签
+        var tag = document.getElementById("tags").getElementsByTagName("li");
+        var taglength = tag.length;
+        for (i = 0; i < taglength; i++) {
+            tag[i].className = "";
+        }
+        selfObj.parentNode.className = "selectTag";
+        // 操作内容
+//        for (i = 0; j = document.getElementById("tagContent" + i); i++) {
+//            j.style.display = "none";
+//        }
+        document.getElementById(showContent).style.display = "block";
+        $("#StatusType").val(index);
+        $("#btnTabs").click();
+    }
+    function aa() {
+        alert('aaaa');
+    }
+</script>
+<h2>团购订单</h2>
+@using (Html.BeginForm())
+{
+    <div>
+    @Html.HiddenFor(model => model.Id)
+     @Html.HiddenFor(model => model.Price)
+     @Html.HiddenFor(model => model.Sellers)
+     @Html.HiddenFor(model => model.GroupByName)
+     @Html.HiddenFor(model => model.StatusType)
+      <table width="100%" border="0">
+            <tr>
+                <th>团购名称</th>
+                <th>@Model.GroupByName</th>
+                <th>业务员</th>
+                <th>@Model.Sellers</th>
+                <th>价格</th>
+                <th>@Model.Price</th>
+            </tr>
+            <tr>
+                <td>
+                    买家名称
+                </td>
+                <td>@Html.TextBoxFor(model => model.BuyerName)
+                </td>
+                <td>
+                    地址
+                </td>
+                <td>@Html.TextBoxFor(model => model.Addr)
+                </td>
+                <td>&nbsp;</td><td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    办理日期 从
+                </td>
+                <td>@Html.TextBoxFor(model => model.DealDateFrom)
+                </td>
+                <td>
+                    至
+                </td>   
+                <td>@Html.TextBoxFor(model => model.DealDateTo)
+                </td>
+                 <td>&nbsp;</td><td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="6" align="right">
+                    <input type="submit" id="btnSearch" value="查询" class="button" name="search" />&nbsp;&nbsp;&nbsp;&nbsp;
+                    
+                </td>
+            </tr>
+        </table>
+    </div>
+       <ul   id="tags" width="100%">
+                    <li  class="selectTag"><a  id="baseInfo" onclick="selectTag('tagContent0',this,'0')"  href="#">未办理</a> </li>
+                    <li><a onclick="selectTag('tagContent0',this,'1')"  href="#">成功办理</a></li>
+                    <li><a onclick="selectTag('tagContent0',this,'2')" href="#">全部订单</a></li>
+                  
+                </ul>
+    <input type="submit" id="btnTabs" value="btnTabs" style="display:none" />
+    
+}
+       <div id="tagContent">
+                        <div class="tagContent selectTag" id="tagContent0">
+<table width="100%">
+    <tr>
+        <th>
+            买家名称
+        </th>
+        <th>
+            支付金额
+         </th>
+        <th>
+            收货地址
+        </th>
+         <th>
+            联系电话
+       </th>
+        <th>
+            状态
+        </th>
+         <th>
+            办理日期
+        </th>
+        <th>
+            办理人
+        </th>
+       <th>
+            备注
+       </th>
+         <th> </th>
+    </tr>
+
+@foreach (var item in Model.OrderDetailList)
+{
+    <tr>
+        
+        <td>
+            @item.BuyerNick
+        </td>
+        <td>
+             @String.Format("{0:F}", item.TotalFee)
+        </td>
+        <td>
+            @item.Address
+        </td>
+        <td>
+
+        </td>
+        <td>
+        @if (ViewData["CodeTableList"] != null)
+        {
+            if (item.RefundStatus.HasValue)
+            {
+                var status = item.RefundStatus.Value.ToString();
+                CodeTable ct = ((IList<CodeTable>)ViewData["CodeTableList"]).FirstOrDefault(p => p.CodeValue == status);
+                <label>@ct.CodeDesc</label>
+            }
+        }
+        </td>
+        <td>
+            @item.DealBy
+        </td>
+        <td>
+            @item.DealTime
+        </td>
+        <td>
+            @item.Remark
+        </td>
+       <td>
+            @Html.ActionLink("处理退款", "Edit", new { id = item.OrderDetailID }) 
+        </td>
+          @*  @String.Format("{0:g}", item.UpdateRefundTime)*@
+
+    </tr>
+}
+
+</table>
+@Html.Pager(Model.OrderDetailList, new PagerOptions { PageIndexParameterName = "id" })
+</div>
+</div>
+<br />
+
+<input type="submit" id="btnBack" value="返回" class="button" onclick="window.location='@Url.Action("Index")'" />

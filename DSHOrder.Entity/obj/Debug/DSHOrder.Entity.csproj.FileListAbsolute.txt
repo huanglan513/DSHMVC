@@ -1,0 +1,84 @@
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Entity\bin\Debug\DSHOrder.Entity.dll.config
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Entity\bin\Debug\DSHOrder.Entity.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Entity\bin\Debug\DSHOrder.Entity.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Entity\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Entity\obj\Debug\DSHOrder.Entity.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Entity\obj\Debug\DSHOrder.Entity.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll.config
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Entity\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.pdb
+D:\aaa\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll.config
+D:\aaa\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll
+D:\aaa\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.pdb
+D:\aaa\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.dll
+D:\aaa\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.pdb
+D:\aaa\DSHOrder\DSHOrder.Entity\obj\Debug\ResolveAssemblyReference.cache
+D:\aaa\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.dll
+D:\aaa\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.pdb
+H:\DSHOrder Project\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll.config
+H:\DSHOrder Project\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll
+H:\DSHOrder Project\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.pdb
+H:\DSHOrder Project\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.dll
+H:\DSHOrder Project\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.pdb
+H:\DSHOrder Project\DSHOrder\DSHOrder.Entity\obj\Debug\ResolveAssemblyReference.cache
+H:\DSHOrder Project\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.dll
+H:\DSHOrder Project\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.pdb
+D:\net_project\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll.config
+D:\net_project\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll
+D:\net_project\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.pdb
+D:\net_project\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.dll
+D:\net_project\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.pdb
+D:\net_project\DSHOrder\DSHOrder.Entity\obj\Debug\ResolveAssemblyReference.cache
+D:\net_project\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.dll
+D:\net_project\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.pdb
+E:\NetProjects\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll.config
+E:\NetProjects\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll
+E:\NetProjects\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.pdb
+E:\NetProjects\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.dll
+E:\NetProjects\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.pdb
+E:\NetProjects\DSHOrder\DSHOrder.Entity\obj\Debug\ResolveAssemblyReference.cache
+E:\NetProjects\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.dll
+E:\NetProjects\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.pdb
+E:\DSH\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll.config
+E:\DSH\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll
+E:\DSH\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.pdb
+E:\DSH\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.dll
+E:\DSH\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.pdb
+E:\DSH\DSHOrder\DSHOrder.Entity\obj\Debug\ResolveAssemblyReference.cache
+E:\DSH\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.dll
+E:\DSH\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.pdb
+G:\work document\DSH\DSHsrc\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll.config
+G:\work document\DSH\DSHsrc\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll
+G:\work document\DSH\DSHsrc\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.pdb
+G:\work document\DSH\DSHsrc\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.dll
+G:\work document\DSH\DSHsrc\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.pdb
+G:\work document\DSH\DSHsrc\DSHOrder\DSHOrder.Entity\obj\Debug\ResolveAssemblyReference.cache
+G:\work document\DSH\DSHsrc\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.dll
+G:\work document\DSH\DSHsrc\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.pdb
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll.config
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.pdb
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.dll
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.pdb
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Entity\obj\Debug\ResolveAssemblyReference.cache
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.dll
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.pdb
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll.config
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.pdb
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.dll
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.pdb
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Entity\obj\Debug\ResolveAssemblyReference.cache
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.dll
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.pdb
+D:\Others\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll.config
+D:\Others\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.dll
+D:\Others\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Entity.pdb
+D:\Others\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.dll
+D:\Others\DSHOrder\DSHOrder.Entity\bin\Debug\DSHOrder.Common.pdb
+D:\Others\DSHOrder\DSHOrder.Entity\obj\Debug\ResolveAssemblyReference.cache
+D:\Others\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.dll
+D:\Others\DSHOrder\DSHOrder.Entity\obj\Debug\DSHOrder.Entity.pdb

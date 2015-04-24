@@ -1,0 +1,683 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DSHOrder.Entity.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="DSHOrderEntityStoreContainer">
+    <EntitySet Name="City" EntityType="DSHOrder.Entity.Store.City" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CodeTable" EntityType="DSHOrder.Entity.Store.CodeTable" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CodeType" EntityType="DSHOrder.Entity.Store.CodeType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Customer" EntityType="DSHOrder.Entity.Store.Customer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Department" EntityType="DSHOrder.Entity.Store.Department" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="District" EntityType="DSHOrder.Entity.Store.District" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Function" EntityType="DSHOrder.Entity.Store.Function" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupByCity" EntityType="DSHOrder.Entity.Store.GroupByCity" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupByGroup" EntityType="DSHOrder.Entity.Store.GroupByGroup" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupByItem" EntityType="DSHOrder.Entity.Store.GroupByItem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupByPortal" EntityType="DSHOrder.Entity.Store.GroupByPortal" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupBySales" EntityType="DSHOrder.Entity.Store.GroupBySales" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Industry" EntityType="DSHOrder.Entity.Store.Industry" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LogisticsInfo" EntityType="DSHOrder.Entity.Store.LogisticsInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderDetail" EntityType="DSHOrder.Entity.Store.OrderDetail" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Payment" EntityType="DSHOrder.Entity.Store.Payment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PhoneFeeInfo" EntityType="DSHOrder.Entity.Store.PhoneFeeInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Privilege" EntityType="DSHOrder.Entity.Store.Privilege" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Role" EntityType="DSHOrder.Entity.Store.Role" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SubIndustry" EntityType="DSHOrder.Entity.Store.SubIndustry" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SystemParam" EntityType="DSHOrder.Entity.Store.SystemParam" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User" EntityType="DSHOrder.Entity.Store.User" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserDepartment" EntityType="DSHOrder.Entity.Store.UserDepartment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserRole" EntityType="DSHOrder.Entity.Store.UserRole" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_CODETABL_REFERENCE_CODETYPE" Association="DSHOrder.Entity.Store.FK_CODETABL_REFERENCE_CODETYPE">
+      <End Role="CodeType" EntitySet="CodeType" />
+      <End Role="CodeTable" EntitySet="CodeTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CUSTOMER_REFERENCE_CITY" Association="DSHOrder.Entity.Store.FK_CUSTOMER_REFERENCE_CITY">
+      <End Role="City" EntitySet="City" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CUSTOMER_REFERENCE_DISTRICT" Association="DSHOrder.Entity.Store.FK_CUSTOMER_REFERENCE_DISTRICT">
+      <End Role="District" EntitySet="District" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DEPARTME_REFERENCE_USER" Association="DSHOrder.Entity.Store.FK_DEPARTME_REFERENCE_USER">
+      <End Role="User" EntitySet="User" />
+      <End Role="Department" EntitySet="Department" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DISTRICT_REFERENCE_CITY" Association="DSHOrder.Entity.Store.FK_DISTRICT_REFERENCE_CITY">
+      <End Role="City" EntitySet="City" />
+      <End Role="District" EntitySet="District" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GROUPBYC_REFERENCE_CITY" Association="DSHOrder.Entity.Store.FK_GROUPBYC_REFERENCE_CITY">
+      <End Role="City" EntitySet="City" />
+      <End Role="GroupByCity" EntitySet="GroupByCity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByCity_GroupByItem" Association="DSHOrder.Entity.Store.FK_GroupByCity_GroupByItem">
+      <End Role="GroupByItem" EntitySet="GroupByItem" />
+      <End Role="GroupByCity" EntitySet="GroupByCity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByGroup_Customer" Association="DSHOrder.Entity.Store.FK_GroupByGroup_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByGroup_SubIndustry" Association="DSHOrder.Entity.Store.FK_GroupByGroup_SubIndustry">
+      <End Role="SubIndustry" EntitySet="SubIndustry" />
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByItem_GroupByGroup" Association="DSHOrder.Entity.Store.FK_GroupByItem_GroupByGroup">
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+      <End Role="GroupByItem" EntitySet="GroupByItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByItem_GroupByPortal" Association="DSHOrder.Entity.Store.FK_GroupByItem_GroupByPortal">
+      <End Role="GroupByPortal" EntitySet="GroupByPortal" />
+      <End Role="GroupByItem" EntitySet="GroupByItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupBySales_GroupBySales" Association="DSHOrder.Entity.Store.FK_GroupBySales_GroupBySales">
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+      <End Role="GroupBySales" EntitySet="GroupBySales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupBySales_User" Association="DSHOrder.Entity.Store.FK_GroupBySales_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="GroupBySales" EntitySet="GroupBySales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_GroupByGroup" Association="DSHOrder.Entity.Store.FK_Payment_GroupByGroup">
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRIVILEG_REFERENCE_FUNCTION" Association="DSHOrder.Entity.Store.FK_PRIVILEG_REFERENCE_FUNCTION">
+      <End Role="Function" EntitySet="Function" />
+      <End Role="Privilege" EntitySet="Privilege" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRIVILEG_REFERENCE_ROLE" Association="DSHOrder.Entity.Store.FK_PRIVILEG_REFERENCE_ROLE">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Privilege" EntitySet="Privilege" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SUBINDUS_REFERENCE_INDUSTRY" Association="DSHOrder.Entity.Store.FK_SUBINDUS_REFERENCE_INDUSTRY">
+      <End Role="Industry" EntitySet="Industry" />
+      <End Role="SubIndustry" EntitySet="SubIndustry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USERDEPA_REFERENCE_DEPARTME" Association="DSHOrder.Entity.Store.FK_USERDEPA_REFERENCE_DEPARTME">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="UserDepartment" EntitySet="UserDepartment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USERDEPA_REFERENCE_USER" Association="DSHOrder.Entity.Store.FK_USERDEPA_REFERENCE_USER">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserDepartment" EntitySet="UserDepartment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USERROLE_REFERENCE_ROLE" Association="DSHOrder.Entity.Store.FK_USERROLE_REFERENCE_ROLE">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USERROLE_REFERENCE_USER" Association="DSHOrder.Entity.Store.FK_USERROLE_REFERENCE_USER">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CodeTable">
+    <Key>
+      <PropertyRef Name="CodeID" />
+    </Key>
+    <Property Name="CodeID" Type="int" Nullable="false" />
+    <Property Name="CodeTypeID" Type="int" />
+    <Property Name="CodeValue" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="CodeDesc" Type="nvarchar" MaxLength="200" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="CodeType">
+    <Key>
+      <PropertyRef Name="CodeTypeID" />
+    </Key>
+    <Property Name="CodeTypeID" Type="int" Nullable="false" />
+    <Property Name="CodeTypeName" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DistrictID" Type="int" />
+    <Property Name="CityID" Type="int" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ContactPhoneNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankName" Type="nvarchar" MaxLength="100" />
+    <Property Name="BankAccount" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankReceiver" Type="nvarchar" MaxLength="50" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+    <Property Name="CutoffInd" Type="int" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="LastModifyBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyTime" Type="datetime" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="DeleteInd" Type="int" />
+    <Property Name="DefaultPaymentType" Type="int" />
+    <Property Name="ContactName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="int" Nullable="false" />
+    <Property Name="DepartmentManager" Type="int" />
+    <Property Name="DepartmentName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="DistrictID" />
+    </Key>
+    <Property Name="DistrictID" Type="int" Nullable="false" />
+    <Property Name="CityID" Type="int" />
+    <Property Name="DistrictName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Function">
+    <Key>
+      <PropertyRef Name="FunctionID" />
+    </Key>
+    <Property Name="FunctionID" Type="int" Nullable="false" />
+    <Property Name="FunctionName" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="ParentID" Type="int" Nullable="false" />
+    <Property Name="Url" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="GroupByCity">
+    <Key>
+      <PropertyRef Name="GroupByCityID" />
+    </Key>
+    <Property Name="GroupByCityID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GroupByItemID" Type="int" />
+    <Property Name="CityID" Type="int" />
+    <Property Name="DeleteInd" Type="int" />
+  </EntityType>
+  <EntityType Name="GroupByGroup">
+    <Key>
+      <PropertyRef Name="GroupByGroupID" />
+    </Key>
+    <Property Name="GroupByGroupID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GroupByGroupName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="SubIndustryID" Type="int" />
+    <Property Name="OriginalPrice" Type="decimal" Scale="2" />
+    <Property Name="GroupByContent" Type="ntext" />
+    <Property Name="SettlementType" Type="int" />
+    <Property Name="RefundType" Type="int" />
+    <Property Name="LogisticCharge" Type="decimal" Scale="2" />
+    <Property Name="Status" Type="int" />
+    <Property Name="GroupByContractNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="LastModifyBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyTime" Type="datetime" />
+    <Property Name="DeleteInd" Type="int" />
+    <Property Name="GroupByCodeNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="FinalProfit" Type="decimal" Scale="2" />
+  </EntityType>
+  <EntityType Name="GroupByItem">
+    <Key>
+      <PropertyRef Name="GroupByItemID" />
+    </Key>
+    <Property Name="GroupByItemID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GroupByPortalID" Type="int" />
+    <Property Name="StartDay" Type="datetime" />
+    <Property Name="EndDay" Type="datetime" />
+    <Property Name="ExpireDay" Type="datetime" />
+    <Property Name="LowestNum" Type="int" />
+    <Property Name="HighestNum" Type="int" />
+    <Property Name="SellingPrice" Type="decimal" Scale="2" />
+    <Property Name="GroupByNum" Type="int" />
+    <Property Name="SellNum" Type="int" />
+    <Property Name="URL" Type="nvarchar" MaxLength="500" />
+    <Property Name="RefundPrice" Type="decimal" Scale="2" />
+    <Property Name="ActualConsumption" Type="int" />
+    <Property Name="LeaveAmount" Type="int" />
+    <Property Name="RankingValue" Type="int" />
+    <Property Name="RankingNum" Type="int" />
+    <Property Name="SZOnlineSell" Type="int" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="LastModifyBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyTime" Type="datetime" />
+    <Property Name="DeleteInd" Type="int" />
+    <Property Name="GroupByGroupID" Type="int" />
+    <Property Name="TaobaoProductID" Type="nvarchar" MaxLength="50" />
+    <Property Name="GroupByItemCodeNo" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="GroupByPortal">
+    <Key>
+      <PropertyRef Name="GroupByPortalID" />
+    </Key>
+    <Property Name="GroupByPortalID" Type="int" Nullable="false" />
+    <Property Name="PortalName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="GroupBySales">
+    <Key>
+      <PropertyRef Name="GroupBySalesID" />
+    </Key>
+    <Property Name="GroupBySalesID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="GroupByGroupID" Type="int" />
+    <Property Name="DeleteInd" Type="int" />
+  </EntityType>
+  <EntityType Name="Industry">
+    <Key>
+      <PropertyRef Name="IndustryID" />
+    </Key>
+    <Property Name="IndustryID" Type="int" Nullable="false" />
+    <Property Name="IndustryName" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="LogisticsInfo">
+    <Key>
+      <PropertyRef Name="LogisticsID" />
+    </Key>
+    <Property Name="LogisticsID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SerialNum" Type="varchar" MaxLength="50" />
+    <Property Name="OrderID" Type="varchar" MaxLength="50" />
+    <Property Name="Project" Type="nvarchar" MaxLength="50" />
+    <Property Name="GetGoodsDate" Type="datetime" />
+    <Property Name="SourceStop" Type="nvarchar" MaxLength="50" />
+    <Property Name="DestStop" Type="nvarchar" MaxLength="50" />
+    <Property Name="OperateDate" Type="datetime" />
+    <Property Name="ArriveStopDate" Type="datetime" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" />
+    <Property Name="TelPhone" Type="varchar" MaxLength="50" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+    <Property Name="GoodsName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SalesNum" Type="int" />
+    <Property Name="Carrier" Type="nvarchar" MaxLength="50" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderDetailID" />
+    </Key>
+    <Property Name="OrderDetailID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GroupByItemID" Type="int" />
+    <Property Name="LockBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="BuyerID" Type="nvarchar" MaxLength="50" />
+    <Property Name="BuyerNick" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShippingType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tid" Type="nvarchar" MaxLength="50" />
+    <Property Name="Oid" Type="nvarchar" MaxLength="50" />
+    <Property Name="AlipayNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="TotalFee" Type="decimal" Scale="2" />
+    <Property Name="ApplyRefundTime" Type="datetime" />
+    <Property Name="UpdateRefundTime" Type="datetime" />
+    <Property Name="HasGoodReturn" Type="nvarchar" MaxLength="50" />
+    <Property Name="RefundFee" Type="decimal" Scale="2" />
+    <Property Name="Payment" Type="decimal" Scale="2" />
+    <Property Name="Reason" Type="nvarchar" MaxLength="500" />
+    <Property Name="Desc" Type="nvarchar" MaxLength="500" />
+    <Property Name="GoodReturnTime" Type="datetime" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="PayTime" Type="datetime" />
+    <Property Name="DealTime" Type="datetime" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="LastModifyBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyTime" Type="datetime" />
+    <Property Name="DeleteInd" Type="int" />
+    <Property Name="LockTime" Type="datetime" />
+    <Property Name="DealBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="OrderStatus" Type="int" />
+    <Property Name="RefundStatus" Type="int" />
+    <Property Name="IssueType" Type="int" />
+    <Property Name="RefundTimeout" Type="datetime" />
+    <Property Name="TaobaoProductID" Type="nvarchar" MaxLength="50" />
+    <Property Name="BuyerMessage" Type="nvarchar" MaxLength="500" />
+    <Property Name="OfflineDealStatus" Type="int" />
+    <Property Name="OfflineReturnFee" Type="decimal" />
+    <Property Name="OfflineDealBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="OfflineDealDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="PaymentID" />
+    </Key>
+    <Property Name="PaymentID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GroupByGroupID" Type="int" />
+    <Property Name="PaymentPrice" Type="decimal" Scale="2" />
+    <Property Name="PaymentTime" Type="datetime" />
+    <Property Name="PaymentProportion" Type="decimal" Scale="2" />
+    <Property Name="PaymentDeadline" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="LastModifyBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyTime" Type="datetime" />
+    <Property Name="DeleteInd" Type="int" />
+    <Property Name="PaymentType" Type="int" />
+  </EntityType>
+  <EntityType Name="PhoneFeeInfo">
+    <Key>
+      <PropertyRef Name="PhoneFeeOrderID" />
+    </Key>
+    <Property Name="PhoneFeeOrderID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="varchar" MaxLength="50" />
+    <Property Name="BuyerName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Payment" Type="decimal" Scale="2" />
+    <Property Name="GetGoodsAddr" Type="nvarchar" MaxLength="300" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+    <Property Name="SalesNum" Type="int" />
+    <Property Name="Result" Type="nvarchar" MaxLength="100" />
+    <Property Name="OrderDate" Type="datetime" />
+    <Property Name="RechargeDate" Type="datetime" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreateTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Privilege">
+    <Key>
+      <PropertyRef Name="PrivilegeID" />
+    </Key>
+    <Property Name="PrivilegeID" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" />
+    <Property Name="FunctionID" Type="int" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SubIndustry">
+    <Key>
+      <PropertyRef Name="SubIndustryID" />
+    </Key>
+    <Property Name="SubIndustryID" Type="int" Nullable="false" />
+    <Property Name="IndustryID" Type="int" />
+    <Property Name="SubIndustryName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SystemParam">
+    <Key>
+      <PropertyRef Name="SystemID" />
+    </Key>
+    <Property Name="SystemID" Type="int" Nullable="false" />
+    <Property Name="SystemName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SystemValue" Type="nvarchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="Title" Type="nvarchar" MaxLength="20" />
+    <Property Name="Sex" Type="int" />
+    <Property Name="DeleteInd" Type="int" />
+  </EntityType>
+  <EntityType Name="UserDepartment">
+    <Key>
+      <PropertyRef Name="UserDepartmentID" />
+    </Key>
+    <Property Name="UserDepartmentID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentID" Type="int" />
+    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserRoleID" />
+    </Key>
+    <Property Name="UserRoleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RoleID" Type="int" />
+    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <Association Name="FK_CODETABL_REFERENCE_CODETYPE">
+    <End Role="CodeType" Type="DSHOrder.Entity.Store.CodeType" Multiplicity="0..1" />
+    <End Role="CodeTable" Type="DSHOrder.Entity.Store.CodeTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CodeType">
+        <PropertyRef Name="CodeTypeID" />
+      </Principal>
+      <Dependent Role="CodeTable">
+        <PropertyRef Name="CodeTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CUSTOMER_REFERENCE_CITY">
+    <End Role="City" Type="DSHOrder.Entity.Store.City" Multiplicity="0..1" />
+    <End Role="Customer" Type="DSHOrder.Entity.Store.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CUSTOMER_REFERENCE_DISTRICT">
+    <End Role="District" Type="DSHOrder.Entity.Store.District" Multiplicity="0..1" />
+    <End Role="Customer" Type="DSHOrder.Entity.Store.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="DistrictID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DEPARTME_REFERENCE_USER">
+    <End Role="User" Type="DSHOrder.Entity.Store.User" Multiplicity="0..1" />
+    <End Role="Department" Type="DSHOrder.Entity.Store.Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="DepartmentManager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DISTRICT_REFERENCE_CITY">
+    <End Role="City" Type="DSHOrder.Entity.Store.City" Multiplicity="0..1" />
+    <End Role="District" Type="DSHOrder.Entity.Store.District" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GROUPBYC_REFERENCE_CITY">
+    <End Role="City" Type="DSHOrder.Entity.Store.City" Multiplicity="0..1" />
+    <End Role="GroupByCity" Type="DSHOrder.Entity.Store.GroupByCity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="GroupByCity">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByCity_GroupByItem">
+    <End Role="GroupByItem" Type="DSHOrder.Entity.Store.GroupByItem" Multiplicity="0..1" />
+    <End Role="GroupByCity" Type="DSHOrder.Entity.Store.GroupByCity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupByItem">
+        <PropertyRef Name="GroupByItemID" />
+      </Principal>
+      <Dependent Role="GroupByCity">
+        <PropertyRef Name="GroupByItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByGroup_Customer">
+    <End Role="Customer" Type="DSHOrder.Entity.Store.Customer" Multiplicity="0..1" />
+    <End Role="GroupByGroup" Type="DSHOrder.Entity.Store.GroupByGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="GroupByGroup">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByGroup_SubIndustry">
+    <End Role="SubIndustry" Type="DSHOrder.Entity.Store.SubIndustry" Multiplicity="0..1" />
+    <End Role="GroupByGroup" Type="DSHOrder.Entity.Store.GroupByGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubIndustry">
+        <PropertyRef Name="SubIndustryID" />
+      </Principal>
+      <Dependent Role="GroupByGroup">
+        <PropertyRef Name="SubIndustryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByItem_GroupByGroup">
+    <End Role="GroupByGroup" Type="DSHOrder.Entity.Store.GroupByGroup" Multiplicity="0..1" />
+    <End Role="GroupByItem" Type="DSHOrder.Entity.Store.GroupByItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupByGroup">
+        <PropertyRef Name="GroupByGroupID" />
+      </Principal>
+      <Dependent Role="GroupByItem">
+        <PropertyRef Name="GroupByGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByItem_GroupByPortal">
+    <End Role="GroupByPortal" Type="DSHOrder.Entity.Store.GroupByPortal" Multiplicity="0..1" />
+    <End Role="GroupByItem" Type="DSHOrder.Entity.Store.GroupByItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupByPortal">
+        <PropertyRef Name="GroupByPortalID" />
+      </Principal>
+      <Dependent Role="GroupByItem">
+        <PropertyRef Name="GroupByPortalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupBySales_GroupBySales">
+    <End Role="GroupByGroup" Type="DSHOrder.Entity.Store.GroupByGroup" Multiplicity="0..1" />
+    <End Role="GroupBySales" Type="DSHOrder.Entity.Store.GroupBySales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupByGroup">
+        <PropertyRef Name="GroupByGroupID" />
+      </Principal>
+      <Dependent Role="GroupBySales">
+        <PropertyRef Name="GroupByGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupBySales_User">
+    <End Role="User" Type="DSHOrder.Entity.Store.User" Multiplicity="0..1" />
+    <End Role="GroupBySales" Type="DSHOrder.Entity.Store.GroupBySales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="GroupBySales">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_GroupByGroup">
+    <End Role="GroupByGroup" Type="DSHOrder.Entity.Store.GroupByGroup" Multiplicity="0..1" />
+    <End Role="Payment" Type="DSHOrder.Entity.Store.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupByGroup">
+        <PropertyRef Name="GroupByGroupID" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="GroupByGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRIVILEG_REFERENCE_FUNCTION">
+    <End Role="Function" Type="DSHOrder.Entity.Store.Function" Multiplicity="0..1" />
+    <End Role="Privilege" Type="DSHOrder.Entity.Store.Privilege" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Function">
+        <PropertyRef Name="FunctionID" />
+      </Principal>
+      <Dependent Role="Privilege">
+        <PropertyRef Name="FunctionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRIVILEG_REFERENCE_ROLE">
+    <End Role="Role" Type="DSHOrder.Entity.Store.Role" Multiplicity="0..1" />
+    <End Role="Privilege" Type="DSHOrder.Entity.Store.Privilege" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="Privilege">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SUBINDUS_REFERENCE_INDUSTRY">
+    <End Role="Industry" Type="DSHOrder.Entity.Store.Industry" Multiplicity="0..1" />
+    <End Role="SubIndustry" Type="DSHOrder.Entity.Store.SubIndustry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Industry">
+        <PropertyRef Name="IndustryID" />
+      </Principal>
+      <Dependent Role="SubIndustry">
+        <PropertyRef Name="IndustryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USERDEPA_REFERENCE_DEPARTME">
+    <End Role="Department" Type="DSHOrder.Entity.Store.Department" Multiplicity="0..1" />
+    <End Role="UserDepartment" Type="DSHOrder.Entity.Store.UserDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="UserDepartment">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USERDEPA_REFERENCE_USER">
+    <End Role="User" Type="DSHOrder.Entity.Store.User" Multiplicity="0..1" />
+    <End Role="UserDepartment" Type="DSHOrder.Entity.Store.UserDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserDepartment">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USERROLE_REFERENCE_ROLE">
+    <End Role="Role" Type="DSHOrder.Entity.Store.Role" Multiplicity="0..1" />
+    <End Role="UserRole" Type="DSHOrder.Entity.Store.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USERROLE_REFERENCE_USER">
+    <End Role="User" Type="DSHOrder.Entity.Store.User" Multiplicity="0..1" />
+    <End Role="UserRole" Type="DSHOrder.Entity.Store.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

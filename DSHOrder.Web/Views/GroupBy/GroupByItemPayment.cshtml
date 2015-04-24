@@ -1,0 +1,87 @@
+﻿@model DSHOrder.Entity.GroupByItem
+
+<fieldset>
+
+
+  
+                  @{var lblTitle = Model.GroupByPortal.PortalName + "基本信息"; }<br />
+                    <div>
+                        <label>@lblTitle</label></div>
+    @Html.HiddenFor(model => model.GroupByItemID)
+    <table>
+    <tr>
+                <td>
+                    <div class="display-label">
+                        团购价
+                    </div>
+                </td>
+                <td>
+                   @Model.SellingPrice
+                </td>
+                  <td>
+                    <div class="display-label">
+                        单份利润
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                            <label id="lblProfitOne">@ViewData["profitOne"]</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="display-label">
+                       总销售量
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.EditorFor(model => model.SellNum)
+                        @Html.ValidationMessageFor(model => model.SellNum, "*")
+                    </div>
+                </td>
+                <td>
+                    <div class="display-label">
+                        总利润
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        <label id="lblTotalProfit"></label>
+                    </div>
+                </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="display-label">
+                        退款总计
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.EditorFor(model => model.RefundPrice)
+                    </div>
+                </td>
+                 <td>
+                    <div class="display-label">
+                        评分级别
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.EditorFor(model => model.RankingValue)
+                    </div>
+                </td>
+                  <td>
+                    <div class="display-label">
+                        评分次数
+                    </div>
+                </td>
+                <td colspan="3">
+                    <div class="display-field">
+                        @Html.EditorFor(model => model.RankingNum)
+                    </div>
+                </td>
+            </tr>
+    </table>
+</fieldset>
+

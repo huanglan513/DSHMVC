@@ -1,0 +1,30 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "出错了";
+}
+<script language="javascript" type="text/javascript">
+    function CheckError_onclick() {
+        var chk = document.getElementById("CheckError");
+        var divError = document.getElementById("errorMsg");
+        if (chk.checked) {
+            divError.style.display = "inline";
+        }
+        else {
+            divError.style.display = "none";
+        }
+    }
+</script>
+<br /><br />&nbsp;&nbsp;&nbsp;
+<h2 style="text-align:center">
+    页面出错了。。。。。。。
+</h2>
+<span style="text-align:right; width:100%;">
+    <input type="checkbox" id="CheckError"  onclick="CheckError_onclick()" />查看错误详情
+</span><br /><br />
+    @{ string err = "出错页面是：" +Model.ControllerName+"/"+Model.ActionName + "<br>";
+            err += "异常信息：" + Model.Exception.Message + "<br>";
+            err += "Source：" + Model.Exception.Source + "<br>";
+            err += "StackTrace：" + Model.Exception.StackTrace;
+       <div id="errorMsg" style="display:none">@(new System.Web.HtmlString(err))</div>
+   }

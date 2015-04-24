@@ -1,0 +1,180 @@
+﻿@model DSHOrder.Web.Models.OrderDetailSearchModel
+@using Webdiyer.WebControls.Mvc;
+@{
+    ViewBag.Title = "订单清单列表";
+}
+<link rel="stylesheet" href="@Url.Content("~/Content/themes/base/jquery-ui.css")" type="text/css" />
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/DatePickerzh-cn.js")"></script>
+<script type="text/javascript" language="javascript">
+    $(function () {
+        $('#DealDateFrom').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true, yearRange: '2010:2040' });
+        $('#DealDateTo').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true, yearRange: '2010:2040' });
+    });
+
+</script>
+<h2>
+    团购买家清单</h2>
+@using (Html.BeginForm("Index", "OrderDetail", FormMethod.Get))
+{
+    <div>
+        <table width="100%" border="0">
+            <tr>
+                <th>
+                    团购名称
+                </th>
+                <td>@Html.DisplayFor(modelItem => Model.GroupByName)
+                </td>
+                <th>
+                    业务员
+                </th>
+                <td>@Html.DisplayFor(modelItem => Model.Sellers)
+                </td>
+                <th>
+                    价格
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Price)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    客户名称
+                </th>
+                <td>@Html.TextBoxFor(modelItem => Model.BuyerName)
+                </td>
+                <th>
+                    地址/电话
+                </th>
+                <td>@Html.TextBoxFor(modelItem => Model.Addr)
+                </td>
+                <th>
+                </th>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    办理日期
+                </th>
+                <td>@Html.TextBoxFor(modelItem => Model.DealDateFrom)
+                </td>
+                <th>
+                </th>
+                <td>@Html.TextBoxFor(modelItem => Model.DealDateTo)
+                </td>
+                <th>
+                </th>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <input type="submit" id="btnSearch" value="查询" class="button" name="search" />
+                </td>
+            </tr>
+        </table>
+    </div>
+}
+@using (Html.BeginForm())
+    { 
+    <div>
+        <div class="content-box-header">
+            <ul id="tabDealType" class="content-box-tabs" style="float: left">
+                @if (Model.StatusType == 0)
+                { 
+                    <li><a href="@Url.Action("Index", "OrderDetail", new { @BuyerName = Request["BuyerName"], @Addr = Request["Addr"], @DealDateFrom = Request["DealDateFrom"], @DealDateTo = Request["DealDateTo"], @dealType = 0 })"  class="default-tab">
+                        全部订单</a></li>
+                    <li><a href="@Url.Action("Index", "OrderDetail", new { @BuyerName = Request["BuyerName"], @Addr = Request["Addr"], @DealDateFrom = Request["DealDateFrom"], @DealDateTo = Request["DealDateTo"], @dealType = 1 })">
+                        未办理</a></li>
+                    <li><a href="@Url.Action("Index", "OrderDetail", new { @BuyerName = Request["BuyerName"], @Addr = Request["Addr"], @DealDateFrom = Request["DealDateFrom"], @DealDateTo = Request["DealDateTo"], @dealType = 2 })">
+                        成功办理</a></li>                
+                }
+                else if (Model.StatusType == 1)
+                {
+                    <li><a href="@Url.Action("Index", "OrderDetail", new { @BuyerName = Request["BuyerName"], @Addr = Request["Addr"], @DealDateFrom = Request["DealDateFrom"], @DealDateTo = Request["DealDateTo"], @dealType = 0 })">
+                        全部订单</a></li>
+                    <li><a href="@Url.Action("Index", "OrderDetail", new { @BuyerName = Request["BuyerName"], @Addr = Request["Addr"], @DealDateFrom = Request["DealDateFrom"], @DealDateTo = Request["DealDateTo"], @dealType = 1 })"  class="default-tab">
+                        未办理</a></li>
+                    <li><a href="@Url.Action("Index", "OrderDetail", new { @BuyerName = Request["BuyerName"], @Addr = Request["Addr"], @DealDateFrom = Request["DealDateFrom"], @DealDateTo = Request["DealDateTo"], @dealType = 2 })">
+                        成功办理</a></li>            
+                }
+                else if (Model.StatusType == 2)
+                {
+                    <li><a href="@Url.Action("Index", "OrderDetail", new { @BuyerName = Request["BuyerName"], @Addr = Request["Addr"], @DealDateFrom = Request["DealDateFrom"], @DealDateTo = Request["DealDateTo"], @dealType = 0 })">
+                        全部订单</a></li>
+                    <li><a href="@Url.Action("Index", "OrderDetail", new { @BuyerName = Request["BuyerName"], @Addr = Request["Addr"], @DealDateFrom = Request["DealDateFrom"], @DealDateTo = Request["DealDateTo"], @dealType = 1 })">
+                        未办理</a></li>
+                    <li><a href="@Url.Action("Index", "OrderDetail", new { @BuyerName = Request["BuyerName"], @Addr = Request["Addr"], @DealDateFrom = Request["DealDateFrom"], @DealDateTo = Request["DealDateTo"], @dealType = 2 })"   class="default-tab">
+                        成功办理</a></li>            
+                }
+            </ul>
+        </div>
+        <div class="tab-content default-tab" id="tab">
+            <table class="tbList">
+                <tr>
+                    <th>
+                        买家昵称
+                    </th>
+                    <th>
+                        支付金额
+                    </th>
+                    <th>
+                        收款地址
+                    </th>
+                    <th>
+                        状态
+                    </th>
+                    <th>
+                        办理日期
+                    </th>
+                    <th>
+                        办理人
+                    </th>
+                    <th>
+                        备注
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model.OrderDetailList)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BuyerNick)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalFee)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RefundStatus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DealTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DealBy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Remark)
+                        </td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.LockBy))
+                            {
+                                <text>（于 @item.LockTime.ToString() 被人锁住）</text>
+                            }
+                            else
+                            { 
+                                <input type="submit" id="edit:@item.OrderDetailID" value="编辑" class="button" name="edit:@item.OrderDetailID"/>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+            @Html.Pager(Model.OrderDetailList, new PagerOptions { PageIndexParameterName = "pageIndex" })
+        </div>
+    </div>
+    }

@@ -1,0 +1,17 @@
+﻿@model DSHOrder.Web.Models.GroupByFlowInfo
+@Html.HiddenFor(m => m.GroupByItem.CurrentNode)
+<table width="100%">
+    @foreach (var item in @Model.ThisPortalApproveRecords)
+    {
+        <tr>
+            <td>
+                @Html.Partial("ControlsForForm/ControlsForApprove/_" + item.NodeCode, Model)
+            </td>
+        </tr>
+    }
+    <tr>
+        <td>
+            @Html.Partial("ControlsForForm/ControlsForApprove/_" + Model.CurrentNode.ToString(), Model)
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,110 @@
+﻿@model IEnumerable<DSHOrder.Web.Models.PaymentHistoryModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="pragram" content="no-cache" /> 
+    <title>付款历史信息</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/skin.css")" type="text/css" />
+</head>
+<body>
+    <table class="tbList">
+        <tr>
+            <th>
+            付款序列
+        </th>
+        <th width="70px">
+            计划付款日
+        </th>
+        <th>
+            计划付款比例
+        </th>
+        <th>
+            计划付款金额（元）
+        </th>
+        <th width="70px">
+            实际付款日
+        </th>
+        <th>
+            实际付款比例
+        </th>
+        <th>
+            实际付款金额（元）
+        </th>
+        <th>
+            动作
+        </th>
+        <th>
+            状态
+        </th>
+        <th width="100px">
+            付款凭证
+        </th>
+        <th>
+            处理人
+        </th>
+        <th width="108px">
+            处理时间
+        </th>
+        <th>
+            备注
+        </th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+               No.@item.PaymentType
+            </td>
+            <td>
+                @String.Format("{0:d}", item.PaymentDeadline)
+            </td>
+            <td>
+                @String.Format("{0:P2}", item.PaymentProportion)
+            </td>
+            <td>
+                @String.Format("{0:N}", item.PaymentPrice)
+            </td>
+            <td>
+                @String.Format("{0:d}", item.ActualPaymentDeadline)
+            </td>
+            <td>
+                @String.Format("{0:P2}", item.ActualPaymentProportion)
+            </td>
+            <td>
+                @String.Format("{0:N}", item.ActualPaymentPrice)
+            </td>
+            <td nowrap="nowrap">
+                @item.Action
+            </td>
+            <td nowrap="nowrap">
+                @item.Result
+            </td>
+            <td>
+             @if (!string.IsNullOrEmpty(item.CertificateImage))
+             {
+                 @Html.Partial("_ShowImage", item.CertificateImage)
+             }   
+            </td>
+            <td>
+                @item.User
+            </td>
+            <td>
+                @String.Format("{0:g}", item.ActionDate)
+            </td>
+            <td>
+                @item.Comment
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
+

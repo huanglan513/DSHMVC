@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/skin.css")" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery.min.js")" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript">
+    
+        $(function () {
+            SetupLoading();
+        });
+
+        function SetupLoading() {
+            $("<div id='divLoading' class='Loading-mask'></div>").css({ display: "none", width: "100%", height: $(window).height() }).appendTo("body");
+            $("<div id='divLoadingMsg' class='Loading-mask-msg'></div>").html("正在处理，请稍候。。。").appendTo("body").css({ display: "none", left: ($(document.body).outerWidth(true) - 190) / 2, top: ($(window).height() - 45) / 2 });
+
+            $(document).ajaxStart(function () {
+                ShowLoading();
+            });
+            $(document).ajaxStop(function () {
+                HideLoading();
+            });
+
+            function ShowLoading() {
+                $("#divLoading").show();
+                $("#divLoadingMsg").show();
+            }
+            function HideLoading() {
+                $("#divLoading").hide();
+                $("#divLoadingMsg").hide();
+            }
+        }
+
+    </script>
+</head>
+<body id="mainBody">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="admin_topbg">
+        <tr>
+            <td width="61%">
+                <img src="../../Content/Images/logo.gif" alt="都市惠" width="262" height="64" />
+            </td>
+            <td width="39%" valign="top">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="height: 60">
+                    <tr>
+                        <td width="74%" height="38" class="admin_txt">
+                            @Html.Partial("_LogOnPartial")
+                        </td>
+                        <td width="22%">
+                            &nbsp;
+                        </td>
+                        <td width="4%">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="19" colspan="3">
+                            &nbsp;
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr valign="top">
+            <td style="width: 200px">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#EEF2FB">
+                    <tr>
+                        <td width="182" valign="top">
+                            <div>
+                                @{Html.RenderAction("Menu", "Common");}
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td valign="top" style="width: 95%">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="17" valign="top" style="background-image: url(../../Content/Images/mail_leftbg.gif)">
+                            <img src="../../Content/Images/left-top-right.gif" alt="*" width="17" height="29" />
+                        </td>
+                        <td valign="top" style="background-image: url(../../Content/Images/content-bg.gif)">
+                            <table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" class="left_topbg"
+                                id="table2">
+                                <tr>
+                                    <td height="31">
+                                        <div class="titlebt">@ViewBag.Title</div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td width="16" valign="top" style="background-image: url(../../Content/Images/mail_rightbg.gif)">
+                            <img src="../../Content/Images/nav-right-bg.gif" width="16" height="29" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" style="background-image: url(../../Content/Images/mail_leftbg.gif)">
+                            &nbsp;
+                        </td>
+                        <td valign="top" bgcolor="#F7F8F9">
+                            <div>
+                                @RenderBody()
+                            </div>
+                        </td>
+                        <td style="background-image: Url(../../Content/Images/mail_rightbg.gif)">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="bottom" style="background-image: url(../../Content/Images/mail_leftbg.gif)">
+                            <img src="../../Content/Images/buttom_left2.gif" width="17" height="17" />
+                        </td>
+                        <td style="background-image: url(../../Content/Images/buttom_bgs.gif)">
+                            <img src="../../Content/Images/buttom_bgs.gif" width="17" height="17">
+                        </td>
+                        <td valign="bottom" style="background-image: url(../../Content/Images/mail_rightbg.gif)">
+                            <img src="../../Content/Images/buttom_right2.gif" width="16" height="17" />
+                        </td>
+                    </tr>
+                </table>
+                <div id="footer">
+                    <small>&#169; Copyright 2012 都市惠 www.dushihui.com</small>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

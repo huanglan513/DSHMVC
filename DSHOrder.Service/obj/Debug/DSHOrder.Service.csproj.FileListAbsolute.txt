@@ -1,0 +1,126 @@
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Service\bin\Debug\DSHOrder.Service.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Service\bin\Debug\DSHOrder.Service.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Service\bin\Debug\DSHOrder.Entity.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Service\bin\Debug\DSHOrder.Repository.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Service\bin\Debug\DSHOrder.Service.Interface.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Service\bin\Debug\DSHOrder.Entity.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Service\bin\Debug\DSHOrder.Repository.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Service\bin\Debug\DSHOrder.Service.Interface.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Service\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Service\obj\Debug\DSHOrder.Service.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Service\obj\Debug\DSHOrder.Service.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Service\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.pdb
+D:\aaa\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.dll
+D:\aaa\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.pdb
+D:\aaa\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Common.dll
+D:\aaa\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.dll
+D:\aaa\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.dll
+D:\aaa\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.dll
+D:\aaa\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Common.pdb
+D:\aaa\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.pdb
+D:\aaa\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.pdb
+D:\aaa\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.pdb
+D:\aaa\DSHOrder\DSHOrder.Service\obj\Debug\ResolveAssemblyReference.cache
+D:\aaa\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.dll
+D:\aaa\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.pdb
+H:\DSHOrder Project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.dll
+H:\DSHOrder Project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.pdb
+H:\DSHOrder Project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Common.dll
+H:\DSHOrder Project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.dll
+H:\DSHOrder Project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.dll
+H:\DSHOrder Project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.dll
+H:\DSHOrder Project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Common.pdb
+H:\DSHOrder Project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.pdb
+H:\DSHOrder Project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.pdb
+H:\DSHOrder Project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.pdb
+H:\DSHOrder Project\DSHOrder\DSHOrder.Service\obj\Debug\ResolveAssemblyReference.cache
+H:\DSHOrder Project\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.dll
+H:\DSHOrder Project\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.pdb
+D:\net_project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.dll
+D:\net_project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.pdb
+D:\net_project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Common.dll
+D:\net_project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.dll
+D:\net_project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.dll
+D:\net_project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.dll
+D:\net_project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Common.pdb
+D:\net_project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.pdb
+D:\net_project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.pdb
+D:\net_project\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.pdb
+D:\net_project\DSHOrder\DSHOrder.Service\obj\Debug\ResolveAssemblyReference.cache
+D:\net_project\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.dll
+D:\net_project\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.pdb
+E:\NetProjects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.dll
+E:\NetProjects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.pdb
+E:\NetProjects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Common.dll
+E:\NetProjects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.dll
+E:\NetProjects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.dll
+E:\NetProjects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.dll
+E:\NetProjects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Common.pdb
+E:\NetProjects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.pdb
+E:\NetProjects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.pdb
+E:\NetProjects\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.pdb
+E:\NetProjects\DSHOrder\DSHOrder.Service\obj\Debug\ResolveAssemblyReference.cache
+E:\NetProjects\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.dll
+E:\NetProjects\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.pdb
+E:\DSH\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.dll
+E:\DSH\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.pdb
+E:\DSH\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Common.dll
+E:\DSH\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.dll
+E:\DSH\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.dll
+E:\DSH\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.dll
+E:\DSH\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Common.pdb
+E:\DSH\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.pdb
+E:\DSH\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.pdb
+E:\DSH\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.pdb
+E:\DSH\DSHOrder\DSHOrder.Service\obj\Debug\ResolveAssemblyReference.cache
+E:\DSH\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.dll
+E:\DSH\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.pdb
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Service\obj\Debug\ResolveAssemblyReference.cache
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.dll
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.pdb
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Common.dll
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.dll
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.dll
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.dll
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Common.pdb
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.pdb
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.pdb
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.pdb
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.dll
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.pdb
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.dll
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.pdb
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Common.dll
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.dll
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.dll
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.dll
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Common.pdb
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.pdb
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.pdb
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.pdb
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Service\obj\Debug\ResolveAssemblyReference.cache
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.dll
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.pdb
+D:\Others\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.dll
+D:\Others\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.pdb
+D:\Others\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Common.dll
+D:\Others\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.dll
+D:\Others\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.dll
+D:\Others\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.dll
+D:\Others\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Common.pdb
+D:\Others\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Entity.pdb
+D:\Others\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Repository.pdb
+D:\Others\DSHOrder\DSHOrder.Service\bin\Debug\DSHOrder.Service.Interface.pdb
+D:\Others\DSHOrder\DSHOrder.Service\obj\Debug\ResolveAssemblyReference.cache
+D:\Others\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.dll
+D:\Others\DSHOrder\DSHOrder.Service\obj\Debug\DSHOrder.Service.pdb

@@ -1,0 +1,126 @@
+﻿@model DSHOrder.Web.Models.GroupByFlowInfo
+@using DSHOrder.Web.Common;
+@using DSHOrder.Web.Common.Application.GroupByGroup;
+@{
+    GBGField fh = ViewData["fh"] as GBGField;
+}
+<style type="text/css">
+    #spanData
+    {
+        background-color: #C4DCAB;
+        font-weight: bold;
+    }
+</style>
+@if (Model.CurrentNode == GBGFlowEnumFLowNode.YWYTXTGSQB)
+{
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            $("#detailTable input[type!='radio']").width(40);
+            // $("#detailTable input[type='radio']").width(20);
+            $("#detailTable textarea").width("99%");
+
+            $("#GroupGeneralModel_EffectiveDayBegin").width("120").datepicker();
+            $("#GroupGeneralModel_EffectiveDayEnd").width("120").datepicker();
+            $("#GroupGeneralModel_ReceiveTime").width("120").datepicker();
+        });
+    </script>
+}
+<table id="detailTable" width="100%" border="1" cellspacing="0">
+   
+    <tr>
+        <td class="title" rowspan="8" width="20">
+            套系组合详情
+        </td>
+         
+        <tr>
+        <td class="title" width="150">
+            时长/地点
+        </td>
+        <td>
+            拍摄时长<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.PaiSheDays)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.PaiSheDays)天
+            拍摄场地：内景 <span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.PaiSheAddressInner)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.PaiSheAddressInner)；外景<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.PaiSheAddressOut)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.PaiSheAddressOut)
+        </td>
+         </tr>
+        <tr>
+        <td class="title" width="150">
+            时间周期
+        </td>
+        <td>
+            需提前<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.PreDays)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.PreDays)天预约
+            取件时间<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.QuJinDays)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.QuJinDays)天
+            有效期起止（包括限制使用日期）<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.ExpireDate)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.ExpireDate)
+        </td>
+         </tr>
+        <tr>
+        <td class="title" width="150">
+            照片
+        </td>
+        <td>
+            拍摄<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.PaiSheCount)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.PaiSheCount)张
+            精修<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.JingXiuCount)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.JingXiuCount)张
+            入光盘<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.InDisCount)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.InDisCount)张
+            额外精修<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.JingXiuPriceExta)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.JingXiuPriceExta)元/张
+            额外精修加入相册<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.JingXiuPriceExtaRuCe)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.JingXiuPriceExtaRuCe)元/张
+        </td>
+         </tr>
+        <tr>
+        <td class="title" width="150">
+            相框
+        </td>
+        <td>
+            尺寸<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.Size1)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.Size1)，制作工艺<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.GongYi1)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.GongYi1)
+            尺寸<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.Size2)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.Size2)，制作工艺<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.GongYi2)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.GongYi2)
+            尺寸<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.Size3)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.Size3)，制作工艺<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.GongYi3)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.GongYi3)
+        </td>
+       </tr>
+        <tr>
+        <td class="title" width="150">
+            相册
+        </td>
+        <td>
+            入册<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.RuCeCount1)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.RuCeCount1)张，尺寸<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.RuCeSize1)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.RuCeSize1)，制作工艺<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.RuCeGongYi1)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.RuCeGongYi1)
+            入册<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.RuCeCount2)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.RuCeCount2)张，尺寸<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.RuCeSize2)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.RuCeSize2)，制作工艺<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.RuCeGongYi2)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.RuCeGongYi2)
+           </td>
+      </tr>
+        <tr>
+        <td class="title" width="150">
+            赠品
+        </td>
+        <td>
+            服装套数<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.ClothCount)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.ClothCount)
+            化妆造型<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.HuaZhuangType)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.HuaZhuangType)
+            摆台<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.BaiTai)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.BaiTai)个，材质<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.CaiZhi)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.CaiZhi)
+            海报<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.HaiBaoCount)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.HaiBaoCount)张，尺寸<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.HaiBaoSize)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.HaiBaoSize)
+            钱包照<span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.QianBaoCount)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.QianBaoCount)张
+        </td>
+        </tr>
+        <tr>
+        <td class="title" width="150">
+            其他
+        </td>
+        <td>
+            是否赠送假睫毛 @fh.ShowField(m => m.GroupSheYingModel.SongJieMao, GBGFlowEnumEditType.CodeTableRadioButtonList, CodeTableHelper.CodeTableSFZSJJM)@Html.ValidationMessageFor(m => m.GroupSheYingModel.SongJieMao)
+            是否包含门票 @fh.ShowField(m => m.GroupSheYingModel.BaoMenPiao, GBGFlowEnumEditType.CodeTableRadioButtonList, CodeTableHelper.CodeTableSFBHMP)@Html.ValidationMessageFor(m => m.GroupSheYingModel.BaoMenPiao)
+            可接待份数 <span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.JieDaiCount)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.JieDaiCount)
+            是否参加聚无忧： @fh.ShowField(m => m.GroupSheYingModel.CanJiaJWY, GBGFlowEnumEditType.CodeTableRadioButtonList, CodeTableHelper.CodeTableJoinJWY)@Html.ValidationMessageFor(m => m.GroupSheYingModel.CanJiaJWY)
+        </td>
+         </tr>
+        </tr>
+    <tr>
+        <td class="title" colspan="2">
+            其它补充说明
+        </td>
+        <td style="height: 100px" align="left" valign="top">
+            @fh.ShowField(m => m.GroupSheYingModel.Other, GBGFlowEnumEditType.TextArea) @Html.ValidationMessageFor(m => m.GroupSheYingModel.Other)
+        </td>
+    </tr>
+    <tr>
+        <td class="title" colspan="2">
+            品质保障
+        </td>
+        <td>
+            当最终评分低于 <span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.IfBelowScore)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.IfBelowScore)分的情况下， 乙方愿意赔偿 <span id="spanData">@fh.ShowField(m => m.GroupSheYingModel.YiPayJia)</span> @Html.ValidationMessageFor(m => m.GroupSheYingModel.YiPayJia)元给予甲方
+        </td>
+    </tr>
+    
+</table>

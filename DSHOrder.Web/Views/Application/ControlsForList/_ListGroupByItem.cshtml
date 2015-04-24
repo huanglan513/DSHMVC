@@ -1,0 +1,70 @@
+﻿@model IEnumerable<DSHOrder.Web.Models.GroupByItemFlowInfo>
+<table>
+    <tr>
+        <th>
+            序号
+        </th>
+        <th>
+            团购名称
+        </th>
+        <th>
+            商家公司全称
+        </th>
+        <th>
+            团购状态
+        </th>
+        <th>
+            部门
+        </th>
+        <th>
+            业务员
+        </th>
+        <th>
+            团购平台
+        </th>
+        <th>
+            所在城市
+        </th>
+        <th>
+            开始日期
+        </th>
+        <th>
+            结束日期
+        </th>
+        <th>
+            操作
+        </th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupByPortalID)
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+                @Html.ActionLink("处理", "Form", new { id = item.GroupByItemID })
+            </td>
+        </tr>
+        }
+    }
+</table>

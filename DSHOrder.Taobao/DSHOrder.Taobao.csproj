@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E7BA6E91-2BE7-4470-9C7E-15389B3846C4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DSHOrder.Taobao</RootNamespace>
+    <AssemblyName>DSHOrder.Taobao</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging, Version=1.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DSHOrder.Web\lib\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz">
+      <HintPath>..\DSHOrder.Web\lib\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TopSdk, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\TopSdk.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseSync.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="DefaultProvider.cs" />
+    <Compile Include="GroupByItemOrderMapSync.cs" />
+    <Compile Include="IncrementOrderSync.cs" />
+    <Compile Include="ItemSync.cs" />
+    <Compile Include="OneOrderSync.cs" />
+    <Compile Include="OrderSync.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaobaoConfig.cs" />
+    <Compile Include="ThreeMonthsOrderSync.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Lib\TopSdk.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DSHOrder.Entity\DSHOrder.Entity.csproj">
+      <Project>{C25A03D1-1A31-42AE-A8DD-49E6BE0D3F3C}</Project>
+      <Name>DSHOrder.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DSHOrder.Service.Interface\DSHOrder.Service.Interface.csproj">
+      <Project>{2306096E-8527-43FC-9261-7D4FF00D82CA}</Project>
+      <Name>DSHOrder.Service.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DSHOrder.Service\DSHOrder.Service.csproj">
+      <Project>{D54887CC-1B30-46C2-B373-537C292A002F}</Project>
+      <Name>DSHOrder.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

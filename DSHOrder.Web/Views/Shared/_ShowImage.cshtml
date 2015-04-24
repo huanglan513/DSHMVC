@@ -1,0 +1,9 @@
+﻿@model string
+
+@if (!string.IsNullOrEmpty(Model))
+{
+     <a href="@Model" onclick='javascript:window.showModalDialog("@Model","aa","dialogWidth=700px;dialogHeight=600px"); return false;' >
+                                 <img alt="" id="imageheader" src="@Model" style="border:0px; height:100px; width:100px;" />
+     </a>
+}
+           

@@ -1,0 +1,62 @@
+﻿@model DSHOrder.Web.Models.ApplyPaymentMergerModel
+
+@{
+    ViewBag.Title = "合并申请付款";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.PaymentIDs)
+    <fieldset>
+        @Html.Partial("_GroupBaseInfoForPayment", Model.GroupBaseInfo)
+        <br />
+     @{
+         int i=0;
+         int count=Model.GroupItemInfoList.Count;
+         decimal totalPayment=0;
+         for (; i < count; i++)
+         {
+             if (Model.PaymentList[i].PaymentPrice.HasValue)
+             {
+                 totalPayment += Model.PaymentList[i].PaymentPrice.Value;
+             }
+            @Html.DisplayFor(model => model.GroupItemInfoList[i])
+            
+        <div id="divPayment" style="background-color: #DFF4F5; height: 30px; vertical-align: middle">
+            <label style="vertical-align: middle">
+                <label style="vertical-align: middle">
+                    付款申请信息</label>
+            </label>
+        </div>
+        <table id="tbPayment" class="tbList" width="100%" style="border: solid 1px  #BDBDBD;">
+            <tr>
+                <td style="width: 300px">
+                    第 @Model.PaymentList[i].PaymentType 次计划打款日：@Model.PaymentList[i].PaymentDeadline.Value.ToString("yyyy-MM-dd")
+                </td>
+                <td style="width: 200px">
+                    计划打款比例：@(Model.PaymentList[i].PaymentProportion * 100 + "%")
+                </td>
+                <td>
+                    计划打款额度：@string.Format("{0:N}",Model.PaymentList[i].PaymentPrice) 元
+                </td>
+            </tr>
+            @if (i == count - 1)
+            {
+                <tr>
+                <td colspan="3">最终打款金额：@string.Format("{0:N}",totalPayment) 元</td>
+                </tr>
+                <tr>
+                <td>申请人：@Model.Applicant</td><td colspan="2">申请日期：@DateTime.Today.ToString("yyyy-MM-dd") *默认为当天</td>
+                </tr>
+            }
+        </table>
+          }
+}
+        <br />
+        <p style="text-align: center">
+            <input type="submit" value="提交" class="button" />
+            <input type="button" value="取消" class="button" onclick="javascript:window.history.go(-1);" />
+        </p>
+    </fieldset>
+}
+

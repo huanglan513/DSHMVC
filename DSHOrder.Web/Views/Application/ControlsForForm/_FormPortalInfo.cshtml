@@ -1,0 +1,253 @@
+﻿@model DSHOrder.Web.Models.GroupByFlowInfo
+@using DSHOrder.Web.Models;
+@using DSHOrder.Web.Common;
+@using DSHOrder.Web.Common.Application.GroupByGroup;
+@{
+    GBGField fh = ViewData["fh"] as GBGField;
+}
+@if (fh.CalcField(m => m.ListGroupByPortal) == GBGFlowEnumPermission.CanWrite)
+{
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            $("input[name^='GroupByItemModel'][name$='Day']").datepicker();
+
+            RefreshCheckBox();
+            RefreshPortal();
+
+            $("input[name='hiddenPortalID']").each(function () { ChangeItemId($(this).val()); });
+
+//            ChangeItemId(0);
+//            ChangeItemId(1);
+//            ChangeItemId(2);
+//            ChangeItemId(3);
+
+            // $("#GroupByGroup_GroupByGroupName").rules("remove");
+            // $("#GroupByGroup_GroupByGroupName").attr("disabled", "disabled");
+        });
+
+        // 设置 checkbox
+        function RefreshCheckBox() {
+            $(":checkbox[id^='Portal_']").removeAttr("checked");
+
+            var v = $("#GroupByItemIds").val();
+            var ids = v.split("|");
+
+            $.each(ids,
+            function (i, n) {
+                $(":checkbox[id='Portal_" + n + "']").attr("checked", "checked");
+            }
+        );
+        }
+
+        function CheckPortal() {
+            SetGroupByItemIds();
+            RefreshPortal();
+        }
+
+        // 设置 GroupByItemIds
+        function SetGroupByItemIds() {
+            var v = "";
+            var arr = $(":checkbox:checked[id^='Portal_']");
+            arr.each(
+            function () {
+                var cb = $(this);
+                v = v + cb.attr("value") + "|";
+            }
+        );
+
+            if (v != "") {
+                v = v.substring(0, v.length - 1);
+            }
+
+            $("#GroupByItemIds").val(v);
+        }
+
+
+        function OnSelectCity(o) {
+            var name = o.name;
+            var iCount = $("input[name='" + name + "']:checked").size();
+
+            var v = "";
+            if (iCount > 0) v = iCount;
+
+            $("#Hidden" + name).val(v);
+        }
+
+        function ChangeItemId(i) {
+            var txtItemId = $("input[name='GroupByItemModel[" + i + "].GroupByItemCodeNo']");
+
+            txtItemId.change(
+            function () {
+                var txtURL = $("input[name='GroupByItemModel[" + i + "].URL']");
+                txtURL.val("http://ju.taobao.com/tg/home.htm?item_id=" + txtItemId.val());
+            });
+        }
+
+    </script>
+}
+else
+{ 
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            RefreshPortal();
+        });
+    </script>
+}
+<script language="javascript" type="text/javascript">
+    // 设置 Portal
+    function RefreshPortal() {
+        $("tr[id^='trPortal_']").hide();
+        // disabled 跳过验证
+        $("tr[id^='trPortal_'] input").attr("disabled", "disabled");
+
+        var v = $("#GroupByItemIds").val();
+        var ids = v.split("|");
+
+        $.each(ids,
+            function (i, n) {
+                $("#trPortal_" + n).show();
+                // enabled 启用验证
+                $("#trPortal_" + n + " input").removeAttr("disabled");
+            });
+
+    }
+</script>
+@Html.HiddenFor(m => m.GroupByItemIds)
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+    @if (fh.CalcField(m => m.ListGroupByPortal) == GBGFlowEnumPermission.CanWrite)
+    {
+        <tr>
+            <td>
+                请选择平台 :
+                @foreach (var item in Model.ListGroupByPortal)
+                {
+                    <input type="checkbox" id="@string.Concat("Portal_", item.GroupByPortalID)" name="Portals" PortalId="@item.GroupByPortalID" onclick="CheckPortal()" value="@item.GroupByPortalID" />@item.PortalName
+                }
+                @Html.ValidationMessageFor(m => m.GroupByItemIds)
+                <br />
+                <br />
+            </td>
+        </tr>
+    }
+    @for (int i = 0; i < Model.ListGroupByPortal.Count; i++)
+    {
+        <tr id='@string.Concat("trPortal_", Model.ListGroupByPortal[i].GroupByPortalID.ToString())'>
+            <td>
+                <table id="MainTable" width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td colspan="4" class="title" align="left" style="text-align: left">
+                            <b>&nbsp;平台 : @Model.ListGroupByPortal[i].PortalName </b>
+                            @Html.HiddenFor(m => m.GroupByItemModel[i].GroupByPortalID)
+                            <input type="hidden" name="hiddenPortalID" value='@i' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200" class="title">
+                            上架日期
+                        </td>
+                        <td width="200">
+                            @fh.ShowField(m => m.GroupByItemModel[i].StartDay)
+                            @Html.ValidationMessageFor(m => m.GroupByItemModel[i].StartDay)
+                        </td>
+                        <td width="200" class="title">
+                            下架日期
+                        </td>
+                        <td>
+                            @fh.ShowField(m => m.GroupByItemModel[i].EndDay)
+                            @Html.ValidationMessageFor(m => m.GroupByItemModel[i].EndDay)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="title">
+                            有效日期
+                        </td>
+                        <td>
+                            @fh.ShowField(m => m.GroupByItemModel[i].ExpireDay)
+                            @Html.ValidationMessageFor(m => m.GroupByItemModel[i].ExpireDay)
+                        </td>
+                        <td class="title">
+                            团购价
+                        </td>
+                        <td>
+                            @fh.ShowField(m => m.GroupByItemModel[i].SellingPrice)
+                            @Html.ValidationMessageFor(m => m.GroupByItemModel[i].SellingPrice)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="title">
+                            最少成团数量
+                        </td>
+                        <td>
+                            @fh.ShowField(m => m.GroupByItemModel[i].LowestNum)
+                            @Html.ValidationMessageFor(m => m.GroupByItemModel[i].LowestNum)
+                        </td>
+                        <td class="title">
+                            库存总量
+                        </td>
+                        <td>
+                            @fh.ShowField(m => m.GroupByItemModel[i].HighestNum)
+                            @Html.ValidationMessageFor(m => m.GroupByItemModel[i].HighestNum)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="title">
+                            团购(ItemID)
+                        </td>
+                        <td>
+                            @fh.ShowField(m => m.GroupByItemModel[i].GroupByItemCodeNo)
+                            @Html.ValidationMessageFor(m => m.GroupByItemModel[i].GroupByItemCodeNo)
+                        </td>
+                        <td class="title">
+                            团购(URL)
+                        </td>
+                        <td>
+                            @fh.ShowField(m => m.GroupByItemModel[i].URL)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="title">
+                            团购城市
+                        </td>
+                        <td colspan="3">
+                            @{
+                                
+                       var strDisabled = "disabled='disabled'";
+
+                       var p = fh.CalcField(m => m.ListCity);
+                       if (p == GBGFlowEnumPermission.CanWrite)
+                       {
+                           strDisabled = "";
+                       }
+                       else
+                       {
+                           strDisabled = "disabled='disabled'";
+                       }
+
+                       if (p == GBGFlowEnumPermission.CanWrite)
+                       {
+                           var name = string.Concat("City_", Model.ListGroupByPortal[i].GroupByPortalID);
+                           var nameHiddenCity = string.Concat("HiddenCity_", Model.ListGroupByPortal[i].GroupByPortalID);
+
+                           foreach (var item in Model.ListCity)
+                           {
+                                <input type="checkbox" name="@name" value="@item.CityID" @GroupByFlowInfo.GetCheckBoxChecked_GroupByCity(item.CityID, Model.GroupByItemModel[i]) onchange="OnSelectCity(this)" />@item.CityName
+                           }
+                                <input data-val="true" data-val-required="至少选择一个城市" id="@nameHiddenCity" name="@nameHiddenCity" type="hidden" value="" />
+                                <span class="field-validation-valid" data-valmsg-for="@nameHiddenCity" data-valmsg-replace="true"></span>
+                       }
+                       else if (p == GBGFlowEnumPermission.CanRead)
+                       {
+                                @GroupByFlowInfo.GetCheckBox_GroupByCity(Model.GroupByItemModel[i])
+                       }
+                            }
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr height="10">
+            <td>
+            </td>
+        </tr>
+    }
+</table>

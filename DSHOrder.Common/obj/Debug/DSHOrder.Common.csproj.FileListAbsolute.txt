@@ -1,0 +1,50 @@
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Common\bin\Debug\DSHOrder.Common.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Common\bin\Debug\DSHOrder.Common.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Common\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Common\obj\Debug\DSHOrder.Common.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\MvcEFTest.Common\obj\Debug\DSHOrder.Common.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Common\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.pdb
+D:\aaa\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.dll
+D:\aaa\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.pdb
+D:\aaa\DSHOrder\DSHOrder.Common\obj\Debug\ResolveAssemblyReference.cache
+D:\aaa\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.dll
+D:\aaa\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.pdb
+H:\DSHOrder Project\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.dll
+H:\DSHOrder Project\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.pdb
+H:\DSHOrder Project\DSHOrder\DSHOrder.Common\obj\Debug\ResolveAssemblyReference.cache
+H:\DSHOrder Project\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.dll
+H:\DSHOrder Project\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.pdb
+D:\net_project\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.dll
+D:\net_project\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.pdb
+D:\net_project\DSHOrder\DSHOrder.Common\obj\Debug\ResolveAssemblyReference.cache
+D:\net_project\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.dll
+D:\net_project\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.pdb
+E:\NetProjects\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.dll
+E:\NetProjects\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.pdb
+E:\NetProjects\DSHOrder\DSHOrder.Common\obj\Debug\ResolveAssemblyReference.cache
+E:\NetProjects\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.dll
+E:\NetProjects\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.pdb
+E:\DSH\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.dll
+E:\DSH\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.pdb
+E:\DSH\DSHOrder\DSHOrder.Common\obj\Debug\ResolveAssemblyReference.cache
+E:\DSH\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.dll
+E:\DSH\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.pdb
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.dll
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.pdb
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Common\obj\Debug\ResolveAssemblyReference.cache
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.dll
+E:\DSH\DSHSrc\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.pdb
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.dll
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.pdb
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Common\obj\Debug\ResolveAssemblyReference.cache
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.dll
+D:\dudu\DSHOrder\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.pdb
+D:\Others\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.dll
+D:\Others\DSHOrder\DSHOrder.Common\bin\Debug\DSHOrder.Common.pdb
+D:\Others\DSHOrder\DSHOrder.Common\obj\Debug\ResolveAssemblyReference.cache
+D:\Others\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.dll
+D:\Others\DSHOrder\DSHOrder.Common\obj\Debug\DSHOrder.Common.pdb

@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DSHOrderFormModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="DSHOrderFormEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Department" EntityType="DSHOrderFormModel.Department" />
+    <EntitySet Name="Function" EntityType="DSHOrderFormModel.Function" />
+    <EntitySet Name="Priviledge" EntityType="DSHOrderFormModel.Priviledge" />
+    <EntitySet Name="Role" EntityType="DSHOrderFormModel.Role" />
+    <EntitySet Name="User" EntityType="DSHOrderFormModel.User" />
+    <EntitySet Name="UserDepartment" EntityType="DSHOrderFormModel.UserDepartment" />
+    <EntitySet Name="UserRole" EntityType="DSHOrderFormModel.UserRole" />
+    <AssociationSet Name="FK_UserDepartment_Department" Association="DSHOrderFormModel.FK_UserDepartment_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="UserDepartment" EntitySet="UserDepartment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Priviledge_Function" Association="DSHOrderFormModel.FK_Priviledge_Function">
+      <End Role="Function" EntitySet="Function" />
+      <End Role="Priviledge" EntitySet="Priviledge" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Priviledge_Role" Association="DSHOrderFormModel.FK_Priviledge_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Priviledge" EntitySet="Priviledge" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_Role" Association="DSHOrderFormModel.FK_UserRole_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDepartment_User" Association="DSHOrderFormModel.FK_UserDepartment_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserDepartment" EntitySet="UserDepartment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_User" Association="DSHOrderFormModel.FK_UserRole_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentManager" Type="Int32" Nullable="false" />
+    <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="UserDepartment" Relationship="DSHOrderFormModel.FK_UserDepartment_Department" FromRole="Department" ToRole="UserDepartment" />
+  </EntityType>
+  <EntityType Name="Function">
+    <Key>
+      <PropertyRef Name="FunctionID" />
+    </Key>
+    <Property Name="FunctionID" Type="Int32" Nullable="false" />
+    <Property Name="FunctionName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Priviledge" Relationship="DSHOrderFormModel.FK_Priviledge_Function" FromRole="Function" ToRole="Priviledge" />
+  </EntityType>
+  <EntityType Name="Priviledge">
+    <Key>
+      <PropertyRef Name="PriviledgeID" />
+    </Key>
+    <Property Name="PriviledgeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FunctionID" Type="Int32" Nullable="false" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Function" Relationship="DSHOrderFormModel.FK_Priviledge_Function" FromRole="Priviledge" ToRole="Function" />
+    <NavigationProperty Name="Role" Relationship="DSHOrderFormModel.FK_Priviledge_Role" FromRole="Priviledge" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Priviledge" Relationship="DSHOrderFormModel.FK_Priviledge_Role" FromRole="Role" ToRole="Priviledge" />
+    <NavigationProperty Name="UserRole" Relationship="DSHOrderFormModel.FK_UserRole_Role" FromRole="Role" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="PassWord" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Title" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Sex" Type="Int32" Nullable="false" />
+    <Property Name="DeleteInd" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="UserDepartment" Relationship="DSHOrderFormModel.FK_UserDepartment_User" FromRole="User" ToRole="UserDepartment" />
+    <NavigationProperty Name="UserRole" Relationship="DSHOrderFormModel.FK_UserRole_User" FromRole="User" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="UserDepartment">
+    <Key>
+      <PropertyRef Name="UserDepartmentID" />
+    </Key>
+    <Property Name="UserDepartmentID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Department" Relationship="DSHOrderFormModel.FK_UserDepartment_Department" FromRole="UserDepartment" ToRole="Department" />
+    <NavigationProperty Name="User" Relationship="DSHOrderFormModel.FK_UserDepartment_User" FromRole="UserDepartment" ToRole="User" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserRoleID" />
+    </Key>
+    <Property Name="UserRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="DSHOrderFormModel.FK_UserRole_Role" FromRole="UserRole" ToRole="Role" />
+    <NavigationProperty Name="User" Relationship="DSHOrderFormModel.FK_UserRole_User" FromRole="UserRole" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_UserDepartment_Department">
+    <End Role="Department" Type="DSHOrderFormModel.Department" Multiplicity="1" />
+    <End Role="UserDepartment" Type="DSHOrderFormModel.UserDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="UserDepartment">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Priviledge_Function">
+    <End Role="Function" Type="DSHOrderFormModel.Function" Multiplicity="1" />
+    <End Role="Priviledge" Type="DSHOrderFormModel.Priviledge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Function">
+        <PropertyRef Name="FunctionID" />
+      </Principal>
+      <Dependent Role="Priviledge">
+        <PropertyRef Name="FunctionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Priviledge_Role">
+    <End Role="Role" Type="DSHOrderFormModel.Role" Multiplicity="1" />
+    <End Role="Priviledge" Type="DSHOrderFormModel.Priviledge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="Priviledge">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_Role">
+    <End Role="Role" Type="DSHOrderFormModel.Role" Multiplicity="1" />
+    <End Role="UserRole" Type="DSHOrderFormModel.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserDepartment_User">
+    <End Role="User" Type="DSHOrderFormModel.User" Multiplicity="1" />
+    <End Role="UserDepartment" Type="DSHOrderFormModel.UserDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserDepartment">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_User">
+    <End Role="User" Type="DSHOrderFormModel.User" Multiplicity="1" />
+    <End Role="UserRole" Type="DSHOrderFormModel.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

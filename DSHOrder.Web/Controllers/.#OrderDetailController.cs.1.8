@@ -1,0 +1,214 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using DSHOrder.Service;
+using DSHOrder.Service.Interface;
+using DSHOrder.Entity;
+using DSHOrder.Web.Common;
+using DSHOrder.Web.Models;
+using DSHOrder.Common;
+using Webdiyer.WebControls.Mvc;
+
+namespace DSHOrder.Web.Controllers
+{
+    public class OrderDetailController : BaseController
+    {
+	    private IGroupByItemService gbiService { get; set; }
+        private IOrderDetailService odService { get; set; }
+        private ICodeTableService ctService { get; set; }
+
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        {
+            gbiService = new GroupByItemService();
+            odService = new OrderDetailService();
+            ctService = new CodeTableService();
+            base.Initialize(requestContext);
+        }
+
+        //
+        // GET: /OrderDetail/
+
+        public ActionResult Index(int id, int pageIndex=1, string BuyerName=null, string Addr=null, DateTime? DealDateFrom=null, DateTime? DealDateTo=null, int dealType = 0)
+        {
+            if (ValidateRole(null) == false) return AccessDenyView();
+
+            OrderDetailSearchModel model = new OrderDetailSearchModel();
+            GroupByItem gbi = gbiService.GetById(id);
+            if (gbi != null)
+            {
+                model.GroupByItemId = id;
+                model.GroupByName = gbi.GroupByGroup.GroupByGroupName;
+                model.Addr = Addr;
+                model.BuyerName = BuyerName;
+                IEnumerable<GroupBySales> sales = gbi.GroupByGroup.GroupBySales;
+                string strSales = string.Empty;                
+                foreach (var sale in sales)
+                {
+                    strSales += sale.User.UserName + " ";
+                }
+                model.Sellers = strSales;
+                model.Price = gbi.SellingPrice.GetValueOrDefault();
+                model.DealDateFrom = DealDateFrom;
+                model.DealDateTo = DealDateTo;
+                model.StatusType = dealType;
+
+                Pagination paging = new Pagination();
+                paging.PageSize = 10;
+                paging.CurrentPageIndex = pageIndex; //.HasValue ? pageIndex.Value : 1;
+
+                IList<OrderDetail> orderDetailList = odService.GetByContidion(paging, id, BuyerName, Addr, DealDateFrom, DealDateTo, dealType);
+                PagedList<OrderDetail> pagedOrderDetailList = new PagedList<OrderDetail>(orderDetailList, paging.CurrentPageIndex, paging.PageSize, paging.PageCount);
+                model.OrderDetailList = pagedOrderDetailList;
+            }
+            else { 
+                throw new ArgumentException("ID无效！");
+            }
+            return View(model);     
+        }
+
+
+        public ActionResult AccessDenyView()
+        {
+            return RedirectToAction("Security", "Home", new { pageUrl = this.Request.RawUrl });
+        }
+
+        [HttpPost]
+        [ActionName("Index")]
+        [MultiButton(Name = "edit", Argument="id")]
+        public ActionResult Edit(int id)
+        {
+            return RedirectToAction("Refund", "OrderDetail", new { @id = id });
+        }
+
+        [HttpPost]
+        [ActionName("Index")]
+        [MultiButton(Name = "Back")]
+        public ActionResult IndexForBack()
+        {
+            return RedirectToAction("Index", "GroupBy");
+        }
+		
+        public ActionResult Refund(int id)
+        {
+            OrderDetail orderDetail = GetOrderValues(id);
+            IUserService uService = new UserService();
+            orderDetail.LockBy = User.Identity.Name;
+            orderDetail.LockTime = DateTime.Now;
+            odService.Update(orderDetail);
+
+            return View(orderDetail);
+        }
+
+        [HttpPost]
+        [ActionName("Refund")]
+        [MultiButton(Name = "btnSave")]
+        public ActionResult Refund(OrderDetail model,FormCollection collection)
+        {
+            if (ModelState.IsValid)
+            {
+                IOrderDetailService orderService = new OrderDetailService();
+                OrderDetail orderDetail = orderService.GetById(model.OrderDetailID);
+                orderDetail.IssueType = Convert.ToInt32(collection["IssueType"]);//model.IssueType;
+                //orderDetail.RefundStatus = model.RefundStatus;
+                orderDetail.DealTime = model.DealTime;
+                orderDetail.DealBy = User.Identity.Name;
+                //orderDetail.RefundFee = model.RefundFee;
+                orderDetail.Remark = model.Remark;
+                if (Convert.ToBoolean(collection["CheckOfflinePay"].Split(',')[0]))
+                {
+                    orderDetail.OfflineDealStatus = 1;
+                }
+                else
+                {
+                    orderDetail.OfflineDealStatus = null;
+                }                
+                orderDetail.LockBy = null;
+                orderDetail.LockTime = null;
+
+                orderService.Update(orderDetail);
+
+                return RedirectToAction("Index", "OrderDetail", new { id = model.GroupByItemID });
+            }
+            else
+            {
+                OrderDetail orderDetail = GetOrderValues(model.OrderDetailID);
+                return View(orderDetail);
+            }
+        }
+
+        [HttpPost]
+        [ActionName("Refund")]
+        [MultiButton(Name = "btnUpdateFTaobao")]
+        public ActionResult UpdateFTaobao(OrderDetail model, FormCollection collection)
+        {
+            OrderDetail orderDetail = GetOrderValues(model.OrderDetailID);
+            Taobao.OneOrderSync oos = new Taobao.OneOrderSync(User.Identity.Name, Int64.Parse(orderDetail.Tid), orderDetail.OrderDetailID);
+            oos.InnerExecute();
+
+            orderDetail = GetOrderValues(model.OrderDetailID);
+            return View(orderDetail);
+        }
+
+        private OrderDetail GetOrderValues(int id)
+        {
+            IOrderDetailService orderService = new OrderDetailService();
+            OrderDetail orderDetail = orderService.GetById(id);
+
+            GroupByGroup groupByGroup = orderService.GetGroupByGroup(id);
+            ViewData["GroupByName"] = groupByGroup.GroupByGroupName;
+            ViewData["GroupByGroupID"] = groupByGroup.GroupByGroupID;
+            ViewData["GroupByGroupStatus"] = groupByGroup.Status;
+
+            ICodeTableService codeTableService = new CodeTableService();
+            IList<CodeTable> codeList = codeTableService.GetCodeTablesByTypes(new int[]{(int)ComUtil.CodeType.IssueType,(int)ComUtil.CodeType.RefundStatus,
+                                            (int)ComUtil.CodeType.OrderType});
+
+            IList<CodeTable> issueTypeList=new List<CodeTable>();
+            IList<CodeTable> refundStatusList = new List<CodeTable>();
+            IList<CodeTable> orderStatusList = new List<CodeTable>();
+            foreach (CodeTable ct in codeList)
+            {
+                switch (ct.CodeTypeID)
+                {
+                    case (int)ComUtil.CodeType.IssueType:
+                        issueTypeList.Add(ct);
+                        break;
+                    case (int)ComUtil.CodeType.RefundStatus:
+                        refundStatusList.Add(ct);
+                        if (ct.CodeID == orderDetail.RefundStatus)
+                        {
+                            ViewData["RefundStatus"] = ct.CodeDesc;
+                        }
+                        break;
+                    case (int)ComUtil.CodeType.OrderType:
+                        orderStatusList.Add(ct);
+                        if (ct.CodeID == orderDetail.OrderStatus)
+                        {
+                            ViewData["OrderStatus"] = ct.CodeDesc;
+                        }
+                        break;
+                }
+            }
+
+            ViewData["IssueTypeList"] = new SelectList(issueTypeList, "CodeValue", "CodeDesc", orderDetail.IssueType);
+          //  ViewData["RefundStatus"] = new SelectList(refundStatusList, "CodeValue", "CodeDesc");
+
+            return orderDetail;
+        }
+
+        [HttpPost]
+        public ActionResult Back(int orderDetailId, int groupByItemID)
+        {
+            IOrderDetailService orderService = new OrderDetailService();
+            OrderDetail orderDetail = orderService.GetById(orderDetailId);
+
+            orderDetail.LockBy = null;
+            orderDetail.LockTime = null;
+            orderService.Update(orderDetail);
+
+            return RedirectToAction("Index", "OrderDetail", new { id = groupByItemID });
+        }
+    }
+}

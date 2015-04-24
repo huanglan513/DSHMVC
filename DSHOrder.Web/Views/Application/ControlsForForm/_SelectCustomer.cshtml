@@ -1,0 +1,146 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using DSHOrder.Web.Common.Application.GroupByGroup;
+@using DSHOrder.Web.Models;
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("#dialog-form").dialog({
+            autoOpen: false,
+            height: 500,
+            width: 740,
+            modal: true
+        });
+
+        $("#btnCancel").click(
+                function () {
+                    $("#dialog-form").dialog("close");
+                }
+                );
+    });
+
+
+    function NewCustomer() {
+        var url = "@Url.Action("Create", "Customer", new { id = -1 })";
+        window.open(url);
+    }
+
+    function SearchCustomer() {
+        ClearCustomer();
+
+        var url ="@Url.Action("SearchCustomer", "Application")"; 
+        var CustomerName = $("#CustomerName").val();
+        var CityID = $("#CityID").val();
+        var IsCertified = $("#IsCertified").val();
+        var subIndustryId = $("#GroupByGroup_SubIndustryID").val();
+
+        var params = { 'CustomerName': CustomerName, 'CityID': CityID, 'IsCertified': IsCertified, 'subIndustryId': subIndustryId};
+
+        var r = $("table[selectcustomer='true'] tr:eq(0)");
+        $.getJSON(url, params, function (data) {
+            $.each(data, function (i, item) {
+                r = $("<tr><td>" + item.CustomerName + "</td><td>" 
+                                 + item.CityName + "</td><td>"
+                                 + item.IsCertified + "</td><td>"
+                                 + item.ContactName + "</td><td>"
+                                 + item.ContactPhoneNo + "</td><td>" 
+                                 + "<input type='button' value='选择' class='button' onclick='javascript:SelectCustomer(" + item.CustomerID + ")'/></td></tr>"
+                    ).insertAfter(r);
+            });  
+        }); 
+    }
+
+    function ClearCustomer() {
+        $("table[selectcustomer='true'] tr").each(function (i) {
+            if (i != 0)
+            {
+                $(this).remove();
+            }
+        });
+    }
+
+</script>
+<div id="dialog-form" title="选择商家">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <table id="MainTable" width="100%" border="1" cellspacing="0">
+                    <tr>
+                        <td class="title" style="width: 160px">
+                            商家公司名称
+                        </td>
+                        <td style="width: 200px">
+                            @Html.Editor("CustomerName")
+                        </td>
+                        <td class="title" style="width: 160px">
+                            所在城市
+                        </td>
+                        <td>
+                            @Html.DropDownList("CityID", GroupByFlowInfo.CityList)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="title">
+                            是否认证
+                        </td>
+                        <td colspan="3">
+                            @{
+                                var listIsCertified = new List<SelectListItem>();
+
+                                SelectListItem item = new SelectListItem();
+                                item.Text = "全部";
+                                item.Value = "-1";
+                                listIsCertified.Add(item);
+
+                                item = new SelectListItem();
+                                item.Text = "是";
+                                item.Value = "1";
+                                listIsCertified.Add(item);
+
+                                item = new SelectListItem();
+                                item.Text = "否";
+                                item.Value = "0";
+                                listIsCertified.Add(item);
+                            }
+                            @Html.DropDownList("IsCertified", listIsCertified)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" align="right">
+                            <input type="button" value="查询" class="button" onclick="SearchCustomer()" />
+                            <input type="button" value="新增" class="button" onclick="NewCustomer()" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr style="height: 10px">
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table id="MainTable" selectcustomer="true" width="100%" border="1" cellspacing="0">
+                    <tr>
+                        <th class="title">
+                            商家公司全称
+                        </th>
+                        <th class="title">
+                            所在城市
+                        </th>
+                        <th class="title">
+                            是否认证
+                        </th>
+                        <th class="title">
+                            商家联系人
+                        </th>
+                        <th class="title">
+                            商家联系电话
+                        </th>
+                        <th class="title">
+                            选择
+                        </th>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

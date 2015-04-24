@@ -1,0 +1,66 @@
+﻿@model DSHOrder.Web.Models.GroupByFlowInfo
+<table id="GeneralTable">
+    <tr>
+        <td class="title" height="50" align="left">
+            <b>团购名称： @Model.GroupByGroup.GroupByGroupName</b>
+        </td>
+    </tr>
+</table>
+<br />
+<table id="GeneralTable">
+    <tr>
+        <td class="title">
+            序号
+        </td>
+        <td class="title">
+            团购平台
+        </td>
+        <td class="title">
+            审批或处理节点
+        </td>
+        <td class="title">
+            审批或处理人
+        </td>
+        <td class="title">
+            审批或处理结果
+        </td>
+        <td class="title">
+            审批或处理时间
+        </td>
+        <td class="title">
+            备注
+        </td>
+    </tr>
+    @if (Model.GroupByGroup.ApproveRecordGroupBy != null)
+    {
+        var iCount = 0;
+
+        foreach (var item in Model.GroupByGroup.ApproveRecordGroupBy)
+        {
+            iCount++;
+        <tr>
+            <td>
+                @iCount
+            </td>
+            <td>
+                @item.PortalName
+            </td>
+            <td>
+                @item.NodeName
+            </td>
+            <td>
+                @item.HandleUserName
+            </td>
+            <td>
+                @Model.GetFLowActionDesc(item.ApproveResult)
+            </td>
+            <td>
+                @item.HandleTime
+            </td>
+            <td>
+                @item.ApproveMemo
+            </td>
+        </tr>
+        }
+    }
+</table>

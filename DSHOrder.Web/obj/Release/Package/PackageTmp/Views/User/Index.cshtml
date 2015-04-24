@@ -1,0 +1,97 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model PagedList<DSHOrder.Web.Models.UserModel>
+@{
+    ViewBag.Title = "用户管理";
+}
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("#cbxAll").click(function () {
+            $(":checkbox[id^='cbxInValid']").attr("checked", $(this).attr("checked"));  
+        });          
+    });
+
+    function collectDelUsers() {
+        var selectedIds = [];
+        var strLength = 'cbxInValid:'.length;
+        $(":checkbox:checked[id^='cbxInValid']").each(function () {
+            selectedIds.push($(this).attr("id").substr(strLength));
+        });
+
+        if (selectedIds.length <= 0) {
+            alert("请选择要删除的信息!");
+            return false;
+        }      
+        if (!window.confirm("确定要删除选择的数据项吗?")) {
+            return false;
+        }
+
+        $("#btnDel").attr("name", $("#btnDel").attr("name") + ":" + selectedIds.join(','));
+//        alert($("#btnDel").attr("name"));
+        return true;
+    }
+
+</script>
+<h2>用户管理</h2>
+@using (Html.BeginForm())
+{
+  <p style="text-align: left">
+<input type="submit" id="btnCreate" value="新增" class="button" name="create" />
+<input type="submit" id="btnDel" value="作废"  class="button" name="delete" onclick="return collectDelUsers();" />
+</p>
+<input id="hdSelectUser" type="hidden" />
+<table class="tbList">
+    <tr>
+        <th>
+            <input type="checkbox" id="cbxAll" name="cbxAll" />
+        </th>
+        <th>
+            @ViewBag.UserNaemTtl
+        </th>
+        <th>
+            @ViewBag.SexTtl
+        </th>
+        <th>
+            @ViewBag.Status
+        </th>       
+        <th>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {     
+        <tr>
+            <td>
+                @if (item.Status)
+                { 
+                    <input type="checkbox" id="cbxInValid:@item.UserID" name="cbxInValid:@item.UserID" />
+                }
+            </td>
+            <td>
+                @item.UserName
+            </td>
+            <td>
+                @item.Sex
+            </td>
+            <td>
+                @if (item.Status)
+                {
+                    <span>有效</span> 
+                }
+                else
+                { 
+                    <span>作废</span>
+                }
+            </td>
+            <td>
+                @if (item.Status)
+                {
+                      <input type="submit" id="btnUpdate:@item.UserID" value="编辑" class="button" name="edit:@item.UserID" />
+                     <input type="submit" id="btnDelete:@item.UserID" value="作废" class="button" name="delete:@item.UserID" />  
+                }                      
+            </td>
+        </tr>
+    }
+</table>
+}
+@Html.Pager(Model, new PagerOptions { PageIndexParameterName = "id" })
+

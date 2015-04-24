@@ -1,0 +1,107 @@
+﻿@model IEnumerable<DSHOrder.Entity.Customer>
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("#dialog-form").dialog({
+            autoOpen: false,
+            height: 500,
+            width: 750,
+            modal: true
+        });
+
+        $("#btnCancel").click(
+                function () {
+                    $("#dialog-form").dialog("close");
+                }
+                );
+    });
+
+</script>
+<div id="dialog-form" title="选择商家">
+    <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td>
+                            商家公司名称
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            所在城市
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            是否认证
+                        </td>
+                        <td colspan="3">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <input type="button" value="查询" class="button" />
+                            <input type="button" value="新增" class="button" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table border="1">
+                    <tr>
+                        <th>
+                            商家公司全称
+                        </th>
+                        <th>
+                            所在城市
+                        </th>
+                        <th>
+                            是否认证
+                        </th>
+                        <th>
+                            商家联系人
+                        </th>
+                        <th>
+                            商家联系电话
+                        </th>
+                        <th>
+                            选择
+                        </th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CityID)
+                            </td>
+                            <td>
+                                是否认证
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactPhoneNo)
+                            </td>
+                            <td>
+                                <input type="button" value="选择" class="button" onclick="javascript: SelectCustomer(@item.CustomerID)"/>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <input id="btnCancel" type="button" value="返回" class="button" />
+            </td>
+        </tr>
+    </table>
+</div>

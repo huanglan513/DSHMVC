@@ -1,0 +1,71 @@
+﻿@model DSHOrder.Web.Models.GroupByFlowInfo
+@using DSHOrder.Web.Common;
+@using DSHOrder.Web.Common.Application.GroupByGroup;
+@{
+    GBGField fh = ViewData["fh"] as GBGField;
+}
+@if (Model.CurrentNode == GBGFlowEnumFLowNode.SJB)
+{
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            _SJB_Init();
+        });
+
+        function _SJB_Init() {
+            var vSJBResult = $("#GroupByItem_ApproveSJBResult").val();
+            if (vSJBResult == "" || vSJBResult == "SJB_NotSure") {
+                $("#Helper_SJB_Status_18[value='2']").attr("checked", "checked");
+            }
+            else if (vSJBResult == "SJB_Sure") {
+                $("#Helper_SJB_Status_18[value='1']").attr("checked", "checked");
+            }
+
+            $("#Helper_SJB_Status_18[value='1']").change(
+            function () {
+                _SJB_ChangeSubmitStatus("Sure");
+            });
+            $("#Helper_SJB_Status_18[value='2']").change(
+        function () {
+            _SJB_ChangeSubmitStatus("NotSure");
+        });
+        }
+
+        function _SJB_ChangeSubmitStatus(v) {
+            $(":submit[id^='Submit:SJB_']").attr("name", "Submit:SJB_" + v);
+            $(":submit[id^='Submit:SJB_']").attr("id", "Submit:SJB_" + v);
+        }
+    </script>
+}
+@Html.HiddenFor(m => m.GroupByItem.ApproveSJBResult)
+<table id="GeneralTable">
+    <tr>
+        <td colspan="2" class="title">
+            <b>设计部</b>
+        </td>
+    </tr>
+    <tr>
+        <td class="title" width="180">
+            设计是否确认完成
+        </td>
+        <td>
+            @fh.ShowField(m => m.Helper_SJB_Status_18, GBGFlowEnumEditType.CodeTableRadioButtonList, CodeTableHelper.CodeTableSJSFWC)
+        </td>
+    </tr>
+    <tr>
+        <td class="title" width="180">
+            备注
+        </td>
+        <td style="height: 100px" align="left" valign="top">
+            @fh.ShowField(m => m.GroupByItem.ApproveSJBMemo, GBGFlowEnumEditType.TextArea)
+            @Html.ValidationMessageFor(m => m.GroupByItem.ApproveSJBMemo)
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            处理时间
+        </td>
+        <td>
+            @fh.ShowField(m => m.GroupByItem.ApproveSJBActionTime)
+        </td>
+    </tr>
+</table>

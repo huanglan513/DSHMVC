@@ -1,0 +1,20 @@
+/BaseTaobaoModel.cs/1.2/Tue Dec 27 16:01:23 2011//
+/Constants.cs/1.4/Sun Feb 19 16:14:17 2012//
+/DSHOrder.Taobao.csproj/1.4/Fri May 18 16:03:01 2012//
+/DefaultProvider.cs/1.3/Fri May 18 16:03:01 2012//
+/Order.cs/1.2/Sun Feb 19 16:14:17 2012//
+/Product.cs/1.2/Sun Feb 19 16:14:17 2012//
+/TaobaoConfig.cs/1.2/Fri May 18 16:03:01 2012//
+/TaobaoItemModel.cs/1.4/Sun Feb 19 16:14:17 2012//
+/TaobaoRefundModel.cs/1.2/Tue Dec 27 16:01:23 2011//
+/TaobaoTradeModel.cs/1.4/Tue Jan 10 04:39:30 2012//
+/TaobaoTradeRateModel.cs/1.1/Sun Dec 25 16:42:22 2011//
+D/Lib////
+D/Properties////
+/BaseSync.cs/1.3/Sun Jun 10 04:49:45 2012//
+/GroupByItemOrderMapSync.cs/1.3/Sun Jun 10 04:49:45 2012//
+/IncrementOrderSync.cs/1.3/Sun Jun 10 04:49:45 2012//
+/ItemSync.cs/1.3/Sun Jun 10 04:49:45 2012//
+/OneOrderSync.cs/1.3/Sun Jun 10 04:49:45 2012//
+/OrderSync.cs/1.3/Sun Jun 10 04:49:45 2012//
+/ThreeMonthsOrderSync.cs/1.3/Sun Jun 10 04:49:45 2012//

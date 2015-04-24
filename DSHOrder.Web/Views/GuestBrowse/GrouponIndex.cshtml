@@ -1,0 +1,172 @@
+﻿@model DSHOrder.Web.Models.GrouponSearchModel
+@using Webdiyer.WebControls.Mvc;
+@using DSHOrder.Web.Common;
+@using DSHOrder.Entity;
+@{
+    ViewBag.Title = "团购信息";
+}
+<script language="javascript" type="text/javascript">
+    $(function () {
+
+        //Tab Link Styles.
+        $("#tabDealType li a").each(function () {
+            $(this).removeClass("default-tab");
+            if ($(this).attr("status") == $('#GroupByStatus').val()) {
+                $(this).addClass("default-tab");
+            }
+        });
+
+        //Tab Link Events.
+        $("#tabDealType li a").click(function () {
+            $('#GroupByStatus').val($(this).attr("status"));
+            $('form').submit();
+            return false;
+        });
+    });
+</script>
+@using (Html.BeginForm())
+{ 
+    <div id="searchContent">
+        <table class="tbList" style="width: 100%; border: 0px">
+            <tr>
+                <th>@Html.LabelFor(m => m.CitySelected)
+                </th>
+                <td>@Html.EditorFor(m => m.CitySelected)
+                </td>
+                <th>@Html.LabelFor(m => m.PortalSelected)
+                </th>
+                <td>@Html.EditorFor(m => m.PortalSelected)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.GroupByName)
+                </th>
+                <td>@Html.EditorFor(m => m.GroupByName)
+                </td>
+                <th>@Html.LabelFor(m => m.GroupBySale)
+                </th>
+                <td>@Html.EditorFor(m => m.GroupBySale)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.CustomerName)
+                </th>
+                <td>@Html.DisplayFor(m => m.CustomerName)
+                </td>
+                <td colspan="2" style="text-align: right">
+                    <input type="submit" id="btnSearch" value="查询" class="button" name="btnSearch" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="listContent">
+        <div id="navList" class="content-box-header">
+            <ul id="tabDealType" class="content-box-tabs" style="float: left">
+                <li>@Html.ActionLink("全部团购", "GrouponIndex", "CustomerService", null, new { status= "" })</li>
+                <li>@Html.ActionLink("进行中的团购", "GrouponIndex", "CustomerService", null, new { status=(int)GroupBySearchStatus.GroupBying })</li>
+                <li> @Html.ActionLink("往期的团购", "GrouponIndex", "CustomerService", null, new { status = (int)GroupBySearchStatus.GroupByed })</li>
+                <li> @Html.ActionLink("未开始的团购", "GrouponIndex", "CustomerService", null, new { status = (int)GroupBySearchStatus.GroupBypending  })</li>
+            </ul>
+            @Html.HiddenFor(m=>m.GroupByStatus)
+        </div>
+        <div class="tab-content default-tab" id="tab">
+            <table class="tbList">
+                <tr>
+                    <th>
+                        团购名称
+                    </th>
+                    <th>
+                        商家公司全称
+                    </th>
+                    <th>
+                        团购状态
+                    </th>
+                    <th>
+                        部门
+                    </th>
+                    <th>
+                        业务员
+                    </th>
+                    <th>
+                        团购平台
+                    </th>
+                    <th>
+                        所在城市
+                    </th>
+                    <th>
+                        开始日期
+                    </th>
+                    <th>
+                        结束日期
+                    </th>
+                    <th>
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var g in Model.GroupByItemList)
+                {
+                    <tr>
+                        <td>
+                             <span title="@g.GroupByGroup.GroupByGroupName">
+                                @Html.Label(Html.Truncat(g.GroupByGroup.GroupByGroupName, 50))
+                            </span>
+                        </td>
+                        <td>
+                            @if (g.GroupByGroup.Customer != null)
+                            {
+                                <span title="@g.GroupByGroup.Customer.CustomerName">
+                                    @Html.Label(Html.Truncat(g.GroupByGroup.Customer.CustomerName, 50))
+                                </span>
+                            }
+                        </td>
+                        <td>@Html.Label(Html.ConvertGBPStsToString(g.GroupByGroup.Status))
+                        </td>
+                        <td>
+                            @foreach (var u in g.GroupByGroup.GroupBySales)
+                            {
+                                foreach (var d in u.User.Department)
+                                {
+                                     @Html.Label(d.DepartmentName)<br />
+                                }
+                            }
+                        </td>
+                        <td>
+                            @foreach (var u in g.GroupByGroup.GroupBySales)
+                            {
+                                @Html.Label(u.User.UserName)<br />
+                            }
+                        </td>
+                        <td>@Html.Label(g.GroupByPortal.PortalName)
+                        </td>
+                        <td>
+                            @foreach (var city in g.GroupByCity)
+                            { 
+                                @Html.Label(city.City.CityName)<br />                          
+                            }
+                        </td>
+                        <td>
+                            @if (g.StartDay.HasValue)
+                            {
+                                @Html.Label(g.StartDay.Value.ToShortDateString())
+                            }
+                        </td>
+                        <td>
+                            @if (g.EndDay.HasValue)
+                            { 
+                                @Html.Label(g.EndDay.Value.ToShortDateString())
+                            }
+                        </td>
+                        <td>
+                            <input type="submit" id="excel:@g.GroupByGroupID" value="导出Excel" class="button" name="excels:@g.GroupByGroupID"/>
+                        </td>
+                        <td>
+                            <input type="submit" id="order:@g.GroupByItemID" value="订单" class="button" name="order:@g.GroupByItemID"/>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        @Html.Pager(Model.GroupByItemList, new PagerOptions { PageIndexParameterName = "PageIndex" }, new { @class = "pagination" })
+    </div>
+}

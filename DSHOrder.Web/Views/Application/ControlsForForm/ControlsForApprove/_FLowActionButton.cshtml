@@ -1,0 +1,16 @@
+﻿@model DSHOrder.Web.Models.GroupByFlowInfo
+@using DSHOrder.Web.Common.Application.GroupByGroup;
+@{
+    var ni = GBGFlowInfo.Instance.GetNodeInfo(Model.CurrentNode);
+}
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        @foreach (var item in ni.Buttons)
+        {
+            <td>
+                <input type="@item.ButtonType" value="@item.ButtonText" class="button" id="Submit:@item.FLowAction" name="Submit:@item.FLowAction" />
+                &nbsp;&nbsp;&nbsp;&nbsp;
+            </td>
+        }
+    </tr>
+</table>

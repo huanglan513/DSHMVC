@@ -1,0 +1,53 @@
+﻿@model DSHOrder.Web.Models.GroupByItemFlowInfo
+@{
+    ViewBag.Title = "_SearchGroupByItem";
+}
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <table border="1" cellpadding="0" cellspacing="0">
+            <tr>
+                <td>
+                    商家所在城市
+                </td>
+                <td>
+                    商家所在城市value
+                </td>
+                <td>
+                    团购平台
+                </td>
+                <td>
+                    团购平台value
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    团购编号/名称
+                </td>
+                <td>
+                    团购编号/名称value
+                </td>
+                <td>
+                    业务员
+                </td>
+                <td>
+                    业务员value
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    商家公司全称
+                </td>
+                <td colspan="3">
+                    商家公司全称value
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="right">
+                    <input type="submit" class="button" value="查询" />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}

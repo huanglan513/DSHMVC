@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DSHOrderEntityStoreContainer" CdmEntityContainer="DSHOrderManagementEntities">
+    <EntitySetMapping Name="City">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.City)">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CodeTable">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.CodeTable)">
+        <MappingFragment StoreEntitySet="CodeTable">
+          <ScalarProperty Name="CodeID" ColumnName="CodeID" />
+          <ScalarProperty Name="CodeTypeID" ColumnName="CodeTypeID" />
+          <ScalarProperty Name="CodeValue" ColumnName="CodeValue" />
+          <ScalarProperty Name="CodeDesc" ColumnName="CodeDesc" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CodeType">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.CodeType)">
+        <MappingFragment StoreEntitySet="CodeType">
+          <ScalarProperty Name="CodeTypeID" ColumnName="CodeTypeID" />
+          <ScalarProperty Name="CodeTypeName" ColumnName="CodeTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customer">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.Customer)">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="DistrictID" ColumnName="DistrictID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="ContactPhoneNo" ColumnName="ContactPhoneNo" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="BankAccount" ColumnName="BankAccount" />
+          <ScalarProperty Name="BankReceiver" ColumnName="BankReceiver" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="CutoffInd" ColumnName="CutoffInd" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="LastModifyBy" ColumnName="LastModifyBy" />
+          <ScalarProperty Name="LastModifyTime" ColumnName="LastModifyTime" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DeleteInd" ColumnName="DeleteInd" />
+          <ScalarProperty Name="DefaultPaymentType" ColumnName="DefaultPaymentType" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Department">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.Department)">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="DepartmentManager" ColumnName="DepartmentManager" />
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="District">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.District)">
+        <MappingFragment StoreEntitySet="District">
+          <ScalarProperty Name="DistrictID" ColumnName="DistrictID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Function">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.Function)">
+        <MappingFragment StoreEntitySet="Function">
+          <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
+          <ScalarProperty Name="FunctionName" ColumnName="FunctionName" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupByCity">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.GroupByCity)">
+        <MappingFragment StoreEntitySet="GroupByCity">
+          <ScalarProperty Name="GroupByCityID" ColumnName="GroupByCityID" />
+          <ScalarProperty Name="GroupByItemID" ColumnName="GroupByItemID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="DeleteInd" ColumnName="DeleteInd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupByGroup">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.GroupByGroup)">
+        <MappingFragment StoreEntitySet="GroupByGroup">
+          <ScalarProperty Name="GroupByGroupID" ColumnName="GroupByGroupID" />
+          <ScalarProperty Name="GroupByGroupName" ColumnName="GroupByGroupName" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="SubIndustryID" ColumnName="SubIndustryID" />
+          <ScalarProperty Name="OriginalPrice" ColumnName="OriginalPrice" />
+          <ScalarProperty Name="GroupByContent" ColumnName="GroupByContent" />
+          <ScalarProperty Name="SettlementType" ColumnName="SettlementType" />
+          <ScalarProperty Name="RefundType" ColumnName="RefundType" />
+          <ScalarProperty Name="LogisticCharge" ColumnName="LogisticCharge" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="GroupByContractNo" ColumnName="GroupByContractNo" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="LastModifyBy" ColumnName="LastModifyBy" />
+          <ScalarProperty Name="LastModifyTime" ColumnName="LastModifyTime" />
+          <ScalarProperty Name="DeleteInd" ColumnName="DeleteInd" />
+          <ScalarProperty Name="GroupByCodeNo" ColumnName="GroupByCodeNo" />
+          <ScalarProperty Name="FinalProfit" ColumnName="FinalProfit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupByItem">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.GroupByItem)">
+        <MappingFragment StoreEntitySet="GroupByItem">
+          <ScalarProperty Name="GroupByItemCodeNo" ColumnName="GroupByItemCodeNo" />
+          <ScalarProperty Name="GroupByItemID" ColumnName="GroupByItemID" />
+          <ScalarProperty Name="GroupByPortalID" ColumnName="GroupByPortalID" />
+          <ScalarProperty Name="StartDay" ColumnName="StartDay" />
+          <ScalarProperty Name="EndDay" ColumnName="EndDay" />
+          <ScalarProperty Name="ExpireDay" ColumnName="ExpireDay" />
+          <ScalarProperty Name="LowestNum" ColumnName="LowestNum" />
+          <ScalarProperty Name="HighestNum" ColumnName="HighestNum" />
+          <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+          <ScalarProperty Name="GroupByNum" ColumnName="GroupByNum" />
+          <ScalarProperty Name="SellNum" ColumnName="SellNum" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="RefundPrice" ColumnName="RefundPrice" />
+          <ScalarProperty Name="ActualConsumption" ColumnName="ActualConsumption" />
+          <ScalarProperty Name="LeaveAmount" ColumnName="LeaveAmount" />
+          <ScalarProperty Name="RankingValue" ColumnName="RankingValue" />
+          <ScalarProperty Name="RankingNum" ColumnName="RankingNum" />
+          <ScalarProperty Name="SZOnlineSell" ColumnName="SZOnlineSell" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="LastModifyBy" ColumnName="LastModifyBy" />
+          <ScalarProperty Name="LastModifyTime" ColumnName="LastModifyTime" />
+          <ScalarProperty Name="DeleteInd" ColumnName="DeleteInd" />
+          <ScalarProperty Name="GroupByGroupID" ColumnName="GroupByGroupID" />
+          <ScalarProperty Name="TaobaoProductID" ColumnName="TaobaoProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupByPortal">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.GroupByPortal)">
+        <MappingFragment StoreEntitySet="GroupByPortal">
+          <ScalarProperty Name="GroupByPortalID" ColumnName="GroupByPortalID" />
+          <ScalarProperty Name="PortalName" ColumnName="PortalName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupBySales">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.GroupBySales)">
+        <MappingFragment StoreEntitySet="GroupBySales">
+          <ScalarProperty Name="GroupBySalesID" ColumnName="GroupBySalesID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DeleteInd" ColumnName="DeleteInd" />
+          <ScalarProperty Name="GroupByGroupID" ColumnName="GroupByGroupID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Industry">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.Industry)">
+        <MappingFragment StoreEntitySet="Industry">
+          <ScalarProperty Name="IndustryID" ColumnName="IndustryID" />
+          <ScalarProperty Name="IndustryName" ColumnName="IndustryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetail">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.OrderDetail)">
+        <MappingFragment StoreEntitySet="OrderDetail">
+          <ScalarProperty Name="OfflineDealDate" ColumnName="OfflineDealDate" />
+          <ScalarProperty Name="OfflineDealBy" ColumnName="OfflineDealBy" />
+          <ScalarProperty Name="OfflineReturnFee" ColumnName="OfflineReturnFee" />
+          <ScalarProperty Name="OfflineDealStatus" ColumnName="OfflineDealStatus" />
+          <ScalarProperty Name="BuyerMessage" ColumnName="BuyerMessage" />
+          <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+          <ScalarProperty Name="GroupByItemID" ColumnName="GroupByItemID" />
+          <ScalarProperty Name="LockBy" ColumnName="LockBy" />
+          <ScalarProperty Name="BuyerID" ColumnName="BuyerID" />
+          <ScalarProperty Name="BuyerNick" ColumnName="BuyerNick" />
+          <ScalarProperty Name="ShippingType" ColumnName="ShippingType" />
+          <ScalarProperty Name="Tid" ColumnName="Tid" />
+          <ScalarProperty Name="Oid" ColumnName="Oid" />
+          <ScalarProperty Name="AlipayNo" ColumnName="AlipayNo" />
+          <ScalarProperty Name="TotalFee" ColumnName="TotalFee" />
+          <ScalarProperty Name="ApplyRefundTime" ColumnName="ApplyRefundTime" />
+          <ScalarProperty Name="UpdateRefundTime" ColumnName="UpdateRefundTime" />
+          <ScalarProperty Name="HasGoodReturn" ColumnName="HasGoodReturn" />
+          <ScalarProperty Name="RefundFee" ColumnName="RefundFee" />
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Desc" ColumnName="Desc" />
+          <ScalarProperty Name="GoodReturnTime" ColumnName="GoodReturnTime" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PayTime" ColumnName="PayTime" />
+          <ScalarProperty Name="DealTime" ColumnName="DealTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="LastModifyBy" ColumnName="LastModifyBy" />
+          <ScalarProperty Name="LastModifyTime" ColumnName="LastModifyTime" />
+          <ScalarProperty Name="DeleteInd" ColumnName="DeleteInd" />
+          <ScalarProperty Name="LockTime" ColumnName="LockTime" />
+          <ScalarProperty Name="DealBy" ColumnName="DealBy" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+          <ScalarProperty Name="RefundStatus" ColumnName="RefundStatus" />
+          <ScalarProperty Name="IssueType" ColumnName="IssueType" />
+          <ScalarProperty Name="RefundTimeout" ColumnName="RefundTimeout" />
+          <ScalarProperty Name="TaobaoProductID" ColumnName="TaobaoProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payment">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.Payment)">
+        <MappingFragment StoreEntitySet="Payment">
+          <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+          <ScalarProperty Name="GroupByGroupID" ColumnName="GroupByGroupID" />
+          <ScalarProperty Name="PaymentPrice" ColumnName="PaymentPrice" />
+          <ScalarProperty Name="PaymentTime" ColumnName="PaymentTime" />
+          <ScalarProperty Name="PaymentProportion" ColumnName="PaymentProportion" />
+          <ScalarProperty Name="PaymentDeadline" ColumnName="PaymentDeadline" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="LastModifyBy" ColumnName="LastModifyBy" />
+          <ScalarProperty Name="LastModifyTime" ColumnName="LastModifyTime" />
+          <ScalarProperty Name="DeleteInd" ColumnName="DeleteInd" />
+          <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Privilege">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.Privilege)">
+        <MappingFragment StoreEntitySet="Privilege">
+          <ScalarProperty Name="PrivilegeID" ColumnName="PrivilegeID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.Role)">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubIndustry">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.SubIndustry)">
+        <MappingFragment StoreEntitySet="SubIndustry">
+          <ScalarProperty Name="SubIndustryID" ColumnName="SubIndustryID" />
+          <ScalarProperty Name="IndustryID" ColumnName="IndustryID" />
+          <ScalarProperty Name="SubIndustryName" ColumnName="SubIndustryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.User)">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="DeleteInd" ColumnName="DeleteInd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserDepartment">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.UserDepartment)">
+        <MappingFragment StoreEntitySet="UserDepartment">
+          <ScalarProperty Name="UserDepartmentID" ColumnName="UserDepartmentID" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRole">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.UserRole)">
+        <MappingFragment StoreEntitySet="UserRole">
+          <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemParam">
+      <EntityTypeMapping TypeName="IsTypeOf(DSHOrder.Entity.SystemParam)">
+        <MappingFragment StoreEntitySet="SystemParam">
+          <ScalarProperty Name="SystemID" ColumnName="SystemID" />
+          <ScalarProperty Name="SystemName" ColumnName="SystemName" />
+          <ScalarProperty Name="SystemValue" ColumnName="SystemValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogisticsInfo">
+      <EntityTypeMapping TypeName="DSHOrder.Entity.LogisticsInfo">
+        <MappingFragment StoreEntitySet="LogisticsInfo">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Carrier" ColumnName="Carrier" />
+          <ScalarProperty Name="SalesNum" ColumnName="SalesNum" />
+          <ScalarProperty Name="GoodsName" ColumnName="GoodsName" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="TelPhone" ColumnName="TelPhone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ArriveStopDate" ColumnName="ArriveStopDate" />
+          <ScalarProperty Name="OperateDate" ColumnName="OperateDate" />
+          <ScalarProperty Name="DestStop" ColumnName="DestStop" />
+          <ScalarProperty Name="SourceStop" ColumnName="SourceStop" />
+          <ScalarProperty Name="GetGoodsDate" ColumnName="GetGoodsDate" />
+          <ScalarProperty Name="Project" ColumnName="Project" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="SerialNum" ColumnName="SerialNum" />
+          <ScalarProperty Name="LogisticsID" ColumnName="LogisticsID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhoneFeeInfo">
+      <EntityTypeMapping TypeName="DSHOrder.Entity.PhoneFeeInfo">
+        <MappingFragment StoreEntitySet="PhoneFeeInfo">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="RechargeDate" ColumnName="RechargeDate" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="Result" ColumnName="Result" />
+          <ScalarProperty Name="SalesNum" ColumnName="SalesNum" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="GetGoodsAddr" ColumnName="GetGoodsAddr" />
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+          <ScalarProperty Name="BuyerName" ColumnName="BuyerName" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="PhoneFeeOrderID" ColumnName="PhoneFeeOrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

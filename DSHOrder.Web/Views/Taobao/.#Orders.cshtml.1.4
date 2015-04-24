@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DSHOrder.Entity.OrderDetail>
+@{
+    ViewBag.Title = "订单管理";
+}
+
+<h2>淘宝订单管理</h2>
+@using (Html.BeginForm())
+{
+    <table width="100%" border="0">
+        <tr>
+            <td>
+                <input type="submit" id="btnGetLatest" value="获取最新订单数据" class="button" name="getlatest" />
+            </td>
+            @if (ViewBag.IsEmptyOrders != null && ViewBag.IsEmptyOrders)
+            {
+                <td>
+                    <input type="submit" id="btnGetAll" value="获取全部订单数据" class="button" name="getAll" />
+                    <span>（初始化数据库数据，只执行一次）</span>
+                </td>     
+            }
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span>@ViewBag.OutputResult</span>
+            </td>
+        </tr>
+    </table> 
+}
+@if (Model != null && Model.Count() > 0)
+{
+    <table>
+        <tr>
+            <th>
+                产品ID
+            </th>
+            <th>
+                子ID
+            </th>
+            <th>
+                产品名称
+            </th>
+            <th>
+                出售价格
+            </th>
+            <th>
+                URL
+            </th>
+            <th>
+                创建人
+            </th>
+            <th>
+                创建时间
+            </th>
+            <th>
+                淘宝产品ID
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+           @* <tr>
+                <td>@item.GroupByItemID
+                </td>
+                <td>@item.Address
+                </td>
+                <td>@item.GroupByGroup.GroupByGroupName
+                </td>
+                <td>@item.SellingPrice
+                </td>
+                <td>
+                    <a href="@item.URL">@item.URL</a>
+                </td>
+                <td>@item.CreateBy
+                </td>
+                <td>@item.CreateTime.ToString()
+                </td>
+                <td>@item.TaobaoProductID
+                </td>               
+            </tr> *@    
+        }
+    </table> 
+}

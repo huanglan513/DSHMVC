@@ -1,0 +1,6 @@
+c:\documents and settings\huanglan\my documents\visual studio 10\Projects\MvcEFTest\MvcEFTest.Entity\bin\Debug\MvcEFTest.Entity.dll.config
+c:\documents and settings\huanglan\my documents\visual studio 10\Projects\MvcEFTest\MvcEFTest.Entity\bin\Debug\MvcEFTest.Entity.dll
+c:\documents and settings\huanglan\my documents\visual studio 10\Projects\MvcEFTest\MvcEFTest.Entity\bin\Debug\MvcEFTest.Entity.pdb
+c:\documents and settings\huanglan\my documents\visual studio 10\Projects\MvcEFTest\MvcEFTest.Entity\obj\Debug\ResolveAssemblyReference.cache
+c:\documents and settings\huanglan\my documents\visual studio 10\Projects\MvcEFTest\MvcEFTest.Entity\obj\Debug\MvcEFTest.Entity.dll
+c:\documents and settings\huanglan\my documents\visual studio 10\Projects\MvcEFTest\MvcEFTest.Entity\obj\Debug\MvcEFTest.Entity.pdb

@@ -1,0 +1,1469 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DSHOrderManagementModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="DSHOrderManagementModelStoreContainer">
+    <EntitySet Name="ApproveRecordGroupBy" EntityType="DSHOrderManagementModel.Store.ApproveRecordGroupBy" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="City" EntityType="DSHOrderManagementModel.Store.City" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CodeTable" EntityType="DSHOrderManagementModel.Store.CodeTable" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CodeType" EntityType="DSHOrderManagementModel.Store.CodeType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Customer" EntityType="DSHOrderManagementModel.Store.Customer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Department" EntityType="DSHOrderManagementModel.Store.Department" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="District" EntityType="DSHOrderManagementModel.Store.District" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FinApplyInstance" EntityType="DSHOrderManagementModel.Store.FinApplyInstance" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FinApprovalRecord" EntityType="DSHOrderManagementModel.Store.FinApprovalRecord" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Function" EntityType="DSHOrderManagementModel.Store.Function" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupByCity" EntityType="DSHOrderManagementModel.Store.GroupByCity" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupByGroup" EntityType="DSHOrderManagementModel.Store.GroupByGroup" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupByItem" EntityType="DSHOrderManagementModel.Store.GroupByItem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupByPortal" EntityType="DSHOrderManagementModel.Store.GroupByPortal" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupBySales" EntityType="DSHOrderManagementModel.Store.GroupBySales" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupDRDWuLiu" EntityType="DSHOrderManagementModel.Store.GroupDRDWuLiu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupGeneral" EntityType="DSHOrderManagementModel.Store.GroupGeneral" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupLvYou" EntityType="DSHOrderManagementModel.Store.GroupLvYou" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupSheYing" EntityType="DSHOrderManagementModel.Store.GroupSheYing" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Industry" EntityType="DSHOrderManagementModel.Store.Industry" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LogisticsInfo" EntityType="DSHOrderManagementModel.Store.LogisticsInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderDetail" EntityType="DSHOrderManagementModel.Store.OrderDetail" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Payment" EntityType="DSHOrderManagementModel.Store.Payment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PhoneFeeInfo" EntityType="DSHOrderManagementModel.Store.PhoneFeeInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Privilege" EntityType="DSHOrderManagementModel.Store.Privilege" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Role" EntityType="DSHOrderManagementModel.Store.Role" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SubIndustry" EntityType="DSHOrderManagementModel.Store.SubIndustry" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SystemParam" EntityType="DSHOrderManagementModel.Store.SystemParam" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UploadFile" EntityType="DSHOrderManagementModel.Store.UploadFile" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User" EntityType="DSHOrderManagementModel.Store.User" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserDepartment" EntityType="DSHOrderManagementModel.Store.UserDepartment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserRole" EntityType="DSHOrderManagementModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ApproveRecordGroupBy_GroupByGroup" Association="DSHOrderManagementModel.Store.FK_ApproveRecordGroupBy_GroupByGroup">
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+      <End Role="ApproveRecordGroupBy" EntitySet="ApproveRecordGroupBy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ApproveRecordGroupBy_GroupByPortal" Association="DSHOrderManagementModel.Store.FK_ApproveRecordGroupBy_GroupByPortal">
+      <End Role="GroupByPortal" EntitySet="GroupByPortal" />
+      <End Role="ApproveRecordGroupBy" EntitySet="ApproveRecordGroupBy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CODETABL_REFERENCE_CODETYPE" Association="DSHOrderManagementModel.Store.FK_CODETABL_REFERENCE_CODETYPE">
+      <End Role="CodeType" EntitySet="CodeType" />
+      <End Role="CodeTable" EntitySet="CodeTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CUSTOMER_REFERENCE_CITY" Association="DSHOrderManagementModel.Store.FK_CUSTOMER_REFERENCE_CITY">
+      <End Role="City" EntitySet="City" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CUSTOMER_REFERENCE_DISTRICT" Association="DSHOrderManagementModel.Store.FK_CUSTOMER_REFERENCE_DISTRICT">
+      <End Role="District" EntitySet="District" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_SubIndustry" Association="DSHOrderManagementModel.Store.FK_Customer_SubIndustry">
+      <End Role="SubIndustry" EntitySet="SubIndustry" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DEPARTME_REFERENCE_USER" Association="DSHOrderManagementModel.Store.FK_DEPARTME_REFERENCE_USER">
+      <End Role="User" EntitySet="User" />
+      <End Role="Department" EntitySet="Department" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DISTRICT_REFERENCE_CITY" Association="DSHOrderManagementModel.Store.FK_DISTRICT_REFERENCE_CITY">
+      <End Role="City" EntitySet="City" />
+      <End Role="District" EntitySet="District" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FinApplyInstance_Payment" Association="DSHOrderManagementModel.Store.FK_FinApplyInstance_Payment">
+      <End Role="Payment" EntitySet="Payment" />
+      <End Role="FinApplyInstance" EntitySet="FinApplyInstance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FinApprovalRecord_FinApplyInstance" Association="DSHOrderManagementModel.Store.FK_FinApprovalRecord_FinApplyInstance">
+      <End Role="FinApplyInstance" EntitySet="FinApplyInstance" />
+      <End Role="FinApprovalRecord" EntitySet="FinApprovalRecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GROUPBYC_REFERENCE_CITY" Association="DSHOrderManagementModel.Store.FK_GROUPBYC_REFERENCE_CITY">
+      <End Role="City" EntitySet="City" />
+      <End Role="GroupByCity" EntitySet="GroupByCity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByCity_GroupByItem" Association="DSHOrderManagementModel.Store.FK_GroupByCity_GroupByItem">
+      <End Role="GroupByItem" EntitySet="GroupByItem" />
+      <End Role="GroupByCity" EntitySet="GroupByCity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByGroup_City" Association="DSHOrderManagementModel.Store.FK_GroupByGroup_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByGroup_Customer" Association="DSHOrderManagementModel.Store.FK_GroupByGroup_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByGroup_SubIndustry" Association="DSHOrderManagementModel.Store.FK_GroupByGroup_SubIndustry">
+      <End Role="SubIndustry" EntitySet="SubIndustry" />
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByGroup_UploadFile" Association="DSHOrderManagementModel.Store.FK_GroupByGroup_UploadFile">
+      <End Role="UploadFile" EntitySet="UploadFile" />
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByGroup_UploadFile1" Association="DSHOrderManagementModel.Store.FK_GroupByGroup_UploadFile1">
+      <End Role="UploadFile" EntitySet="UploadFile" />
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByGroup_UploadFile2" Association="DSHOrderManagementModel.Store.FK_GroupByGroup_UploadFile2">
+      <End Role="UploadFile" EntitySet="UploadFile" />
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByGroup_UploadFile3" Association="DSHOrderManagementModel.Store.FK_GroupByGroup_UploadFile3">
+      <End Role="UploadFile" EntitySet="UploadFile" />
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByGroup_User" Association="DSHOrderManagementModel.Store.FK_GroupByGroup_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByGroup_User1" Association="DSHOrderManagementModel.Store.FK_GroupByGroup_User1">
+      <End Role="User" EntitySet="User" />
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByGroup_User2" Association="DSHOrderManagementModel.Store.FK_GroupByGroup_User2">
+      <End Role="User" EntitySet="User" />
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByGroup_User3" Association="DSHOrderManagementModel.Store.FK_GroupByGroup_User3">
+      <End Role="User" EntitySet="User" />
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByGroup_User4" Association="DSHOrderManagementModel.Store.FK_GroupByGroup_User4">
+      <End Role="User" EntitySet="User" />
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByItem_GroupByGroup" Association="DSHOrderManagementModel.Store.FK_GroupByItem_GroupByGroup">
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+      <End Role="GroupByItem" EntitySet="GroupByItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByItem_GroupByPortal" Association="DSHOrderManagementModel.Store.FK_GroupByItem_GroupByPortal">
+      <End Role="GroupByPortal" EntitySet="GroupByPortal" />
+      <End Role="GroupByItem" EntitySet="GroupByItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByItem_UploadFile" Association="DSHOrderManagementModel.Store.FK_GroupByItem_UploadFile">
+      <End Role="UploadFile" EntitySet="UploadFile" />
+      <End Role="GroupByItem" EntitySet="GroupByItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByItem_User" Association="DSHOrderManagementModel.Store.FK_GroupByItem_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="GroupByItem" EntitySet="GroupByItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByItem_User1" Association="DSHOrderManagementModel.Store.FK_GroupByItem_User1">
+      <End Role="User" EntitySet="User" />
+      <End Role="GroupByItem" EntitySet="GroupByItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByItem_User2" Association="DSHOrderManagementModel.Store.FK_GroupByItem_User2">
+      <End Role="User" EntitySet="User" />
+      <End Role="GroupByItem" EntitySet="GroupByItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByItem_User3" Association="DSHOrderManagementModel.Store.FK_GroupByItem_User3">
+      <End Role="User" EntitySet="User" />
+      <End Role="GroupByItem" EntitySet="GroupByItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupByItem_User4" Association="DSHOrderManagementModel.Store.FK_GroupByItem_User4">
+      <End Role="User" EntitySet="User" />
+      <End Role="GroupByItem" EntitySet="GroupByItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupBySales_GroupBySales" Association="DSHOrderManagementModel.Store.FK_GroupBySales_GroupBySales">
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+      <End Role="GroupBySales" EntitySet="GroupBySales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupBySales_User" Association="DSHOrderManagementModel.Store.FK_GroupBySales_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="GroupBySales" EntitySet="GroupBySales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupDRDWuLiu_GroupByGroup" Association="DSHOrderManagementModel.Store.FK_GroupDRDWuLiu_GroupByGroup">
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+      <End Role="GroupDRDWuLiu" EntitySet="GroupDRDWuLiu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupGeneral_GroupByGroup" Association="DSHOrderManagementModel.Store.FK_GroupGeneral_GroupByGroup">
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+      <End Role="GroupGeneral" EntitySet="GroupGeneral" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupLvYou_GroupByGroup" Association="DSHOrderManagementModel.Store.FK_GroupLvYou_GroupByGroup">
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+      <End Role="GroupLvYou" EntitySet="GroupLvYou" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupSheYing_GroupByGroup" Association="DSHOrderManagementModel.Store.FK_GroupSheYing_GroupByGroup">
+      <End Role="GroupByGroup" EntitySet="GroupByGroup" />
+      <End Role="GroupSheYing" EntitySet="GroupSheYing" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_GroupByItem" Association="DSHOrderManagementModel.Store.FK_OrderDetail_GroupByItem">
+      <End Role="GroupByItem" EntitySet="GroupByItem" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_GroupByItem" Association="DSHOrderManagementModel.Store.FK_Payment_GroupByItem">
+      <End Role="GroupByItem" EntitySet="GroupByItem" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRIVILEG_REFERENCE_FUNCTION" Association="DSHOrderManagementModel.Store.FK_PRIVILEG_REFERENCE_FUNCTION">
+      <End Role="Function" EntitySet="Function" />
+      <End Role="Privilege" EntitySet="Privilege" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRIVILEG_REFERENCE_ROLE" Association="DSHOrderManagementModel.Store.FK_PRIVILEG_REFERENCE_ROLE">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Privilege" EntitySet="Privilege" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SUBINDUS_REFERENCE_INDUSTRY" Association="DSHOrderManagementModel.Store.FK_SUBINDUS_REFERENCE_INDUSTRY">
+      <End Role="Industry" EntitySet="Industry" />
+      <End Role="SubIndustry" EntitySet="SubIndustry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_City" Association="DSHOrderManagementModel.Store.FK_User_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Customer" Association="DSHOrderManagementModel.Store.FK_User_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USERDEPA_REFERENCE_DEPARTME" Association="DSHOrderManagementModel.Store.FK_USERDEPA_REFERENCE_DEPARTME">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="UserDepartment" EntitySet="UserDepartment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USERDEPA_REFERENCE_USER" Association="DSHOrderManagementModel.Store.FK_USERDEPA_REFERENCE_USER">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserDepartment" EntitySet="UserDepartment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USERROLE_REFERENCE_ROLE" Association="DSHOrderManagementModel.Store.FK_USERROLE_REFERENCE_ROLE">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USERROLE_REFERENCE_USER" Association="DSHOrderManagementModel.Store.FK_USERROLE_REFERENCE_USER">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ApproveRecordGroupBy">
+    <Key>
+      <PropertyRef Name="ApproveRecordGroupByID" />
+    </Key>
+    <Property Name="ApproveRecordGroupByID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GroupByGroupID" Type="int" Nullable="false" />
+    <Property Name="GroupByGroupName" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="GroupByPortalID" Type="int" />
+    <Property Name="PortalName" Type="nvarchar" MaxLength="50" />
+    <Property Name="NodeCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="NodeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="HandleUserID" Type="int" />
+    <Property Name="HandleUserName" Type="nvarchar" MaxLength="20" />
+    <Property Name="HandleTime" Type="datetime" />
+    <Property Name="ApproveResult" Type="nvarchar" MaxLength="20" />
+    <Property Name="ApproveMemo" Type="nvarchar" />
+    <Property Name="ApproveMemoMore" Type="nvarchar" />
+    <Property Name="DeleteInd" Type="bit" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="LastModifyBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CodeTable">
+    <Key>
+      <PropertyRef Name="CodeID" />
+    </Key>
+    <Property Name="CodeID" Type="int" Nullable="false" />
+    <Property Name="CodeTypeID" Type="int" />
+    <Property Name="CodeValue" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="CodeDesc" Type="nvarchar" MaxLength="200" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="CodeType">
+    <Key>
+      <PropertyRef Name="CodeTypeID" />
+    </Key>
+    <Property Name="CodeTypeID" Type="int" Nullable="false" />
+    <Property Name="CodeTypeName" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DistrictID" Type="int" />
+    <Property Name="CityID" Type="int" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ContactPhoneNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankName" Type="nvarchar" MaxLength="100" />
+    <Property Name="BankAccount" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankReceiver" Type="nvarchar" MaxLength="50" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+    <Property Name="CutoffInd" Type="int" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="LastModifyBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyTime" Type="datetime" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="DeleteInd" Type="int" />
+    <Property Name="DefaultPaymentType" Type="int" />
+    <Property Name="ContactName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ContactEmail" Type="varchar" MaxLength="50" />
+    <Property Name="SubIndustryID" Type="int" />
+    <Property Name="PageDesignContact" Type="nvarchar" MaxLength="100" />
+    <Property Name="PageDesignPhone" Type="varchar" MaxLength="50" />
+    <Property Name="PageDesignEmail" Type="varchar" MaxLength="50" />
+    <Property Name="PageDesignQQ" Type="varchar" MaxLength="50" />
+    <Property Name="PageDesignMobile" Type="varchar" MaxLength="50" />
+    <Property Name="PageExecuteContact" Type="nvarchar" MaxLength="100" />
+    <Property Name="PageExecutePhone" Type="varchar" MaxLength="50" />
+    <Property Name="PageExecuteEmail" Type="varchar" MaxLength="50" />
+    <Property Name="PageExecuteQQ" Type="varchar" MaxLength="50" />
+    <Property Name="PageExecuteMobile" Type="varchar" MaxLength="50" />
+    <Property Name="ComplaintHandlingContact" Type="nvarchar" MaxLength="100" />
+    <Property Name="ComplaintHandlingPhone" Type="varchar" MaxLength="50" />
+    <Property Name="ComplaintHandlingEmail" Type="varchar" MaxLength="50" />
+    <Property Name="ComplaintHandlingQQ" Type="varchar" MaxLength="50" />
+    <Property Name="ComplaintHandlingMobile" Type="varchar" MaxLength="50" />
+    <Property Name="FinancialContact" Type="nvarchar" MaxLength="100" />
+    <Property Name="FinancialPhone" Type="varchar" MaxLength="50" />
+    <Property Name="FinancialEmail" Type="varchar" MaxLength="50" />
+    <Property Name="FinancialQQ" Type="varchar" MaxLength="50" />
+    <Property Name="FinancialMobile" Type="varchar" MaxLength="50" />
+    <Property Name="BusinessLisenceImg" Type="nvarchar" MaxLength="200" />
+    <Property Name="TaxRegisterCertificateImg" Type="nvarchar" MaxLength="200" />
+    <Property Name="HealthPermitImg" Type="nvarchar" MaxLength="200" />
+    <Property Name="LisenceImg" Type="nvarchar" MaxLength="200" />
+    <Property Name="OtherProfQualificationImg" Type="nvarchar" MaxLength="200" />
+    <Property Name="PowerofAttorneyImg" Type="nvarchar" MaxLength="200" />
+    <Property Name="ExternalEnvImg" Type="nvarchar" MaxLength="200" />
+    <Property Name="InternalEnvImg" Type="nvarchar" MaxLength="200" />
+    <Property Name="BrandName" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsCertified" Type="bit" />
+    <Property Name="Evaluation" Type="nvarchar" MaxLength="300" />
+    <Property Name="DefaultPaymentDate" Type="int" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="int" Nullable="false" />
+    <Property Name="DepartmentManager" Type="int" />
+    <Property Name="DepartmentName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="DistrictID" />
+    </Key>
+    <Property Name="DistrictID" Type="int" Nullable="false" />
+    <Property Name="CityID" Type="int" />
+    <Property Name="DistrictName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="FinApplyInstance">
+    <Key>
+      <PropertyRef Name="ApplyID" />
+    </Key>
+    <Property Name="ApplyID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentID" Type="int" Nullable="false" />
+    <Property Name="Applicant" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApplyDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="FinApprovalRecord">
+    <Key>
+      <PropertyRef Name="RecordID" />
+    </Key>
+    <Property Name="RecordID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Approver" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="ApprovalResult" Type="int" />
+    <Property Name="ApprovalDate" Type="datetime" />
+    <Property Name="ApprovalComment" Type="nvarchar" MaxLength="300" />
+    <Property Name="ApplyID" Type="int" />
+    <Property Name="ActualPaymentDeadline" Type="datetime" />
+    <Property Name="ActualPaymentProportion" Type="decimal" Scale="2" />
+    <Property Name="ActualPaymentPrice" Type="decimal" Scale="2" />
+  </EntityType>
+  <EntityType Name="Function">
+    <Key>
+      <PropertyRef Name="FunctionID" />
+    </Key>
+    <Property Name="FunctionID" Type="int" Nullable="false" />
+    <Property Name="FunctionName" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="ParentID" Type="int" Nullable="false" />
+    <Property Name="Url" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="GroupByCity">
+    <Key>
+      <PropertyRef Name="GroupByCityID" />
+    </Key>
+    <Property Name="GroupByCityID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GroupByItemID" Type="int" />
+    <Property Name="CityID" Type="int" />
+    <Property Name="DeleteInd" Type="int" />
+  </EntityType>
+  <EntityType Name="GroupByGroup">
+    <Key>
+      <PropertyRef Name="GroupByGroupID" />
+    </Key>
+    <Property Name="GroupByGroupID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GroupByGroupName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="SubIndustryID" Type="int" />
+    <Property Name="OriginalPrice" Type="decimal" Scale="2" />
+    <Property Name="GroupByContent" Type="ntext" />
+    <Property Name="SettlementType" Type="int" />
+    <Property Name="SettlementDate" Type="int" />
+    <Property Name="RefundType" Type="int" />
+    <Property Name="LogisticCharge" Type="decimal" Scale="2" />
+    <Property Name="Status" Type="int" />
+    <Property Name="GroupByContractNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="LastModifyBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyTime" Type="datetime" />
+    <Property Name="DeleteInd" Type="int" />
+    <Property Name="GroupByCodeNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="FinalProfit" Type="decimal" Scale="2" />
+    <Property Name="PriceMarket" Type="decimal" Scale="2" />
+    <Property Name="PriceSettlement" Type="decimal" Scale="2" />
+    <Property Name="PriceSuggest" Type="decimal" Scale="2" />
+    <Property Name="PriceOther" Type="decimal" Scale="2" />
+    <Property Name="ShopCount" Type="int" />
+    <Property Name="ShopNames" Type="nvarchar" />
+    <Property Name="ProductPicture1FileID" Type="int" />
+    <Property Name="ProductPicture2FileID" Type="int" />
+    <Property Name="MaterialFileID" Type="int" />
+    <Property Name="OtherHistryCase" Type="nvarchar" />
+    <Property Name="DPOrKBAddress" Type="nvarchar" />
+    <Property Name="ApproveBMJLUserID" Type="int" />
+    <Property Name="ApproveBMJLActionTime" Type="datetime" />
+    <Property Name="ApproveBMJLResult" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveBMJLMemo" Type="nvarchar" />
+    <Property Name="ApproveFKRBUserID" Type="int" />
+    <Property Name="ApproveFKRBActionTime" Type="datetime" />
+    <Property Name="ApproveFKRBResult" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveFKRBMemo" Type="nvarchar" />
+    <Property Name="ApproveZJLUserID" Type="int" />
+    <Property Name="ApproveZJLActionTime" Type="datetime" />
+    <Property Name="ApproveZJLResult" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveZJLMemo" Type="nvarchar" />
+    <Property Name="ApproveXSZLUserID" Type="int" />
+    <Property Name="ApproveXSZLActionTime" Type="datetime" />
+    <Property Name="ApproveXSZLResult" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveXSZLMemo" Type="nvarchar" />
+    <Property Name="ApproveXSZLIsCrossCity" Type="bit" />
+    <Property Name="ApproveXSZLCrossCityID" Type="int" />
+    <Property Name="ApproveXSZLCrossCityUserID" Type="int" />
+    <Property Name="ApproveXSZLContractFileID" Type="int" />
+    <Property Name="CurrentNode" Type="nvarchar" MaxLength="50" />
+    <Property Name="CurrentStatus" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="GroupByItem">
+    <Key>
+      <PropertyRef Name="GroupByItemID" />
+    </Key>
+    <Property Name="GroupByItemID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GroupByPortalID" Type="int" />
+    <Property Name="StartDay" Type="datetime" />
+    <Property Name="EndDay" Type="datetime" />
+    <Property Name="ExpireDay" Type="datetime" />
+    <Property Name="LowestNum" Type="int" />
+    <Property Name="HighestNum" Type="int" />
+    <Property Name="SellingPrice" Type="decimal" Scale="2" />
+    <Property Name="GroupByNum" Type="int" />
+    <Property Name="SellNum" Type="int" />
+    <Property Name="URL" Type="nvarchar" MaxLength="500" />
+    <Property Name="RefundPrice" Type="decimal" Scale="2" />
+    <Property Name="ActualConsumption" Type="int" />
+    <Property Name="LeaveAmount" Type="int" />
+    <Property Name="RankingValue" Type="int" />
+    <Property Name="RankingNum" Type="int" />
+    <Property Name="SZOnlineSell" Type="int" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="LastModifyBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyTime" Type="datetime" />
+    <Property Name="DeleteInd" Type="int" />
+    <Property Name="GroupByGroupID" Type="int" />
+    <Property Name="TaobaoProductID" Type="nvarchar" MaxLength="50" />
+    <Property Name="GroupByItemCodeNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveTZUserID" Type="int" />
+    <Property Name="ApproveTZActionTime" Type="datetime" />
+    <Property Name="ApproveTZResult" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveTZMemo" Type="nvarchar" />
+    <Property Name="ApproveTZProcessTZTime" Type="datetime" />
+    <Property Name="ApproveTZGroupByFlowNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="ApproveCHBUserID" Type="int" />
+    <Property Name="ApproveCHBActionTime" Type="datetime" />
+    <Property Name="ApproveCHBDesignStatus" Type="int" />
+    <Property Name="ApproveCHBUploadFileID" Type="int" />
+    <Property Name="ApproveCHBResult" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveCHBMemo" Type="nvarchar" />
+    <Property Name="ApproveSJBUserID" Type="int" />
+    <Property Name="ApproveSJBActionTime" Type="datetime" />
+    <Property Name="ApproveSJBResult" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveSJBMemo" Type="nvarchar" />
+    <Property Name="ApproveXSZLUserID" Type="int" />
+    <Property Name="ApproveXSZLActionTime" Type="datetime" />
+    <Property Name="ApproveXSZLResult" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveXSZLMemo" Type="nvarchar" />
+    <Property Name="ScoreUserID" Type="int" />
+    <Property Name="ScoreActionTime" Type="datetime" />
+    <Property Name="ScoreTime" Type="datetime" />
+    <Property Name="ScoreMemo" Type="nvarchar" />
+    <Property Name="Score" Type="decimal" Scale="2" />
+    <Property Name="ScoreUserCount" Type="int" />
+    <Property Name="CurrentNode" Type="nvarchar" MaxLength="50" />
+    <Property Name="CurrentStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="int" />
+    <Property Name="LogisticCharge" Type="decimal" Scale="2" />
+    <Property Name="OtherCharge" Type="decimal" Scale="2" />
+    <Property Name="OnlineRefundNum" Type="int" />
+    <Property Name="ActualOnlineRefundNum" Type="int" />
+    <Property Name="OfflineRefundNum" Type="int" />
+    <Property Name="ActualOfflineRefundNum" Type="int" />
+    <Property Name="ActualSellNum" Type="int" />
+    <Property Name="ActualRefundPrice" Type="decimal" Scale="2" />
+    <Property Name="TotalProfit" Type="decimal" Scale="2" />
+    <Property Name="ActualTotalProfit" Type="decimal" Scale="2" />
+    <Property Name="TotalPayment" Type="decimal" Scale="2" />
+    <Property Name="ActualTotalPayment" Type="decimal" Scale="2" />
+  </EntityType>
+  <EntityType Name="GroupByPortal">
+    <Key>
+      <PropertyRef Name="GroupByPortalID" />
+    </Key>
+    <Property Name="GroupByPortalID" Type="int" Nullable="false" />
+    <Property Name="PortalName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="GroupBySales">
+    <Key>
+      <PropertyRef Name="GroupBySalesID" />
+    </Key>
+    <Property Name="GroupBySalesID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="GroupByGroupID" Type="int" />
+    <Property Name="DeleteInd" Type="int" />
+  </EntityType>
+  <EntityType Name="GroupDRDWuLiu">
+    <Key>
+      <PropertyRef Name="GroupDRDWuLiuID" />
+    </Key>
+    <Property Name="GroupDRDWuLiuID" Type="int" Nullable="false" />
+    <Property Name="GroupByGroupID" Type="int" Nullable="false" />
+    <Property Name="PriceOrg" Type="decimal" Scale="2" />
+    <Property Name="PriceInOffline" Type="decimal" Scale="2" />
+    <Property Name="PriceLowest" Type="decimal" Scale="2" />
+    <Property Name="PriceWuLiuFee" Type="decimal" Scale="2" />
+    <Property Name="PricePackage" Type="decimal" Scale="2" />
+    <Property Name="PriceSuggest" Type="decimal" Scale="2" />
+    <Property Name="Price" Type="decimal" Scale="2" />
+    <Property Name="PriceDiscount" Type="decimal" Scale="2" />
+    <Property Name="WeightGross" Type="decimal" Scale="2" />
+    <Property Name="WeightNet" Type="decimal" Scale="2" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="ShelfLife" Type="nvarchar" MaxLength="20" />
+    <Property Name="ReadyCount" Type="int" />
+    <Property Name="SendTimeType" Type="nvarchar" MaxLength="30" />
+    <Property Name="AreaRangType" Type="nvarchar" MaxLength="30" />
+    <Property Name="ShapeType" Type="int" />
+    <Property Name="IsLegal" Type="int" />
+    <Property Name="Description" Type="nvarchar" />
+    <Property Name="Feature" Type="nvarchar" />
+    <Property Name="DeleteInd" Type="bit" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="LastModifyBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="GroupGeneral">
+    <Key>
+      <PropertyRef Name="GroupGeneralID" />
+    </Key>
+    <Property Name="GroupGeneralID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GroupByGroupID" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" />
+    <Property Name="UserCountPerTicket" Type="int" />
+    <Property Name="TicketCountPerTime" Type="int" />
+    <Property Name="DayCountAhead" Type="int" />
+    <Property Name="TimeCountPerDay" Type="int" />
+    <Property Name="EffectiveDayBegin" Type="datetime" />
+    <Property Name="EffectiveDayEnd" Type="datetime" />
+    <Property Name="UpperLimitCount" Type="int" />
+    <Property Name="ReceiveTime" Type="datetime" />
+    <Property Name="JoinJWY" Type="nvarchar" MaxLength="50" />
+    <Property Name="Other" Type="nvarchar" />
+    <Property Name="IfBelowScoreTM" Type="decimal" Scale="2" />
+    <Property Name="YiPayJiaTM" Type="int" />
+    <Property Name="IfBelowScoreTB" Type="decimal" Scale="2" />
+    <Property Name="YiPayJiaTB" Type="int" />
+    <Property Name="DeleteInd" Type="bit" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="LastModifyBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="GroupLvYou">
+    <Key>
+      <PropertyRef Name="GroupLvYouID" />
+    </Key>
+    <Property Name="GroupLvYouID" Type="int" Nullable="false" />
+    <Property Name="GroupByGroupID" Type="int" Nullable="false" />
+    <Property Name="LYCPXLAP" Type="nvarchar" />
+    <Property Name="FYYBH" Type="nvarchar" />
+    <Property Name="FYWBH" Type="nvarchar" />
+    <Property Name="JiuDianJB" Type="nvarchar" MaxLength="5" />
+    <Property Name="CanBiao" Type="decimal" Scale="2" />
+    <Property Name="PreDays" Type="decimal" Scale="1" />
+    <Property Name="KeJieDaiCount" Type="int" />
+    <Property Name="JiaTongGongJu" Type="int" />
+    <Property Name="JiaTongGongJuOther" Type="nvarchar" MaxLength="50" />
+    <Property Name="ChuTuanTime" Type="datetime" />
+    <Property Name="ExpireDate" Type="datetime" />
+    <Property Name="Shopping" Type="int" />
+    <Property Name="ShoppingCount" Type="int" />
+    <Property Name="ChenTuanReShu" Type="int" />
+    <Property Name="CanJiaJWY" Type="int" />
+    <Property Name="Other" Type="nvarchar" />
+    <Property Name="IfBelowScore" Type="decimal" Scale="2" />
+    <Property Name="YiPayJia" Type="decimal" Scale="2" />
+    <Property Name="Memo" Type="nvarchar" />
+    <Property Name="DeleteInd" Type="bit" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="GroupSheYing">
+    <Key>
+      <PropertyRef Name="GroupSheYingID" />
+    </Key>
+    <Property Name="GroupSheYingID" Type="int" Nullable="false" />
+    <Property Name="GroupByGroupID" Type="int" Nullable="false" />
+    <Property Name="SheYingType" Type="int" />
+    <Property Name="PaiSheDays" Type="decimal" Scale="2" />
+    <Property Name="PaiSheAddressInner" Type="nvarchar" MaxLength="200" />
+    <Property Name="PaiSheAddressOut" Type="nvarchar" MaxLength="200" />
+    <Property Name="PreDays" Type="nchar" MaxLength="10" />
+    <Property Name="QuJinDays" Type="nchar" MaxLength="10" />
+    <Property Name="ExpireDate" Type="datetime" />
+    <Property Name="PaiSheCount" Type="int" />
+    <Property Name="JingXiuCount" Type="int" />
+    <Property Name="InDisCount" Type="int" />
+    <Property Name="JingXiuPriceExta" Type="decimal" Scale="2" />
+    <Property Name="JingXiuPriceExtaRuCe" Type="decimal" Scale="2" />
+    <Property Name="Size1" Type="decimal" Scale="1" />
+    <Property Name="GongYi1" Type="nvarchar" MaxLength="100" />
+    <Property Name="Size2" Type="decimal" Scale="1" />
+    <Property Name="GongYi2" Type="nvarchar" MaxLength="100" />
+    <Property Name="Size3" Type="decimal" Scale="1" />
+    <Property Name="GongYi3" Type="nvarchar" MaxLength="100" />
+    <Property Name="RuCeCount1" Type="int" />
+    <Property Name="RuCeSize1" Type="decimal" Scale="1" />
+    <Property Name="RuCeGongYi1" Type="nvarchar" MaxLength="100" />
+    <Property Name="RuCeCount2" Type="int" />
+    <Property Name="RuCeSize2" Type="decimal" Scale="1" />
+    <Property Name="RuCeGongYi2" Type="nvarchar" MaxLength="100" />
+    <Property Name="ClothCount" Type="int" />
+    <Property Name="HuaZhuangType" Type="nvarchar" MaxLength="50" />
+    <Property Name="BaiTai" Type="int" />
+    <Property Name="CaiZhi" Type="nvarchar" MaxLength="50" />
+    <Property Name="HaiBaoCount" Type="int" />
+    <Property Name="HaiBaoSize" Type="decimal" Scale="1" />
+    <Property Name="QianBaoCount" Type="int" />
+    <Property Name="SongJieMao" Type="int" />
+    <Property Name="BaoMenPiao" Type="int" />
+    <Property Name="JieDaiCount" Type="int" />
+    <Property Name="CanJiaJWY" Type="int" />
+    <Property Name="Other" Type="nvarchar" />
+    <Property Name="IfBelowScore" Type="decimal" Scale="2" />
+    <Property Name="YiPayJia" Type="decimal" Scale="2" />
+    <Property Name="Memo" Type="nvarchar" />
+    <Property Name="DeleteInd" Type="bit" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Industry">
+    <Key>
+      <PropertyRef Name="IndustryID" />
+    </Key>
+    <Property Name="IndustryID" Type="int" Nullable="false" />
+    <Property Name="IndustryName" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="LogisticsInfo">
+    <Key>
+      <PropertyRef Name="LogisticsID" />
+    </Key>
+    <Property Name="LogisticsID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SerialNum" Type="varchar" MaxLength="50" />
+    <Property Name="OrderID" Type="varchar" MaxLength="50" />
+    <Property Name="Project" Type="nvarchar" MaxLength="50" />
+    <Property Name="GetGoodsDate" Type="datetime" />
+    <Property Name="SourceStop" Type="nvarchar" MaxLength="50" />
+    <Property Name="DestStop" Type="nvarchar" MaxLength="50" />
+    <Property Name="OperateDate" Type="datetime" />
+    <Property Name="ArriveStopDate" Type="datetime" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" />
+    <Property Name="TelPhone" Type="varchar" MaxLength="50" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+    <Property Name="GoodsName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SalesNum" Type="int" />
+    <Property Name="Carrier" Type="nvarchar" MaxLength="50" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderDetailID" />
+    </Key>
+    <Property Name="OrderDetailID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GroupByItemID" Type="int" />
+    <Property Name="LockBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="BuyerID" Type="nvarchar" MaxLength="50" />
+    <Property Name="BuyerNick" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShippingType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tid" Type="nvarchar" MaxLength="50" />
+    <Property Name="Oid" Type="nvarchar" MaxLength="50" />
+    <Property Name="AlipayNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="TotalFee" Type="decimal" Scale="2" />
+    <Property Name="ApplyRefundTime" Type="datetime" />
+    <Property Name="UpdateRefundTime" Type="datetime" />
+    <Property Name="HasGoodReturn" Type="nvarchar" MaxLength="50" />
+    <Property Name="RefundFee" Type="decimal" Scale="2" />
+    <Property Name="Payment" Type="decimal" Scale="2" />
+    <Property Name="Reason" Type="nvarchar" MaxLength="500" />
+    <Property Name="Desc" Type="nvarchar" MaxLength="500" />
+    <Property Name="GoodReturnTime" Type="datetime" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="PayTime" Type="datetime" />
+    <Property Name="DealTime" Type="datetime" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="LastModifyBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyTime" Type="datetime" />
+    <Property Name="DeleteInd" Type="int" />
+    <Property Name="LockTime" Type="datetime" />
+    <Property Name="DealBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="OrderStatus" Type="int" />
+    <Property Name="RefundStatus" Type="int" />
+    <Property Name="IssueType" Type="int" />
+    <Property Name="RefundTimeout" Type="datetime" />
+    <Property Name="TaobaoProductID" Type="nvarchar" MaxLength="50" />
+    <Property Name="BuyerMessage" Type="nvarchar" MaxLength="500" />
+    <Property Name="OfflineDealStatus" Type="int" />
+    <Property Name="OfflineReturnFee" Type="decimal" />
+    <Property Name="OfflineDealBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="OfflineDealDate" Type="datetime" />
+    <Property Name="ItemTitle" Type="nvarchar" MaxLength="100" />
+    <Property Name="RefundID" Type="varchar" MaxLength="50" />
+    <Property Name="TradeFrom" Type="nvarchar" MaxLength="50" />
+    <Property Name="TradeRate" Type="int" />
+    <Property Name="CredentialPath" Type="nvarchar" MaxLength="300" />
+    <Property Name="HasCSDeal" Type="int" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="PaymentID" />
+    </Key>
+    <Property Name="PaymentID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentPrice" Type="decimal" Scale="2" />
+    <Property Name="PaymentTime" Type="datetime" />
+    <Property Name="PaymentProportion" Type="decimal" Scale="2" />
+    <Property Name="PaymentDeadline" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="LastModifyBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyTime" Type="datetime" />
+    <Property Name="DeleteInd" Type="int" />
+    <Property Name="PaymentType" Type="int" />
+    <Property Name="ApprovalStatus" Type="int" />
+    <Property Name="PaymentStatus" Type="int" />
+    <Property Name="CertificateImg" Type="nvarchar" MaxLength="200" />
+    <Property Name="ApplyDate" Type="datetime" />
+    <Property Name="Applicant" Type="nvarchar" MaxLength="50" />
+    <Property Name="Payer" Type="nvarchar" MaxLength="50" />
+    <Property Name="GroupByItemID" Type="int" />
+    <Property Name="ActualPaymentPrice" Type="decimal" Scale="2" />
+    <Property Name="ActualPaymentProportion" Type="decimal" Scale="2" />
+    <Property Name="ActualPaymentDeadline" Type="datetime" />
+    <Property Name="PaymentComment" Type="nvarchar" MaxLength="300" />
+    <Property Name="IsLastPayment" Type="bit" />
+  </EntityType>
+  <EntityType Name="PhoneFeeInfo">
+    <Key>
+      <PropertyRef Name="PhoneFeeOrderID" />
+    </Key>
+    <Property Name="PhoneFeeOrderID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="varchar" MaxLength="50" />
+    <Property Name="BuyerName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Payment" Type="decimal" Scale="2" />
+    <Property Name="GetGoodsAddr" Type="nvarchar" MaxLength="300" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+    <Property Name="SalesNum" Type="int" />
+    <Property Name="Result" Type="nvarchar" MaxLength="100" />
+    <Property Name="OrderDate" Type="datetime" />
+    <Property Name="RechargeDate" Type="datetime" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreateTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Privilege">
+    <Key>
+      <PropertyRef Name="PrivilegeID" />
+    </Key>
+    <Property Name="PrivilegeID" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" />
+    <Property Name="FunctionID" Type="int" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SubIndustry">
+    <Key>
+      <PropertyRef Name="SubIndustryID" />
+    </Key>
+    <Property Name="SubIndustryID" Type="int" Nullable="false" />
+    <Property Name="IndustryID" Type="int" />
+    <Property Name="SubIndustryName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SystemParam">
+    <Key>
+      <PropertyRef Name="SystemID" />
+    </Key>
+    <Property Name="SystemID" Type="int" Nullable="false" />
+    <Property Name="SystemName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SystemValue" Type="nvarchar" MaxLength="300" />
+    <Property Name="SystemDescription" Type="nvarchar" />
+  </EntityType>
+  <EntityType Name="UploadFile">
+    <Key>
+      <PropertyRef Name="UploadFileID" />
+    </Key>
+    <Property Name="UploadFileID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TypeCode" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="OriginalFileName" Type="nvarchar" MaxLength="255" />
+    <Property Name="FileName" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="FilePath" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="DeleteInd" Type="bit" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="LastModifyBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastModifyTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="Title" Type="nvarchar" MaxLength="20" />
+    <Property Name="Sex" Type="int" />
+    <Property Name="DeleteInd" Type="int" />
+    <Property Name="CityID" Type="int" />
+    <Property Name="CustomerID" Type="int" />
+  </EntityType>
+  <EntityType Name="UserDepartment">
+    <Key>
+      <PropertyRef Name="UserDepartmentID" />
+    </Key>
+    <Property Name="UserDepartmentID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentID" Type="int" />
+    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserRoleID" />
+    </Key>
+    <Property Name="UserRoleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RoleID" Type="int" />
+    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <Association Name="FK_ApproveRecordGroupBy_GroupByGroup">
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="1" />
+    <End Role="ApproveRecordGroupBy" Type="DSHOrderManagementModel.Store.ApproveRecordGroupBy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupByGroup">
+        <PropertyRef Name="GroupByGroupID" />
+      </Principal>
+      <Dependent Role="ApproveRecordGroupBy">
+        <PropertyRef Name="GroupByGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ApproveRecordGroupBy_GroupByPortal">
+    <End Role="GroupByPortal" Type="DSHOrderManagementModel.Store.GroupByPortal" Multiplicity="0..1" />
+    <End Role="ApproveRecordGroupBy" Type="DSHOrderManagementModel.Store.ApproveRecordGroupBy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupByPortal">
+        <PropertyRef Name="GroupByPortalID" />
+      </Principal>
+      <Dependent Role="ApproveRecordGroupBy">
+        <PropertyRef Name="GroupByPortalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CODETABL_REFERENCE_CODETYPE">
+    <End Role="CodeType" Type="DSHOrderManagementModel.Store.CodeType" Multiplicity="0..1" />
+    <End Role="CodeTable" Type="DSHOrderManagementModel.Store.CodeTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CodeType">
+        <PropertyRef Name="CodeTypeID" />
+      </Principal>
+      <Dependent Role="CodeTable">
+        <PropertyRef Name="CodeTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CUSTOMER_REFERENCE_CITY">
+    <End Role="City" Type="DSHOrderManagementModel.Store.City" Multiplicity="0..1" />
+    <End Role="Customer" Type="DSHOrderManagementModel.Store.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CUSTOMER_REFERENCE_DISTRICT">
+    <End Role="District" Type="DSHOrderManagementModel.Store.District" Multiplicity="0..1" />
+    <End Role="Customer" Type="DSHOrderManagementModel.Store.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="DistrictID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_SubIndustry">
+    <End Role="SubIndustry" Type="DSHOrderManagementModel.Store.SubIndustry" Multiplicity="0..1" />
+    <End Role="Customer" Type="DSHOrderManagementModel.Store.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubIndustry">
+        <PropertyRef Name="SubIndustryID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="SubIndustryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DEPARTME_REFERENCE_USER">
+    <End Role="User" Type="DSHOrderManagementModel.Store.User" Multiplicity="0..1" />
+    <End Role="Department" Type="DSHOrderManagementModel.Store.Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="DepartmentManager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DISTRICT_REFERENCE_CITY">
+    <End Role="City" Type="DSHOrderManagementModel.Store.City" Multiplicity="0..1" />
+    <End Role="District" Type="DSHOrderManagementModel.Store.District" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FinApplyInstance_Payment">
+    <End Role="Payment" Type="DSHOrderManagementModel.Store.Payment" Multiplicity="1" />
+    <End Role="FinApplyInstance" Type="DSHOrderManagementModel.Store.FinApplyInstance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="PaymentID" />
+      </Principal>
+      <Dependent Role="FinApplyInstance">
+        <PropertyRef Name="PaymentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FinApprovalRecord_FinApplyInstance">
+    <End Role="FinApplyInstance" Type="DSHOrderManagementModel.Store.FinApplyInstance" Multiplicity="0..1" />
+    <End Role="FinApprovalRecord" Type="DSHOrderManagementModel.Store.FinApprovalRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FinApplyInstance">
+        <PropertyRef Name="ApplyID" />
+      </Principal>
+      <Dependent Role="FinApprovalRecord">
+        <PropertyRef Name="ApplyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GROUPBYC_REFERENCE_CITY">
+    <End Role="City" Type="DSHOrderManagementModel.Store.City" Multiplicity="0..1" />
+    <End Role="GroupByCity" Type="DSHOrderManagementModel.Store.GroupByCity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="GroupByCity">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByCity_GroupByItem">
+    <End Role="GroupByItem" Type="DSHOrderManagementModel.Store.GroupByItem" Multiplicity="0..1" />
+    <End Role="GroupByCity" Type="DSHOrderManagementModel.Store.GroupByCity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupByItem">
+        <PropertyRef Name="GroupByItemID" />
+      </Principal>
+      <Dependent Role="GroupByCity">
+        <PropertyRef Name="GroupByItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByGroup_City">
+    <End Role="City" Type="DSHOrderManagementModel.Store.City" Multiplicity="0..1" />
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="GroupByGroup">
+        <PropertyRef Name="ApproveXSZLCrossCityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByGroup_Customer">
+    <End Role="Customer" Type="DSHOrderManagementModel.Store.Customer" Multiplicity="0..1" />
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="GroupByGroup">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByGroup_SubIndustry">
+    <End Role="SubIndustry" Type="DSHOrderManagementModel.Store.SubIndustry" Multiplicity="0..1" />
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubIndustry">
+        <PropertyRef Name="SubIndustryID" />
+      </Principal>
+      <Dependent Role="GroupByGroup">
+        <PropertyRef Name="SubIndustryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByGroup_UploadFile">
+    <End Role="UploadFile" Type="DSHOrderManagementModel.Store.UploadFile" Multiplicity="0..1" />
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UploadFile">
+        <PropertyRef Name="UploadFileID" />
+      </Principal>
+      <Dependent Role="GroupByGroup">
+        <PropertyRef Name="ProductPicture1FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByGroup_UploadFile1">
+    <End Role="UploadFile" Type="DSHOrderManagementModel.Store.UploadFile" Multiplicity="0..1" />
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UploadFile">
+        <PropertyRef Name="UploadFileID" />
+      </Principal>
+      <Dependent Role="GroupByGroup">
+        <PropertyRef Name="ProductPicture2FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByGroup_UploadFile2">
+    <End Role="UploadFile" Type="DSHOrderManagementModel.Store.UploadFile" Multiplicity="0..1" />
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UploadFile">
+        <PropertyRef Name="UploadFileID" />
+      </Principal>
+      <Dependent Role="GroupByGroup">
+        <PropertyRef Name="MaterialFileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByGroup_UploadFile3">
+    <End Role="UploadFile" Type="DSHOrderManagementModel.Store.UploadFile" Multiplicity="0..1" />
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UploadFile">
+        <PropertyRef Name="UploadFileID" />
+      </Principal>
+      <Dependent Role="GroupByGroup">
+        <PropertyRef Name="ApproveXSZLContractFileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByGroup_User">
+    <End Role="User" Type="DSHOrderManagementModel.Store.User" Multiplicity="0..1" />
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="GroupByGroup">
+        <PropertyRef Name="ApproveBMJLUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByGroup_User1">
+    <End Role="User" Type="DSHOrderManagementModel.Store.User" Multiplicity="0..1" />
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="GroupByGroup">
+        <PropertyRef Name="ApproveFKRBUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByGroup_User2">
+    <End Role="User" Type="DSHOrderManagementModel.Store.User" Multiplicity="0..1" />
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="GroupByGroup">
+        <PropertyRef Name="ApproveZJLUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByGroup_User3">
+    <End Role="User" Type="DSHOrderManagementModel.Store.User" Multiplicity="0..1" />
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="GroupByGroup">
+        <PropertyRef Name="ApproveXSZLUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByGroup_User4">
+    <End Role="User" Type="DSHOrderManagementModel.Store.User" Multiplicity="0..1" />
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="GroupByGroup">
+        <PropertyRef Name="ApproveXSZLCrossCityUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByItem_GroupByGroup">
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="0..1" />
+    <End Role="GroupByItem" Type="DSHOrderManagementModel.Store.GroupByItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupByGroup">
+        <PropertyRef Name="GroupByGroupID" />
+      </Principal>
+      <Dependent Role="GroupByItem">
+        <PropertyRef Name="GroupByGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByItem_GroupByPortal">
+    <End Role="GroupByPortal" Type="DSHOrderManagementModel.Store.GroupByPortal" Multiplicity="0..1" />
+    <End Role="GroupByItem" Type="DSHOrderManagementModel.Store.GroupByItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupByPortal">
+        <PropertyRef Name="GroupByPortalID" />
+      </Principal>
+      <Dependent Role="GroupByItem">
+        <PropertyRef Name="GroupByPortalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByItem_UploadFile">
+    <End Role="UploadFile" Type="DSHOrderManagementModel.Store.UploadFile" Multiplicity="0..1" />
+    <End Role="GroupByItem" Type="DSHOrderManagementModel.Store.GroupByItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UploadFile">
+        <PropertyRef Name="UploadFileID" />
+      </Principal>
+      <Dependent Role="GroupByItem">
+        <PropertyRef Name="ApproveCHBUploadFileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByItem_User">
+    <End Role="User" Type="DSHOrderManagementModel.Store.User" Multiplicity="0..1" />
+    <End Role="GroupByItem" Type="DSHOrderManagementModel.Store.GroupByItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="GroupByItem">
+        <PropertyRef Name="ApproveTZUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByItem_User1">
+    <End Role="User" Type="DSHOrderManagementModel.Store.User" Multiplicity="0..1" />
+    <End Role="GroupByItem" Type="DSHOrderManagementModel.Store.GroupByItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="GroupByItem">
+        <PropertyRef Name="ApproveCHBUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByItem_User2">
+    <End Role="User" Type="DSHOrderManagementModel.Store.User" Multiplicity="0..1" />
+    <End Role="GroupByItem" Type="DSHOrderManagementModel.Store.GroupByItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="GroupByItem">
+        <PropertyRef Name="ApproveSJBUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByItem_User3">
+    <End Role="User" Type="DSHOrderManagementModel.Store.User" Multiplicity="0..1" />
+    <End Role="GroupByItem" Type="DSHOrderManagementModel.Store.GroupByItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="GroupByItem">
+        <PropertyRef Name="ApproveXSZLUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupByItem_User4">
+    <End Role="User" Type="DSHOrderManagementModel.Store.User" Multiplicity="0..1" />
+    <End Role="GroupByItem" Type="DSHOrderManagementModel.Store.GroupByItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="GroupByItem">
+        <PropertyRef Name="ScoreUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupBySales_GroupBySales">
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="0..1" />
+    <End Role="GroupBySales" Type="DSHOrderManagementModel.Store.GroupBySales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupByGroup">
+        <PropertyRef Name="GroupByGroupID" />
+      </Principal>
+      <Dependent Role="GroupBySales">
+        <PropertyRef Name="GroupByGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupBySales_User">
+    <End Role="User" Type="DSHOrderManagementModel.Store.User" Multiplicity="0..1" />
+    <End Role="GroupBySales" Type="DSHOrderManagementModel.Store.GroupBySales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="GroupBySales">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupDRDWuLiu_GroupByGroup">
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="1" />
+    <End Role="GroupDRDWuLiu" Type="DSHOrderManagementModel.Store.GroupDRDWuLiu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupByGroup">
+        <PropertyRef Name="GroupByGroupID" />
+      </Principal>
+      <Dependent Role="GroupDRDWuLiu">
+        <PropertyRef Name="GroupByGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupGeneral_GroupByGroup">
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="1" />
+    <End Role="GroupGeneral" Type="DSHOrderManagementModel.Store.GroupGeneral" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupByGroup">
+        <PropertyRef Name="GroupByGroupID" />
+      </Principal>
+      <Dependent Role="GroupGeneral">
+        <PropertyRef Name="GroupByGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupLvYou_GroupByGroup">
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="1" />
+    <End Role="GroupLvYou" Type="DSHOrderManagementModel.Store.GroupLvYou" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupByGroup">
+        <PropertyRef Name="GroupByGroupID" />
+      </Principal>
+      <Dependent Role="GroupLvYou">
+        <PropertyRef Name="GroupByGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupSheYing_GroupByGroup">
+    <End Role="GroupByGroup" Type="DSHOrderManagementModel.Store.GroupByGroup" Multiplicity="1" />
+    <End Role="GroupSheYing" Type="DSHOrderManagementModel.Store.GroupSheYing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupByGroup">
+        <PropertyRef Name="GroupByGroupID" />
+      </Principal>
+      <Dependent Role="GroupSheYing">
+        <PropertyRef Name="GroupByGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_GroupByItem">
+    <End Role="GroupByItem" Type="DSHOrderManagementModel.Store.GroupByItem" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="DSHOrderManagementModel.Store.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupByItem">
+        <PropertyRef Name="GroupByItemID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="GroupByItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_GroupByItem">
+    <End Role="GroupByItem" Type="DSHOrderManagementModel.Store.GroupByItem" Multiplicity="0..1" />
+    <End Role="Payment" Type="DSHOrderManagementModel.Store.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupByItem">
+        <PropertyRef Name="GroupByItemID" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="GroupByItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRIVILEG_REFERENCE_FUNCTION">
+    <End Role="Function" Type="DSHOrderManagementModel.Store.Function" Multiplicity="0..1" />
+    <End Role="Privilege" Type="DSHOrderManagementModel.Store.Privilege" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Function">
+        <PropertyRef Name="FunctionID" />
+      </Principal>
+      <Dependent Role="Privilege">
+        <PropertyRef Name="FunctionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRIVILEG_REFERENCE_ROLE">
+    <End Role="Role" Type="DSHOrderManagementModel.Store.Role" Multiplicity="0..1" />
+    <End Role="Privilege" Type="DSHOrderManagementModel.Store.Privilege" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="Privilege">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SUBINDUS_REFERENCE_INDUSTRY">
+    <End Role="Industry" Type="DSHOrderManagementModel.Store.Industry" Multiplicity="0..1" />
+    <End Role="SubIndustry" Type="DSHOrderManagementModel.Store.SubIndustry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Industry">
+        <PropertyRef Name="IndustryID" />
+      </Principal>
+      <Dependent Role="SubIndustry">
+        <PropertyRef Name="IndustryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_City">
+    <End Role="City" Type="DSHOrderManagementModel.Store.City" Multiplicity="0..1" />
+    <End Role="User" Type="DSHOrderManagementModel.Store.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Customer">
+    <End Role="Customer" Type="DSHOrderManagementModel.Store.Customer" Multiplicity="0..1" />
+    <End Role="User" Type="DSHOrderManagementModel.Store.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USERDEPA_REFERENCE_DEPARTME">
+    <End Role="Department" Type="DSHOrderManagementModel.Store.Department" Multiplicity="0..1" />
+    <End Role="UserDepartment" Type="DSHOrderManagementModel.Store.UserDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="UserDepartment">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USERDEPA_REFERENCE_USER">
+    <End Role="User" Type="DSHOrderManagementModel.Store.User" Multiplicity="0..1" />
+    <End Role="UserDepartment" Type="DSHOrderManagementModel.Store.UserDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserDepartment">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USERROLE_REFERENCE_ROLE">
+    <End Role="Role" Type="DSHOrderManagementModel.Store.Role" Multiplicity="0..1" />
+    <End Role="UserRole" Type="DSHOrderManagementModel.Store.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USERROLE_REFERENCE_USER">
+    <End Role="User" Type="DSHOrderManagementModel.Store.User" Multiplicity="0..1" />
+    <End Role="UserRole" Type="DSHOrderManagementModel.Store.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

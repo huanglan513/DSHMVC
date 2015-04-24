@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<InfoStatus>
+  <PhoneFee>
+    <Result>OK</Result>
+    <Result>号码过期</Result>
+    <Result>号码在转业务中</Result>
+    <Result>轻松卡不能办理</Result>
+    <Result>取消，不办了</Result>
+    <Result>停机</Result>
+    <Result>外地号码</Result>
+    <Result>有合约</Result>
+    <Result>转业务中不能办</Result>
+  </PhoneFee>
+  <Logisitics>
+    <Status>配送成功</Status>
+    <Status>配送失败</Status>
+    <Status>配送中</Status>
+  </Logisitics>
+</InfoStatus>

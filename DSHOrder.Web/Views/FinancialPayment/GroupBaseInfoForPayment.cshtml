@@ -1,0 +1,40 @@
+﻿@model DSHOrder.Web.Models.GroupByBaseInfo
+
+<fieldset>
+       <table width="100%" class="tbList" style="border: solid 1px  #BDBDBD;">
+            <tr>
+    <td style="width:120px">
+    @Html.LabelFor(model => model.CustomerName)</td><td colspan="3">
+    @Model.CustomerName
+    </td></tr>
+     <tr><td style="width:120px">
+     @Html.LabelFor(model => model.BankName)</td><td style="width:350px">
+    @Model.BankName</td>
+    <td style="width:120px">
+     @Html.LabelFor(model => model.BankAccount)</td><td>
+    @Model.BankAccount</td></tr>
+     <tr><td>
+    @Html.LabelFor(model => model.BankReceiver)</td><td>
+    @Model.BankReceiver</td>
+   
+    <td>
+    @Html.LabelFor(model => model.SettlementType)</td><td>
+    @Model.SettlementType
+    </td></tr>
+    <tr>
+    <td>
+    @Html.LabelFor(model=>model.CustomerPhone)</td><td>
+    @Model.CustomerPhone
+    </td>
+    <td>
+    @if(Model.SettlementType=="月结")
+    {
+        @Html.LabelFor(model => model.DefaultPaymentDate)
+    }</td><td>
+     @if (Model.SettlementType == "月结")
+     {
+         @Model.DefaultPaymentDate
+     }
+    </td></tr>
+    </table>
+</fieldset>

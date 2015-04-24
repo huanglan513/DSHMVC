@@ -1,0 +1,304 @@
+﻿@model DSHOrder.Web.Models.GroupByPayment
+@using DSHOrder.Entity;
+@{
+    ViewBag.Title = "财务付款";
+}
+<link rel="stylesheet" href="@Url.Content("~/Content/themes/base/jquery-ui.css")" type="text/css" />
+<script  type="text/javascript" src="@Url.Content("~/Scripts/jquery.min.js")"></script>
+ <script type="text/javascript" src="@Url.Content("~/Scripts/autoNumeric.js")"></script>
+ <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.metadata.js")"></script>
+<script language="javascript" type="text/javascript" src="@Url.Content("~/My97DatePicker/WdatePicker.js")"></script>
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $(":text[id^=txtPaymentDate]").click(function () {
+            WdatePicker({ dateFmt: 'yyyy-MM-dd' });
+        });
+       
+        $(":text[id^='txtSellNum']").autoNumeric({ aSep: '', pSign: 's', mDec:'0'});
+        $(":text[id^='txtRefundPrice']").autoNumeric({ pSign: 's'});
+        $(":text[id^='txtRankValue']").autoNumeric({ aSep: '', pSign: 's' });
+        $(":text[id^='txtRankNum']").autoNumeric({ aSep: '', pSign: 's', mDec: '0' });
+        $(":text[id^='txtPaymentRate']").autoNumeric({ aSign: ' %', pSign: 's', vMax: '100.00' });
+        $(":text[id^='txtPaymentNum']").autoNumeric({ pSign: 's' });
+        $(":text[id^='txtFinalCharge']").autoNumeric({ pSign: 's'});
+
+        $(":text[id^='txtSellNum']").blur(function () {
+            var lblId = "lblTotalProfit " + $(this).attr("id").substr("txtSellNum".length);
+            var lblProfitOne = "lblProfitOne" + $(this).attr("id").substr("txtSellNum".length);
+            var sellNum = $(this).val();
+        
+            $("label[id='" + lblId + "']").text(parseFloat($("label[id='" + lblProfitOne + "']").text()) * parseFloat(sellNum)+" 元");
+        });
+    });
+</script>
+@*
+<h2>财务付款</h2>*@<br />
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+<fieldset>
+    @Html.Hidden("hdGroupByID", Model.GroupByGroupID)
+     <table width="100%" class="tbList" style="border: solid 1px  #BDBDBD;">
+            <tr>
+                <td>
+                    <div class="display-label">
+                        团购名称
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.GroupByName)
+                    </div>
+                </td>
+               
+                <td>
+                    <div class="display-label">
+                       商家名称
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Model.CustomerEntity.CustomerName
+                    </div>
+                </td>
+                <td>
+                    <div class="display-label">
+                        联系电话
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Model.CustomerEntity.ContactPhoneNo
+                    </div>
+                </td>
+                </tr>
+                <tr>
+                
+                  <td>
+                    <div class="display-label">
+                        收款人
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Model.CustomerEntity.BankReceiver
+                    </div>
+                </td>
+          
+                <td>
+                    <div class="display-label">
+                       结算方式
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                       @Model.SettleTypeName
+                    </div>
+                </td>
+                <td>
+                    <div class="display-label">
+                        收款银行
+                    </div>
+                </td>
+
+                <td>
+                    <div class="display-field">
+                        @Model.CustomerEntity.BankName
+                    </div>
+                </td>
+                  </tr>
+              <tr>
+                  <td>
+                    <div class="display-label">
+                        银行账号
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Model.CustomerEntity.BankAccount
+                    </div>
+                </td>
+            
+                <td>
+                    <div class="display-label">
+                       底价
+                    </div>
+                </td>
+                <td colspan="3">
+                    <div class="display-field">
+                        @Model.OriginalPrice 元
+                        
+                    </div>
+                </td>
+                </tr>
+                </table>
+                @for (int i = 0; i < Model.GroupByItemList.Count; i++)
+                {
+                    GroupByItem item = Model.GroupByItemList[i];
+                    //Html.RenderAction("GroupByItemPayment", "GroupBy", new {model=item,orginalPrice=Model.GroupByGroupEntity.OriginalPrice});
+                    var lblTitle = item.GroupByPortal.PortalName + "基本信息";
+                    var tbId = "tbItem" + item.GroupByItemID;
+                    var lblProfitOne = "lblProfitOne" + item.GroupByItemID;
+                    var id = item.GroupByItemID;
+
+                    var profitOne = item.SellingPrice - Model.OriginalPrice;
+                    var totalProfit = item.SellNum * profitOne;
+                    <br />
+                    <div  style=" background-color:#DFF4F5; height:30px; vertical-align:middle">
+                        <label>@lblTitle</label></div>
+                    @Html.Hidden("hdItem" + id, id);
+    <table id="@tbId" width="100%" class="tbList" style="border: solid 1px  #BDBDBD;">
+    <tr>
+                <td>
+                    <div class="display-label">
+                        团购价
+                    </div>
+                </td>
+                <td>
+                   @item.SellingPrice 元
+                </td>
+                  <td>
+                    <div class="display-label">
+                        单份利润
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                            <label id="@lblProfitOne">@profitOne  元</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="display-label">
+                       总销售量
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.TextBox("txtSellNum" + id, item.SellNum, new { style = "width:80px" })
+                    </div>
+                </td>
+                <td>
+                    <div class="display-label">
+                        总利润
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        <label id="lblTotalProfit @id">
+                        @totalProfit  元
+                        </label>
+                    </div>
+                </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="display-label">
+                        退款总计
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.TextBox("txtRefundPrice" + id, item.RefundPrice, new { style = "width:80px" })  元
+                    </div>
+                </td>
+                 <td>
+                    <div class="display-label">
+                        评分级别
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.TextBox("txtRankValue" + id, item.RankingValue, new { style = "width:80px" })
+                    </div>
+                </td>
+                  <td>
+                    <div class="display-label">
+                        评分次数
+                    </div>
+                </td>
+                <td colspan="3">
+                    <div class="display-field">
+                        @Html.TextBox("txtRankNum" + id, item.RankingNum, new { style = "width:80px" })
+                    </div>
+                </td>
+            </tr>
+    </table>
+                }  
+                   <br />
+             <div style=" background-color:#DFF4F5; height:30px; vertical-align:middle">
+                        <label> 最终打款信息</label></div>
+            <table width="100%" class="tbList" style="border: solid 1px  #BDBDBD;">
+            @{
+                int j;
+                for (int i = 0; i < Model.PaymentList.Count; i++)
+                {
+                    Payment item = Model.PaymentList[i];
+                    string lblTimes = "第" + (i+1) + "次计划打款日";
+                    j = i + 1;
+        
+         <tr>
+              <td style="width:120px">@lblTimes</td>
+              <td>@item.PaymentDeadline.Value.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <div class="display-label">
+                       打款额度
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.TextBox("txtPaymentNum" + @j, Model.PaymentList[i].PaymentPrice, new { style = "width:80px" })  元
+                    </div>
+                </td>
+                 <td>
+                  打款比例
+                </td>
+                <td>
+                  @Html.TextBox("txtPaymentRate"+@j, Model.PaymentList[i].PaymentProportion * 100 + "%", new { style = "width:80px" })
+                </td>
+                <td>
+                    <div class="display-label">
+                        打款日
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                    @if (item.PaymentTime.HasValue)
+                    {
+                        @Html.TextBox("txtPaymentDate" + @j, item.PaymentTime.Value.ToString("yyyy-MM-dd"), new { style = "width:100px" })
+                    }
+                    else
+                    {
+                         @Html.TextBox("txtPaymentDate" + @j, "", new { style = "width:100px" })
+                    }
+                    </div>
+                </td>
+            </tr>
+        
+                }
+}
+       
+              <tr>
+                <td>
+                    <div class="display-label">
+                       最终利润
+                    </div>
+                </td>
+                <td colspan="5">
+                    <div class="display-field">
+                        @Html.TextBox("txtFinalCharge", Model.FinalProfit, new { style = "width:120px" })  元
+                    </div>
+                </td>
+            </tr>
+        </table>
+               
+      
+         <p>
+            <input type="submit" value="保存" class="button" />
+        </p>
+</fieldset>
+    
+}
+<p>
+  <input type="submit" id="btnBack" value="返回" class="button" onclick="window.location='@Url.Action("Index")'" />
+</p>
+

@@ -1,0 +1,5 @@
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\MvcEFTest\MvcEFTest.Common\bin\Debug\MvcEFTest.Common.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\MvcEFTest\MvcEFTest.Common\bin\Debug\MvcEFTest.Common.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\MvcEFTest\MvcEFTest.Common\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\MvcEFTest\MvcEFTest.Common\obj\Debug\MvcEFTest.Common.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\MvcEFTest\MvcEFTest.Common\obj\Debug\MvcEFTest.Common.pdb

@@ -1,0 +1,99 @@
+﻿@model DSHOrder.Web.Models.AppSearchModel
+@using Webdiyer.WebControls.Mvc;
+@using DSHOrder.Web.Common.Application.GroupByGroup;
+<script language="javascript" type="text/javascript">
+    function OpenForm(id) { 
+        var url = "@Url.Action("Form", "Application")";
+        window.location.href = url + "/" + id;
+    }
+
+    function OpenOrder(id) { 
+        var url = "@Url.Action("Index", "OrderDetail")";
+        window.location.href = url + "/" + id;
+    }
+    
+    function DeleteGroupByGroup(id) { 
+        if (!window.confirm("您真的要删除该团购吗？"))
+        {
+            return false;
+        }
+    }
+    
+</script>
+<table id="SearchTable">
+    <tr>
+        <td class="title">
+            序号
+        </td>
+        <td class="title">
+            团购名称
+        </td>
+        <td class="title">
+            商家公司全称
+        </td>
+        <td class="title">
+            团购状态
+        </td>
+        <td class="title">
+            商家所在城市
+        </td>
+        <td class="title">
+            业务员
+        </td>
+        <td class="title">
+            团购平台及所在城市
+        </td>
+        <td class="title">
+            操作
+        </td>
+    </tr>
+    @if (Model != null)
+    {
+        int i = 0;
+        foreach (var item in Model.ResultItems)
+        {
+            i++;
+        <tr>
+            <td align="center">
+                @i
+            </td>
+            <td style="width: 280px">
+                @GBGHelper.Truncat(item.GroupByGroupName, 20)
+            </td>
+            <td style="width: 250px">
+                @GBGHelper.Truncat(item.CustomerName, 20)
+            </td>
+            <td>
+                ???
+            </td>
+            <td>
+                @item.CustomerCity
+            </td>
+            <td>
+                @item.Sales
+            </td>
+            <td style="width: 200px">
+                @GBGHelper.Truncat(item.AllCities, 20)
+            </td>
+            <td align="center">
+                @*<input type="submit" id="Open:@item.GroupByGroup.GroupByGroupID" value="订单" class="button" name="Open:@item.GroupByGroup.GroupByGroupID"/>*@
+                @{
+           string strItemId = "";
+           if (item.GroupByItemId != -1)
+           {
+               strItemId = "," + item.GroupByItemId.ToString();
+           }
+                }
+                <input type="button" value="订单" class="button" onclick="OpenOrder('@item.GroupByGroupId')" />
+                <input type="button" value="打开" class="button" onclick="OpenForm('@(item.GroupByGroupId + strItemId)')" />
+                <input type="submit" id="Delete:@item.GroupByGroupId" value="删除" onclick="return DeleteGroupByGroup('@item.GroupByGroupId + ',' + '@item.GroupByItemId')" class="button" name="Delete:@item.GroupByGroupId"/>
+            </td>
+        </tr>
+        }
+        <tr>
+            <td colspan="8" class="title" style="height: 20px">
+                @Html.Pager(Model.Pager, new PagerOptions { PageIndexParameterName = "pageIndex" }, new { @class = "pagination" })
+            </td>
+        </tr>
+    }
+</table>

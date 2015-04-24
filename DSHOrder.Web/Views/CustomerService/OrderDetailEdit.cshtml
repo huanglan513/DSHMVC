@@ -1,0 +1,185 @@
+﻿@model DSHOrder.Web.Models.OrderDetailModel
+@{
+    ViewBag.Title = "订单处理";
+}
+<script language="javascript" type="text/javascript" src="@Url.Content("~/My97DatePicker/WdatePicker.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/autoNumeric.js")"></script>
+<script type="text/javascript" language="javascript">
+    $(function () {
+        $("#DealTime").click(function () {
+            WdatePicker();
+        });
+        $(":text[id$='RefundFee']").autoNumeric({ aSep: '', pSign: 's' });
+        $(":text[id$='Payment']").autoNumeric({ aSep: '', pSign: 's' });        
+    });
+</script>
+@using (Html.BeginForm())
+{
+    <div>
+        <table class="tbList" style="width: 100%; text-align: left; margin: 10px 0 10px 0;">
+            <thead>
+                <tr>
+                    <th colspan="4">
+                        订单信息
+                    </th>
+                </tr>
+            </thead>
+            <tr>
+                <th>@Html.LabelFor(m => m.GroupByName)
+                </th>
+                <td colspan="3">@Html.DisplayFor(m => m.GroupByName)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.Oid)
+                </th>
+                <td>@Html.DisplayFor(m => m.Oid)
+                </td>
+                <th>@Html.LabelFor(m => m.TotalFee)
+                </th>
+                <td>@Html.DisplayFor(m => m.TotalFee)
+                </td>
+            </tr>
+            <tr>
+                <th style="font-weight: bold">@Html.LabelFor(m => m.OrderStatus)
+                </th>
+                <td style="font-weight: bold">@Html.DisplayFor(m => m.OrderStatus)
+                </td>
+                <th>@Html.LabelFor(m => m.TradeRate)
+                </th>
+                <td>@Html.DisplayFor(m => m.TradeRate)
+                </td>
+            </tr>
+        </table>
+        <table class="tbList" style="width: 100%; text-align: left; margin: 10px 0 10px 0">
+            <thead>
+                <tr>
+                    <th colspan="4">
+                        买家信息
+                    </th>
+                </tr>
+            </thead>
+            <tr>
+                <th>@Html.LabelFor(m => m.BuyerNick)
+                </th>
+                <td>@Html.DisplayFor(m => m.BuyerNick)
+                </td>
+                <th>@Html.LabelFor(m => m.AlipayNo)
+                </th>
+                <td>@Html.DisplayFor(m => m.AlipayNo)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.Address)
+                </th>
+                <td colspan="3">@Html.DisplayFor(m => m.Address)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.BuyerMessage)
+                </th>
+                <td colspan="3">@Html.DisplayFor(m => m.BuyerMessage)
+                </td>
+            </tr>
+        </table>
+        <table class="tbList" style="width: 100%; text-align: left; margin: 10px 0 10px 0">
+            <thead>
+                <tr>
+                    <th colspan="4">
+                        退款信息
+                    </th>
+                </tr>
+            </thead>
+            <tr>
+                <th>@Html.LabelFor(m => m.RefundID)
+                </th>
+                <td>@Html.DisplayFor(m => m.RefundID)
+                </td>
+                <th style="font-weight: bold">@Html.LabelFor(m => m.RefundStatus)
+                </th>
+                <td style="font-weight: bold">@Html.DisplayFor(m => m.RefundStatus)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.HasGoodReturn)
+                </th>
+                <td>@Html.DisplayFor(m => m.HasGoodReturn)
+                </td>
+                <th>@Html.LabelFor(m => m.GoodReturnTime)
+                </th>
+                <td>@Html.DisplayFor(m => m.GoodReturnTime)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.Reason)
+                </th>
+                <td>@Html.DisplayFor(m => m.Reason)
+                </td>
+                <th>@Html.LabelFor(m => m.Desc)
+                </th>
+                <td>@Html.DisplayFor(m => m.Desc)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.ApplyRefundTime)
+                </th>
+                <td>@Html.DisplayFor(m => m.ApplyRefundTime)
+                </td>
+                <th>@Html.LabelFor(m => m.UpdateRefundTime)
+                </th>
+                <td>@Html.DisplayFor(m => m.UpdateRefundTime)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.RefundFee)
+                </th>
+                <td>@Html.EditorFor(m => m.RefundFee)
+                </td>
+                <th>@Html.LabelFor(m => m.Payment)
+                </th>
+                <td>@Html.EditorFor(m => m.Payment)
+                </td>
+            </tr>
+        </table>
+        <table class="tbList" style="width: 100%; text-align: left; margin: 10px 0 10px 0">
+            <thead>
+                <tr>
+                    <th colspan="4">
+                        处理信息
+                    </th>
+                </tr>
+            </thead>
+            <tr>
+                <th>@Html.LabelFor(m => m.IsOfflineRefund)
+                </th>
+                <td>@Html.EditorFor(m => m.IsOfflineRefund)
+                </td>
+                <th>@Html.LabelFor(m => m.IsDealed)
+                </th>
+                <td>@Html.EditorFor(m => m.IsDealed)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.IssueType)
+                </th>
+                <td>@Html.EditorFor(m => m.IssueType)
+                </td>
+                <th>@Html.LabelFor(m => m.DealTime)
+                </th>
+                <td>@Html.EditorFor(m => m.DealTime)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.Remark)
+                </th>
+                <td colspan="3">@Html.TextAreaFor(m => m.Remark)
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="float: right">
+        <input name="Save:@Model.OrderDetailID" id="Save:@Model.OrderDetailID" type="submit" value="保存" class="button" /> 
+        <input id="TaobaoUpdate:@Model.OrderDetailID" type ="submit" value="从淘宝更新订单" class="button" name="TaobaoUpdate:@Model.OrderDetailID" />
+        <input type="submit" id="Back:@Model.OrderDetailID" value="返回" class="button" name="Back:@Model.OrderDetailID"  />
+    </div>
+}

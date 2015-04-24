@@ -1,0 +1,155 @@
+﻿@model DSHOrder.Web.Models.GroupByFlowInfo
+@using DSHOrder.Web.Common;
+@using DSHOrder.Web.Common.Application.GroupByGroup;
+@using DSHOrder.Entity;
+@{
+    GBGField fh = ViewData["fh"] as GBGField;
+}
+@if (Model.CurrentNode == GBGFlowEnumFLowNode.CHB)
+{
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            _CHB_Init();
+        });
+
+        function _CHB_Init() {
+            var vCHBResult = $("#GroupByItem_ApproveCHBResult").val();
+            if (vCHBResult == "" || vCHBResult == "CHB_NotFinish") {
+                $("#Helper_CHB_Status_17[value='2']").attr("checked", "checked");
+            }
+            else if (vCHBResult == "CHB_Finish") {
+                $("#Helper_CHB_Status_17[value='1']").attr("checked", "checked");
+            }
+
+            $("#ApproveCHBUploadFile").uploadify({
+                'uploader': '/Scripts/uploadify.swf',
+                'script': '/Ashx/ApplicationFileHandler.ashx?Data=4',
+                'folder': '/UploadFile/',
+                'cancelImg': '/Content/cancel.png',
+                'fileExt': '*.doc;*.docx;',
+                'fileDesc': '*.doc;*.docx;',
+                'sizeLimit': 1024 * 1024 * 4, //4M
+                'multi': false,
+                'onComplete': _CHB_AfterUploadedFile
+            });
+
+            $("#Helper_CHB_Status_17[value='1']").change(
+            function () {
+                _CHB_ChangeSubmitStatus("Finish");
+            });
+            $("#Helper_CHB_Status_17[value='2']").change(
+        function () {
+            _CHB_ChangeSubmitStatus("NotFinish");
+        });
+        }
+
+        function _CHB_ChangeSubmitStatus(v) {
+            $(":submit[id^='Submit:CHB_']").attr("name", "Submit:CHB_" + v);
+            $(":submit[id^='Submit:CHB_']").attr("id", "Submit:CHB_" + v);
+        }
+
+
+        function _CHB_AfterUploadedFile(event, queueID, fileObj, response, data) {
+            var jsonData = JSON.parse(response);
+
+            $("#GroupByItem_ApproveCHBUploadFileID").val(jsonData.UploadFileID);
+            $("#aApproveCHBUploadFile").attr("href", jsonData.Path);
+            $("#aApproveCHBUploadFile").text(jsonData.FileName);
+        }
+    </script>
+}
+    <script language="javascript" type="text/javascript">
+        function _CHB_SendEmail(GroupByItemID, cc) {
+            var cc = $("#_CHB_CCEmail").val();
+            var url ="@Url.Action("_CHB_SendEmail", "Application")"; 
+            var params = { 'GroupByItemID': GroupByItemID, 'cc': cc };
+            
+            $.getJSON(url, params, function (data) {
+                alert(data);
+            });     
+        }
+    </script>
+
+@Html.HiddenFor(m => m.GroupByItem.ApproveCHBResult)
+<table id="GeneralTable">
+    <tr>
+        <td colspan="2" class="title">
+            <b>策划部</b>
+        </td>
+    </tr>
+    <tr>
+        <td class="title" width="180">
+            上传Word
+        </td>
+        <td>
+            <table id="NoBorderTable" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    @if (fh.CalcField(m => m.GroupByItem.ApproveCHBUploadFileID) == GBGFlowEnumPermission.CanWrite)
+                    {
+                        <td width="400">
+                            <input id="ApproveCHBUploadFile" name="ApproveCHBUploadFile" type="file" />
+                            @Html.HiddenFor(m => m.GroupByItem.ApproveCHBUploadFileID)
+                            @Html.ValidationMessageFor(m => m.GroupByItem.ApproveCHBUploadFileID)
+                        </td>
+                        <td width="100" align="left" valign="middle">
+                            <a href="javascript:if(checkImport('ApproveCHBUploadFile')){$('#ApproveCHBUploadFile').uploadifyUpload();}" class="button" style="width: 60px; height: 20px; font-size: large; text-align: center">上传</a>
+                        </td>
+                    }
+                    <td>
+                        @{
+                            UploadFile ApproveCHBUploadFile = null;
+                            if (Model != null && Model.GroupByItem != null)
+                            {
+                                ApproveCHBUploadFile = Model.GroupByItem.ApproveCHBUploadFile;
+                            }
+                        }
+                        <a id="aApproveCHBUploadFile" href="@Url.UploadFileUrl(ApproveCHBUploadFile)">@(ApproveCHBUploadFile == null ? "" : ApproveCHBUploadFile.OriginalFileName)</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="title" width="180">
+            备注
+        </td>
+        <td style="height: 100px" align="left" valign="top">
+            @fh.ShowField(m => m.GroupByItem.ApproveCHBMemo, GBGFlowEnumEditType.TextArea)
+            @Html.ValidationMessageFor(m => m.GroupByItem.ApproveCHBMemo)
+        </td>
+    </tr>
+    <tr>
+        <td class="title" width="180">
+            设计状态
+        </td>
+        <td>
+            @fh.ShowField(m => m.Helper_CHB_Status_17, GBGFlowEnumEditType.CodeTableRadioButtonList, CodeTableHelper.CodeTableSJZT)
+            @Html.HiddenFor(m => m.GroupByItem.ApproveCHBDesignStatus)
+        </td>
+    </tr>
+    <tr>
+        <td class="title" width="180">
+            Email
+        </td>
+        <td>
+            @fh.ShowField(m => m.GroupByGroup.Customer.ContactEmail)
+        </td>
+    </tr>
+    <tr>
+        <td class="title" width="180">
+            CC
+        </td>
+        <td>
+            <input type="text" id="_CHB_CCEmail" />
+            <input value="Send Email" class="button" onclick="_CHB_SendEmail(@Model.GroupByItem.GroupByItemID)" style="width: 70px"  />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            处理时间
+        </td>
+        <td>
+            @fh.ShowField(m => m.GroupByItem.ApproveCHBActionTime)
+        </td>
+    </tr>
+</table>

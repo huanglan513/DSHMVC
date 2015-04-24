@@ -1,0 +1,98 @@
+﻿@model String
+
+<link href="../../Content/uploadify.css" rel="stylesheet" type="text/css" />
+    <script src="../../Scripts/swfobject.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.uploadify.v2.1.0.min.js" type="text/javascript"></script>
+
+    <style type="text/css">
+        .textstyle1
+        {
+            color: Red;
+            font-weight: bold;
+        }
+        .textstyle2
+        {
+            color: Green;
+            font-weight: bold;
+        }
+    </style>
+<script language="javascript" type="text/javascript">
+     $(function () {
+        $('#fileCertificate@(ViewData["Name"])').uploadify({
+            'uploader': '/Scripts/uploadify.swf',
+            'script': '/Ashx/FileHandler.ashx',
+            'folder': '/UploadFile/CustomerImage',
+            'cancelImg': '/Content/Images/cancel.png',
+            'fileExt': '*.jpg;*.jpeg;*.gif;*.png;',
+            'fileDesc': '*.jpg;*.jpeg;*.gif;*.png;',
+            'sizeLimit': 1024 * 1024 * 4, //4M
+            'multi': false,
+            'onComplete': fun@(ViewData["Name"])
+        });
+
+        $('#hfImg@(ViewData["Name"])').bind("click",function(){
+            window.showModalDialog("@Model","aa","dialogWidth=700px;dialogHeight=600px"); 
+            return false;
+        });
+    });
+    
+    //显示提示信息，textstyle2为绿色，即正确信息；textstyl1为红色，即错误信息
+    function fun@(ViewData["Name"])(event, queueID, fileObj, response, data) {
+        if (response != "") {
+            $('#result@(ViewData["Name"])').removeClass();
+            $('#result@(ViewData["Name"])').addClass("textstyle2");
+            $('#result@(ViewData["Name"])').html("成功上传");
+
+            $('#fileName@(ViewData["Name"])').html(response);
+
+            var value="/UploadFile/CustomerImage/"+response;
+
+            $('#hfImg@(ViewData["Name"])').attr("href", "../UploadFile/CustomerImage/" + response)[0].style.display = "block";  
+            $('#hfImg@(ViewData["Name"])').unbind("click").bind("click",function(){
+                window.showModalDialog(value,"aa","dialogWidth=700px;dialogHeight=600px"); 
+                return false;
+            });         
+            $('#txtImg@(ViewData["Name"])').val(value); 
+            
+            if($('#img@(ViewData["Name"])').length>0)
+            {
+                $('#img@(ViewData["Name"])').attr("src",value);
+            } 
+            else
+            {
+                var imgCtrl='<img alt="" id="img@(ViewData["Name"])" src="'+value+'" style="border:0px; height:100px; width:100px;" />';
+                 $('#hfImg@(ViewData["Name"])').append(imgCtrl);
+            }
+        }
+        else {
+            $('#result@(ViewData["Name"])').removeClass();
+            $('#result@(ViewData["Name"])').addClass("textstyle2");
+            $('#result@(ViewData["Name"])').html("文件上传出错！");
+            $('#fileName@(ViewData["Name"])').html("");
+            $('#hfImg@(ViewData["Name"])').text("")[0].style.display = "none";
+            $('#txtImg@(ViewData["Name"])').val("");
+        }
+    }
+
+    //如果点击‘导入文件’时选择文件为空，则提示
+    function checkImport(objId) {
+        if ($.trim($('#' + objId + 'Queue').html()) == "") {
+            alert('请先选择要导入的文件！');
+            return false;
+        }
+        return true;
+    }
+    </script>
+  <table width="100%"><tr><td style="border-width:0px; width:380px;" valign="top">
+                <input id="fileCertificate@(ViewData["Name"])" name="file" type="file" />
+                </td><td valign="top" style="border-width:0px"> <a href="javascript:if(checkImport('fileCertificate@(ViewData["Name"])')){$('#fileCertificate@(ViewData["Name"])').uploadifyUpload();}" class="button" style="width:60px; height:20px; font-size:large; text-align:center">上传</a>
+                </td><td  style="border-width:0px">
+                    <a id='hfImg@(ViewData["Name"])' style="text-decoration:underline" href="@Model" > 
+                     @if (!string.IsNullOrEmpty(Model))
+                     {
+                         <img alt="" id="img@(ViewData["Name"])" src="@Model" style="border:0px; height:100px; width:100px;" />
+                     }    
+                     </a><br /><span id='fileName@(ViewData["Name"])'>@(string.IsNullOrEmpty(Model)?"":Model.Substring("/UploadFile/CustomerImage/".Length))</span>
+                     <span id='result@(ViewData["Name"])'></span>
+                    @Html.TextBox("txtImg" + ViewData["Name"], Model, new { style = "display:none" })
+                </td></tr></table>

@@ -1,0 +1,68 @@
+﻿#MainTable
+{
+	width: 100%;
+	border: 1px solid #98bf21;
+	border-collapse: collapse;
+}
+#MainTable td
+{
+	border: 1px solid #98bf21;
+	empty-cells: show;
+}
+#detailTable
+{
+	width: 100%;
+	border: 1px solid #98bf21;
+	border-collapse: collapse;
+}
+#detailTable td
+{
+	border: 1px solid #98bf21;
+	empty-cells: show;
+}
+
+#GeneralTable
+{
+	width: 100%;
+	border: 1px solid #98bf21;
+	border-collapse: collapse;
+}
+#GeneralTable td
+{
+	border: 1px solid #98bf21;
+	empty-cells: show;
+}
+
+
+.title
+{
+	background-color: #EEF2FB;
+	text-align: center;
+	font-family: \5fae\8f6f\96c5\9ed1;
+}
+
+#NoBorderTable
+{
+	width: 100%;
+	border: 0px;
+}
+
+#NoBorderTable td
+{
+	border: 0px;
+	empty-cells: show;
+}
+
+
+
+#SearchTable
+{
+	width: 100%;
+	border: 1px solid #98bf21;
+	border-collapse: collapse;
+}
+#SearchTable td
+{
+	border: 1px solid #98bf21;
+	empty-cells: show;
+}

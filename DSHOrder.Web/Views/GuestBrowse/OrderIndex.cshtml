@@ -1,0 +1,204 @@
+﻿@model DSHOrder.Web.Models.OrderSearchModel
+@using Webdiyer.WebControls.Mvc;
+@using DSHOrder.Entity;
+@using DSHOrder.Web.Common;
+@{
+    ViewBag.Title = "订单清单列表";
+}
+<script language="javascript" type="text/javascript" src="@Url.Content("~/My97DatePicker/WdatePicker.js")"></script>
+<script type="text/javascript" language="javascript">
+    $(function () {
+        $("#DealDateFrom").click(function () {
+            WdatePicker();
+        });
+        $("#DealDateTo").click(function () {
+            WdatePicker();
+        });
+
+        //Tab Link Styles.
+        $("#tabDealType li a").each(function () {
+            $(this).removeClass("default-tab");
+            if ($(this).attr("status") == $('#OrderDealStatus').val()) {
+                $(this).addClass("default-tab");
+            }
+        });
+
+        //Tab Link Events.
+        $("#tabDealType li a").click(function () {
+            $('#OrderDealStatus').val($(this).attr("status"));
+            $('form').submit();
+            return false;
+        });
+    });
+</script>
+@using (Html.BeginForm())
+{ 
+    <div id="searchContent">
+        <table class="tbList" style="width: 100%; border: 0px">
+            <tr>
+                <th>@Html.LabelFor(m => m.GroupByName)
+                </th>
+                <td>@Html.DisplayFor(m => m.GroupByName)
+                    @Html.HiddenFor(m => m.GroupByItemId)
+                </td>
+                <th>@Html.LabelFor(m => m.Price)
+                </th>
+                <td>@Html.DisplayFor(m => m.Price)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.GroupBySale)
+                </th>
+                <td>@Html.DisplayFor(m => m.GroupBySale)
+                </td>
+                 <th>@Html.LabelFor(m => m.TradeRate)
+                </th>
+                <td>@Html.EditorFor(m => m.TradeRate)
+                </td>
+                
+            </tr>
+             <tr>
+                <th>@Html.LabelFor(m => m.BuyerNick)
+                </th>
+                <td>@Html.EditorFor(m => m.BuyerNick)
+                </td>
+                <th>@Html.LabelFor(m => m.Address)
+                </th>
+                <td>@Html.EditorFor(m => m.Address)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.DealDateFrom)
+                </th>
+                <td>@Html.EditorFor(m => m.DealDateFrom)
+                </td>
+                <th>@Html.LabelFor(m => m.DealDateTo)
+                </th>
+                <td>@Html.EditorFor(m => m.DealDateTo)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align: right">
+                    <input type="submit" id="btnSearch" value="查询" class="button" name="btnSearch" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="listContent">
+        <div id="navList" class="content-box-header">
+            <ul id="tabDealType" class="content-box-tabs" style="float: left">
+                <li>@Html.ActionLink("全部订单", "OrderIndex", "CustomerService", null, new { status = (int)OrderDetailSearchType.All })</li>
+                <li>@Html.ActionLink("未处理订单", "OrderIndex", "CustomerService", null, new { status = (int)OrderDetailSearchType.Pending })</li>
+                <li>@Html.ActionLink("办理成功订单", "OrderIndex", "CustomerService", null, new { status = (int)OrderDetailSearchType.Done })</li>
+            </ul>
+            @Html.HiddenFor(m => m.OrderDealStatus)
+        </div>
+        <div class="tab-content default-tab" id="tab">
+            <table class="tbList">
+                <tr>
+                    <th>
+                        团购平台
+                    </th>
+                    <th>
+                        买家昵称
+                    </th>
+                    <th>
+                        买家应付金额
+                    </th>
+                    <th>
+                        退换给买家金额
+                    </th>
+                    <th>
+                        支付给卖家金额
+                    </th>
+                    <th>
+                        收款地址
+                    </th>
+                    <th>
+                        订单状态
+                    </th>
+                    <th>
+                        退款状态
+                    </th>
+                    <th>
+                        办理日期
+                    </th>
+                    <th>
+                        办理人
+                    </th>
+                    <th>
+                        订单评价
+                    </th>
+                    <th>备注
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model.OrderDetailList)
+                {
+                    <tr>
+                        <td>
+                            @Html.ConvertTradeFromToString(item.TradeFrom)
+                        </td>
+                        <td>
+                            @Html.Label(item.BuyerNick)
+                        </td>
+                        <td>
+                            @Html.Label(item.TotalFee.GetValueOrDefault(0).ToString("C"))
+                        </td>
+                        <td>
+                            @Html.Label(item.RefundFee.GetValueOrDefault(0).ToString("C"))
+                        </td>
+                        <td>
+                            @Html.Label(item.Payment.GetValueOrDefault(0).ToString("C"))
+                        </td>
+                        <td>
+                            @if (item.Address != null)
+                            {
+                                @Html.Label(item.Address) 
+                            }
+                        </td>
+                        <td>
+                            @if (item.OrderStatus.HasValue && item.OrderStatus.Value != 0)
+                            { 
+                                @Html.Label(Model.OrderStatusTypes[item.OrderStatus.Value])
+                            }
+                        </td>
+                        <td>
+                            @if (item.RefundStatus.HasValue && item.RefundStatus.Value != 0)
+                            { 
+                                @Html.Label(Model.RefundStatusTypes[item.RefundStatus.Value])
+                            }
+                        </td>
+                        <td>
+                            @Html.Label(item.DealTime.ToString())
+                        </td>
+                        <td>
+                            @if (item.DealBy != null)
+                            { 
+                                @Html.Label(item.DealBy)
+                            }
+                        </td>
+                        <td>
+                            @if (item.TradeRate.HasValue)
+                            { 
+                                @Html.Label(item.TradeRate.ToString())
+                            }
+                        </td>
+                        <td>
+                            @if (item.Remark != null)
+                            { 
+                                @Html.Label(item.Remark)
+                            }
+                        </td>
+                        <td>
+                            <input type="submit" id="view:@item.OrderDetailID" value="订单详情" class="button" name="view:@item.OrderDetailID"/>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        @Html.Pager(Model.OrderDetailList, new PagerOptions { PageIndexParameterName = "PageIndex" }, new { @class = "pagination" })
+        <input type="submit" id="Back" value="后退" class="button" name="Back" />
+    </div>
+}

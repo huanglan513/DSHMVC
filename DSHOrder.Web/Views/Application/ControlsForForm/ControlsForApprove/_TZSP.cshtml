@@ -1,0 +1,96 @@
+﻿@model DSHOrder.Web.Models.GroupByFlowInfo
+@using DSHOrder.Web.Common;
+@using DSHOrder.Web.Common.Application.GroupByGroup;
+@{
+    GBGField fh = ViewData["fh"] as GBGField;
+}
+@if (Model.CurrentNode == GBGFlowEnumFLowNode.TZSP)
+{
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            _TZSP_Init();
+        });
+
+        function _TZSP_Init() {
+            var vTZSPResult = $("#GroupByItem_ApproveTZResult").val();
+            if (vTZSPResult == "" || vTZSPResult == "TZSP_None") {
+                $("#Helper_TZSP_ApproveResult[value='0']").attr("checked", "checked");
+            }
+            else if (vTZSPResult == "TZSP_Pass") {
+                $("#Helper_TZSP_ApproveResult[value='2']").attr("checked", "checked");
+            }
+            else if (vTZSPResult == "TZSP_Refuse") {
+                $("#Helper_TZSP_ApproveResult[value='1']").attr("checked", "checked");
+            }
+
+            $("#Helper_TZSP_ApproveResult[value='0']").change(
+            function () {
+                _TZSP_ChangeSubmitStatus("None");
+            });
+            $("#Helper_TZSP_ApproveResult[value='1']").change(
+        function () {
+            _TZSP_ChangeSubmitStatus("Refuse");
+        });
+            $("#Helper_TZSP_ApproveResult[value='2']").change(
+        function () {
+            _TZSP_ChangeSubmitStatus("Pass");
+        });
+        }
+
+        function _TZSP_ChangeSubmitStatus(v) {
+            $(":submit[id^='Submit:TZSP']").attr("name", "Submit:TZSP_" + v);
+            $(":submit[id^='Submit:TZSP']").attr("id", "Submit:TZSP_" + v);
+        }
+
+    </script>
+}
+@Html.HiddenFor(m => m.GroupByItem.GroupByItemID)
+<table id="GeneralTable">
+    <tr>
+        <td colspan="4" class="title">
+            <b>团长审批</b>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            审批结果
+        </td>
+        <td colspan="3">
+            @fh.ShowField(m => m.Helper_TZSP_ApproveResult, GBGFlowEnumEditType.CodeTableRadioButtonList, CodeTableHelper.CodeTableTZSPJG)
+            @Html.HiddenFor(m => m.GroupByItem.ApproveTZResult)
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            备注
+        </td>
+        <td colspan="3" style="height: 100px" align="left" valign="top">
+            @fh.ShowField(m => m.GroupByItem.ApproveTZMemo, GBGFlowEnumEditType.TextArea)
+            @Html.ValidationMessageFor(m => m.GroupByItem.ApproveTZMemo)
+        </td>
+    </tr>
+    <tr>
+        <td class="title" width="180">
+            团购流水号
+        </td>
+        <td width="180">
+            @fh.ShowField(m => m.GroupByItem.ApproveTZGroupByFlowNo)
+            @Html.ValidationMessageFor(m => m.GroupByItem.ApproveTZGroupByFlowNo)
+        </td>
+        <td class="title" width="180">
+            团长审批时间
+        </td>
+        <td>
+            @fh.ShowField(m => m.GroupByItem.ApproveTZProcessTZTime)
+            @Html.ValidationMessageFor(m => m.GroupByItem.ApproveTZProcessTZTime)
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            审批时间
+        </td>
+        <td colspan="3">
+            @DateTime.Now
+        </td>
+    </tr>
+</table>

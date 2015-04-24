@@ -1,0 +1,163 @@
+﻿@model PagedList<DSHOrder.Entity.CustomerExtend>
+@{
+    ViewBag.Title = "客户管理";
+}
+@using Webdiyer.WebControls.Mvc;
+ <script src="@Url.Content("~/Scripts/jquery.min.js")" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("#cbxAll").click(function () {
+            if (!$(this).attr("checked")) {
+                $(":checkbox[id^='cbxInValid']").attr("checked", false);
+                $("#hdSelectCustomer").val("");
+            }
+            else {
+                var strLength = 'cbxInValid'.length;
+                var selectedIds;
+                $(":checkbox[id^='cbxInValid']").each(function () {
+                    selectedIds += $(this).attr("id").substr(strLength) + ",";
+                    $(this).attr("checked", true);
+                });
+                $("#hdSelectCustomer").val(selectedIds);
+            }
+        });
+//        $(":checkbox[id^='cbxInValid']").click(function () {
+//            if ($(":checkbox[id^='cbxInValid'][checked=false]").length > 0) {
+//                $("#cbxAll").attr("checked", false);
+//            }
+//            else {
+//                $("#cbxAll").attr("checked", true);
+//            }
+
+//            var selectedIds = $("#hdSelectCustomer").val();
+//            var strLength = 'cbxInValid'.length;
+//            var customerId = $(this).attr("id").substr(strLength) + ",";
+//            if ($(this).attr("checked")) {
+//                selectedIds += customerId;
+//            }
+//            else {
+//                selectedIds = selectedIds.replace(customerId, "");
+//            }
+//            $("#hdSelectCustomer").val(selectedIds);
+//        });
+
+        //        $("#btnSearch").click(function () {
+        //            alert('aa');
+        //            // $.get("Customer/Index", { id: 1, customerName: $("#tbxCustomerName").val(), cityId: $("#citySelectList  option:selected").val() });
+        //            $.get("Customer/Index", { id: 1 });
+        //        });
+    });
+
+    //删除选中信息
+    function DeleteCustomerInfos() {
+        if (!window.confirm("确定要删除选择的数据项吗?")) {
+            return;
+        }
+
+        var selectedIds = [];
+        var strLength = 'cbxInValid'.length;
+        $(":checked[id^='cbxInValid']").each(function () {
+            selectedIds.push($(this).attr("id").substr(strLength));
+        });
+
+        var checkedItems = selectedIds.join(',');
+//        var checkedItems = $("#hdSelectCustomer").val();
+        if (checkedItems == "") {
+            alert("请选择要删除的信息!");
+            return;
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/Customer/Delete',
+            dataType: 'text',
+            data: { selectedIds: checkedItems },
+            cache: false,
+            success: DeleteCustomerInfosCallBack
+        });
+    }
+    //删除选中信息回调函数
+    function DeleteCustomerInfosCallBack(r) {
+        if (r >0 ) {
+            alert('删除成功');
+        } else {
+            alert('删除失败');
+        }
+        window.location.reload();
+    }
+     
+
+</script>
+@*<h2>客户管理</h2>*@
+@*@using(Html.BeginForm("Index","Customer",new{id=1},FormMethod.Get))*@<br />
+@using(Html.BeginForm("Index","Customer",new{id=1},FormMethod.Get))
+{
+
+<table width="99%" border="0"  class="tbList">
+    <tr>
+        <td width="60px">客户名称：</td>
+        <td align="left" width="30%">@Html.TextBox("tbxCustomerName",ViewData["customerName"])</td>
+        <td width="60px">所在城市：</td>
+        <td align="left"  width="20%">@Html.DropDownList("citySelectList")</td>
+        <td><input type="submit" id="btnSearch" value="查询" class="button"  />
+        </td>
+    </tr>
+</table>
+
+ }
+
+  <p style="text-align: right">
+<input type="submit" id="btnCreate" value="创建" class="button" onclick="window.location='@Url.Action("Create", new { id = -1, name = 'C' })'" />
+<input type="submit" id="btnDel" value="删除"  class="button" onclick="DeleteCustomerInfos();" />
+</p>
+<input id="hdSelectCustomer" type="hidden" />
+<table class="tbList">
+    <tr>
+        <th>
+            <input type="checkbox" id="cbxAll" name="cbxAll" />
+        </th>
+        <th>
+            客户名称
+        </th>
+        <th>
+            所在城市
+        </th>
+        <th>
+            联系人
+        </th>
+        <th>
+            联系电话
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        string cbxId = "cbxInValid" + item.CustomerID;
+        <tr>
+            <td>
+                <input type="checkbox" id="@cbxId" name="@cbxId" />
+            </td>
+            <td>
+                @item.CustomerName
+            </td>
+            <td>
+                @item.CityName
+            </td>
+            <td>
+                @item.ContactName
+            </td>
+            <td>
+                @item.ContactPhoneNo
+            </td>
+            <td>
+               
+@*                @Html.ActionLink("修改", "Edit", new { id = item.CustomerID }) |
+                @Html.ActionLink("查看", "Details", new { id = item.CustomerID })*@
+                 <input type="submit" id="btnEdit" value="修改" class="button" onclick="window.location='@Url.Action("Edit", new { id = item.CustomerID })'" />
+                 <input type="submit" id="btnDetails" value="查看" class="button" onclick="window.location='@Url.Action("Details", new { id = item.CustomerID })'" />
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.Pager(Model, new PagerOptions { PageIndexParameterName = "id" }, new { @class = "pagination" })

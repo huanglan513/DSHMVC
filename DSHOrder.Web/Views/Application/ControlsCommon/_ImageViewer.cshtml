@@ -1,0 +1,30 @@
+﻿<script language="javascript" type="text/javascript">
+    $(function () {
+        $("img").click(
+            function () {
+                ViewImage(this.src);
+            }
+        );
+    });
+
+    function ViewImage(ImageUrl) {
+        $("#ImgViewer").attr("src", ImageUrl);
+
+        $("#divImage").dialog({
+            modal: true,
+            height: 600,
+            width: 800,
+            buttons: {
+                确定: function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+    }
+
+</script>
+<div id="divImage" title="查看图片" style="display: none;">
+    <div style="width: 500px; height: 500px">
+        <img id="ImgViewer" />
+    </div>
+</div>

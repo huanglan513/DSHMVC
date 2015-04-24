@@ -1,0 +1,29 @@
+﻿@model DSHOrder.Web.Models.GroupByFlowInfo
+@using DSHOrder.Web.Common.Application.GroupByGroup;
+@{
+    GBGField fh = ViewData["fh"] as GBGField;
+}
+<table id="GeneralTable">
+    <tr>
+        <td class="title" colspan="2">
+            <b>总经理审批</b>
+        </td>
+    </tr>
+    <tr>
+        <td class="title" width="180">
+            备注
+        </td>
+        <td style="height: 100px" align="left" valign="top">
+            @fh.ShowField(m => m.GroupByGroup.ApproveZJLMemo, GBGFlowEnumEditType.TextArea)
+            @Html.ValidationMessageFor(m => m.GroupByGroup.ApproveZJLMemo)
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            审批时间
+        </td>
+        <td>
+            @fh.ShowField(m => m.GroupByGroup.ApproveZJLActionTime)
+        </td>
+    </tr>
+</table>

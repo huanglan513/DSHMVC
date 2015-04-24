@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Taobao";
+}
+<link rel="stylesheet" href="@Url.Content("~/Content/themes/base/jquery-ui.css")" type="text/css" />
+ <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/DatePickerzh-cn.js")"></script>
+<script type="text/javascript" language="javascript">
+    $(function () {
+        $('#txtStartTime').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true, yearRange: '2010:2040' });
+        $('#txtEndTime').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true, yearRange: '2010:2040' });
+    });
+</script>
+<h2>淘宝数据获取</h2>
+@using (Html.BeginForm())
+{   
+    <table width="100%" border="0">
+        <tr>
+            <td width="60px">开始时间：</td>
+            <td align="left" width="30%">@Html.TextBox("txtStartTime")</td>
+            <td width="60px">结束时间：</td>
+            <td align="left" width="30%">@Html.TextBox("txtEndTime")</td>
+            <td><input type="submit" id="btnGetOne" value="获取最近一天数据" class="button" name="getOne"  />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+            </td>
+            <td>
+                <input type="submit" id="btnGetAll" value="获取全部数据" class="button" name="getAll" />
+                <span>危险!!!数据会发生错误！</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5">
+                <span>@ViewBag.OutputResult</span>
+            </td>
+        </tr>
+    </table>
+}

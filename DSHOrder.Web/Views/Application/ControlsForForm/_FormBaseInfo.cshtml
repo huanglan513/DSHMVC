@@ -1,0 +1,531 @@
+﻿@model DSHOrder.Web.Models.GroupByFlowInfo
+@using DSHOrder.Web.Common.Application.GroupByGroup;
+@using DSHOrder.Service.Interface;
+@using DSHOrder.Service;
+@using DSHOrder.Entity;
+@using DSHOrder.Web.Models;
+@{
+    GBGField fh = ViewData["fh"] as GBGField;
+
+    UploadFile MaterialFile = null;
+    UploadFile ProductPicture1File = null;
+    UploadFile ProductPicture2File = null;
+    if (Model != null && Model.GroupByGroup != null)
+    {
+        MaterialFile = Model.GroupByGroup.MaterialFile;
+        ProductPicture1File = Model.GroupByGroup.ProductPicture1File;
+        ProductPicture2File = Model.GroupByGroup.ProductPicture2File;
+    }
+}
+@if (Model.CurrentNode == GBGFlowEnumFLowNode.YWYTXTGSQB)
+{
+    <script language="javascript" type="text/javascript">
+    $(function () {
+        InitControls();
+        InitData();
+    });
+
+    // 初始化控件
+    function InitControls()
+    {
+        $("#btnSelectCustomer").click(
+                function () {
+                    ClearCustomer();
+                    $("#dialog-form").dialog("open");
+                }
+                );
+
+        $("#GroupByGroup_SettlementType").change(
+            function(){ 
+                RefreshSettlementTypeDate();
+        });
+
+        $("#SettlementDate").datepicker();
+        $("input[name$='PaymentDeadline']").datepicker();
+        $("textarea").width("98%");
+
+        $("#ProductPicture1File").uploadify({
+            'uploader': '/Scripts/uploadify.swf',
+            'script': '/Ashx/ApplicationFileHandler.ashx?Data=1_1',
+            'folder': '/UploadFile/',
+            'cancelImg': '/Content/cancel.png',
+            'fileExt': '*.jpg;*.jpeg;*.gif;*.png;',
+            'fileDesc': '*.jpg;*.jpeg;*.gif;*.png;',
+            'sizeLimit': 1024 * 1024 * 4, //4M
+            'multi': false,
+            'onComplete': AfterUploadedFile
+        });
+
+        $("#ProductPicture2File").uploadify({
+            'uploader': '/Scripts/uploadify.swf',
+            'script': '/Ashx/ApplicationFileHandler.ashx?Data=1_2',
+            'folder': '/UploadFile/',
+            'cancelImg': '/Content/cancel.png',
+            'fileExt': '*.jpg;*.jpeg;*.gif;*.png;',
+            'fileDesc': '*.jpg;*.jpeg;*.gif;*.png;',
+            'sizeLimit': 1024 * 1024 * 4, //4M
+            'multi': false,
+            'onComplete': AfterUploadedFile
+        });
+
+        $("#MaterialFile").uploadify({
+            'uploader': '/Scripts/uploadify.swf',
+            'script': '/Ashx/ApplicationFileHandler.ashx?Data=2_3',
+            'folder': '/UploadFile/',
+            'cancelImg': '/Content/cancel.png',
+            'fileExt': '*.zip;*.rar;*.doc;*.docx;',
+            'fileDesc': '*.zip;*.rar;*.doc;*.docx;',
+            'sizeLimit': 1024 * 1024 * 10, //10M
+            'multi': false,
+            'onComplete': AfterUploadedFile
+        });
+
+        RefreshSettlementTypeDate();
+    }
+
+    // 初始化数据
+    function InitData()
+    {
+        // 商家信息
+        var customerID= $("#GroupByGroup_CustomerID").val();
+        if (customerID != "")
+        {
+            SelectCustomer(customerID);
+        }
+
+        // 行业信息
+        var SubIndustryID = $("#GroupByGroup_SubIndustryID").val();
+        var urlSubIndustry ="@Url.Action("GetSubIndustryNameById", "Application")";
+        $.getJSON(urlSubIndustry, { 'Id' : SubIndustryID }, function(data){
+             $("#tdSubIndustry").html(data.SubIndustryName);
+        });
+
+        var urlIndustry ="@Url.Action("GetIndustryNameBySubId", "Application")";
+        $.getJSON(urlIndustry, { 'subId' : SubIndustryID }, function(data){
+             $("#tdIndustry").html(data.IndustryName);
+        });
+    
+        var urlUploadFile ="@Url.Action("GetUploadFile", "Application")";
+
+        // 产品图片1
+        var ProductPicture1FileID = $("#GroupByGroup_ProductPicture1FileID").val();
+        $.getJSON(urlUploadFile, { 'Id' : ProductPicture1FileID }, function(data){
+             $("#Img1").attr("src", data.Url);
+        });
+        // 产品图片2
+        var ProductPicture2FileID = $("#GroupByGroup_ProductPicture2FileID").val();
+        $.getJSON(urlUploadFile, { 'Id' : ProductPicture2FileID }, function(data){
+             $("#Img2").attr("src", data.Url);
+        });
+        // 资料路径
+        var MaterialFileID = $("#GroupByGroup_MaterialFileID").val();
+        $.getJSON(urlUploadFile, { 'Id' : MaterialFileID }, function(data){
+             $("#aMaterialFile").text(data.OriginalFileName);
+             $("#aMaterialFile").attr("href", data.Url);
+        });
+
+    }
+
+
+    function RefreshSettlementTypeDate()
+    {
+        if ($('#GroupByGroup_SettlementType option:selected').text() == "月结")
+        {
+            $("#GroupByGroup_SettlementDate").show();
+            // $("#tdSettlementDate").text("结算日");
+        }
+        else
+        {
+            $("#GroupByGroup_SettlementDate").hide();
+            // $("#tdSettlementDate").text("");
+        }
+    }
+
+    function AfterUploadedFile(event, queueID, fileObj, response, data){
+        var jsonData = JSON.parse(response);
+
+        if (jsonData.FilePos == 1 || jsonData.FilePos == 2)
+        {
+            $("#GroupByGroup_ProductPicture" + jsonData.FilePos + "FileID").val(jsonData.UploadFileID);
+            $("#Img" + jsonData.FilePos).attr("src", jsonData.Path);
+            
+        }
+        else if (jsonData.FilePos == 3)
+        {
+            $("#GroupByGroup_MaterialFileID").val(jsonData.UploadFileID);
+            $("#aMaterialFile").attr("href", jsonData.Path);
+            $("#aMaterialFile").text(jsonData.FileName);
+        }
+    }
+
+    function SelectCustomer(customerID) {
+        $.ajaxSetup({ async: true }); 
+
+        $("#dialog-form").dialog("close");
+
+        var urlCustomer="@Url.Action("GetCustomer", "Application")";
+        $.getJSON(urlCustomer,{'customerID':customerID},function(data){
+             $("#GroupByGroup_CustomerID").val(customerID);
+             $("#spanCustomer").text(data.CustomerName);
+
+             $("#tdPageDesignContact").html(data.PageDesignContact);
+             $("#tdPageDesignPhone").html(data.PageDesignPhone);
+             $("#tdPageDesignEmail").html(data.PageDesignEmail);
+             $("#tdPageDesignQQ").html(data.PageDesignQQ);
+             $("#tdPageDesignMobile").html(data.PageDesignMobile);
+             
+             $("#tdComplaintHandlingContact").html(data.ComplaintHandlingContact);
+             $("#tdComplaintHandlingPhone").html(data.ComplaintHandlingPhone);
+             $("#tdComplaintHandlingEmail").html(data.ComplaintHandlingEmail);
+             $("#tdComplaintHandlingQQ").html(data.ComplaintHandlingQQ);
+             $("#tdComplaintHandlingMobile").html(data.ComplaintHandlingMobile);
+             
+             $("#tdFinancialContact").html(data.FinancialContact);
+             $("#tdFinancialPhone").html(data.FinancialPhone);
+             $("#tdFinancialEmail").html(data.FinancialEmail);
+             $("#tdFinancialQQ").html(data.FinancialQQ);
+             $("#tdFinancialMobile").html(data.FinancialMobile);
+
+             // 聚划算历史案例
+
+             // 平均评分
+
+        });
+    }
+    </script>
+}
+<fieldset>
+    @Html.HiddenFor(m => m.GroupByGroup.GroupByGroupID)
+    @Html.HiddenFor(m => m.GroupByGroup.CustomerID)
+    @Html.HiddenFor(m => m.IndustryID)
+    @Html.HiddenFor(m => m.GroupByGroup.SubIndustryID)
+    @Html.HiddenFor(m => m.GroupByGroup.ProductPicture1FileID)
+    @Html.HiddenFor(m => m.GroupByGroup.ProductPicture2FileID)
+    @Html.HiddenFor(m => m.GroupByGroup.MaterialFileID)
+    @Html.HiddenFor(m => m.GroupByGroup.CurrentNode)
+    @Html.HiddenFor(m => m.GroupByGroup.CurrentStatus)
+    <table id="MainTable" width="100%" border="1" cellspacing="0">
+        <tr>
+            <td class="title">
+                团购合同编号
+            </td>
+            <td colspan="7">
+                @fh.ShowField(m => m.GroupByGroup.GroupByContractNo)
+                @Html.ValidationMessageFor(m => m.GroupByGroup.GroupByContractNo)
+            </td>
+        </tr>
+        <tr>
+            <td class="title">
+                所属行业
+            </td>
+            <td id="tdIndustry" colspan="3">
+                @Html.DisplayFor(m => m.GroupByGroup.SubIndustry.Industry.IndustryName)
+            </td>
+            <td rowspan="3" class="title">
+                业务员
+            </td>
+            <td colspan="3" rowspan="3">
+                @{
+                    GBGFlowEnumPermission salesPermission = fh.CalcField(m => m.Sales);
+                }
+                @if (salesPermission == GBGFlowEnumPermission.CanWrite)
+                { 
+                    @Html.Partial("ControlsForForm/_SelectUser", Model)
+                    @Html.ValidationMessageFor(m => m.Sales)
+
+                }
+                else if (salesPermission == GBGFlowEnumPermission.CanRead)
+                { 
+                    @Html.DisplayFor(m => m.SalesText)
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="title">
+                行业细类
+            </td>
+            <td id="tdSubIndustry" colspan="3">
+                @Html.DisplayFor(m => m.GroupByGroup.SubIndustry.SubIndustryName)
+            </td>
+        </tr>
+        <tr>
+            <td class="title">
+                商家公司全称
+            </td>
+            <td colspan="3">
+                @if (fh.CalcField(m => m.GroupByGroup.CustomerID) == GBGFlowEnumPermission.CanWrite)
+                {
+                    <input id="btnSelectCustomer" type="button" class="button" value="选择" />
+                    <span id="spanCustomer"></span>
+
+                    ICustomerService service = new CustomerService();
+                    var customers = service.GetCustomersByCity();
+                    @Html.Partial("ControlsForForm/_SelectCustomer");
+                    @Html.ValidationMessageFor(m => m.GroupByGroup.CustomerID);
+                }
+                else
+                {
+                    <span id="spanCustomer">@fh.ShowField(m => m.GroupByGroup.Customer.CustomerName)</span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="title">
+                团购名称
+            </td>
+            <td colspan="7">
+                @fh.ShowField(m => m.GroupByGroup.GroupByGroupName)
+                @Html.ValidationMessageFor(m => m.GroupByGroup.GroupByGroupName)
+            </td>
+        </tr>
+        <tr>
+            <td class="title" style="width: 180px">
+                产品市场价
+            </td>
+            <td style="width: 120px">
+                @fh.ShowField(m => m.GroupByGroup.PriceMarket)
+                @Html.ValidationMessageFor(m => m.GroupByGroup.PriceMarket)
+            </td>
+            <td align="right" class="title" style="width: 120px">
+                产品结算价
+            </td>
+            <td style="width: 120px">
+                @fh.ShowField(m => m.GroupByGroup.PriceSettlement)
+                @Html.ValidationMessageFor(m => m.GroupByGroup.PriceSettlement)
+            </td>
+            <td align="right" class="title" style="width: 120px">
+                建议上线价格
+            </td>
+            <td style="width: 120px">
+                @fh.ShowField(m => m.GroupByGroup.PriceSuggest)
+                @Html.ValidationMessageFor(m => m.GroupByGroup.PriceSuggest)
+            </td>
+            <td align="right" class="title" style="width: 120px">
+                其它服务费用
+            </td>
+            <td>
+                @fh.ShowField(m => m.GroupByGroup.PriceOther)
+                @Html.ValidationMessageFor(m => m.GroupByGroup.PriceOther)
+            </td>
+        </tr>
+        <tr>
+            <td class="title">
+                参团店数
+            </td>
+            <td>
+                @fh.ShowField(m => m.GroupByGroup.ShopCount)
+            </td>
+            <td class="title">
+                参团店名
+            </td>
+            <td colspan="5">
+                @fh.ShowField(m => m.GroupByGroup.ShopNames)
+            </td>
+        </tr>
+        <tr>
+            <td class="style1" colspan="8">
+                @Html.Partial("ControlsForForm/" + Model.IndustryViewName, Model)
+            </td>
+        </tr>
+        <tr>
+            <td class="title">
+                结算方式
+            </td>
+            <td colspan="3">
+                @fh.ShowField(m => m.GroupByGroup.SettlementType, GBGFlowEnumEditType.DropDownList, GroupByFlowInfo.PaymentTypeList)
+            </td>
+            <td id="tdSettlementDate" class="title">
+                结算日
+            </td>
+            <td colspan="3">
+                @fh.ShowField(m => m.GroupByGroup.SettlementDate, GBGFlowEnumEditType.DropDownList, Model.SettlementDateList)
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="4" class="title">
+                乙方相关对接人
+            </td>
+            <td class="title" colspan="2">
+                对接环节
+            </td>
+            <td class="title">
+                联系人
+            </td>
+            <td class="title">
+                固定电话
+            </td>
+            <td class="title">
+                手机号码
+            </td>
+            <td class="title">
+                QQ号码
+            </td>
+            <td class="title">
+                E-mail
+            </td>
+        </tr>
+        <tr>
+            <td class="title" colspan="2">
+                页面设计
+            </td>
+            <td id="tdPageDesignContact">
+                @Html.DisplayFor(m => m.GroupByGroup.Customer.PageDesignContact)
+            </td>
+            <td id="tdPageDesignPhone">
+                @Html.DisplayFor(m => m.GroupByGroup.Customer.PageDesignPhone)
+            </td>
+            <td id="tdPageDesignMobile">
+                @Html.DisplayFor(m => m.GroupByGroup.Customer.PageDesignMobile)
+            </td>
+            <td id="tdPageDesignQQ">
+                @Html.DisplayFor(m => m.GroupByGroup.Customer.PageDesignQQ)
+            </td>
+            <td id="tdPageDesignEmail">
+                @Html.DisplayFor(m => m.GroupByGroup.Customer.PageDesignEmail)
+            </td>
+        </tr>
+        <tr>
+            <td class="title" colspan="2">
+                投诉处理
+            </td>
+            <td id="tdComplaintHandlingContact">
+                @Html.DisplayFor(m => m.GroupByGroup.Customer.ComplaintHandlingContact)
+            </td>
+            <td id="tdComplaintHandlingPhone">
+                @Html.DisplayFor(m => m.GroupByGroup.Customer.ComplaintHandlingPhone)
+            </td>
+            <td id="tdComplaintHandlingMobile">
+                @Html.DisplayFor(m => m.GroupByGroup.Customer.ComplaintHandlingMobile)
+            </td>
+            <td id="tdComplaintHandlingQQ">
+                @Html.DisplayFor(m => m.GroupByGroup.Customer.ComplaintHandlingQQ)
+            </td>
+            <td id="tdComplaintHandlingEmail">
+                @Html.DisplayFor(m => m.GroupByGroup.Customer.ComplaintHandlingEmail)
+            </td>
+        </tr>
+        <tr>
+            <td class="title" colspan="2">
+                财务对账
+            </td>
+            <td id="tdFinancialContact">
+                @Html.DisplayFor(m => m.GroupByGroup.Customer.FinancialContact)
+            </td>
+            <td id="tdFinancialPhone">
+                @Html.DisplayFor(m => m.GroupByGroup.Customer.FinancialPhone)
+            </td>
+            <td id="tdFinancialMobile">
+                @Html.DisplayFor(m => m.GroupByGroup.Customer.FinancialMobile)
+            </td>
+            <td id="tdFinancialQQ">
+                @Html.DisplayFor(m => m.GroupByGroup.Customer.FinancialQQ)
+            </td>
+            <td id="tdFinancialEmail">
+                @Html.DisplayFor(m => m.GroupByGroup.Customer.FinancialEmail)
+            </td>
+        </tr>
+        <tr>
+            <td class="title">
+                产品图片1
+            </td>
+            <td colspan="7">
+                <table id="NoBorderTable" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        @if (fh.CalcField(m => m.GroupByGroup.ProductPicture1FileID) == GBGFlowEnumPermission.CanWrite)
+                        {
+                            <td width="400" valign="top">
+                                <input id="ProductPicture1File" name="ProductPicture1File" type="file" />
+                                @Html.ValidationMessageFor(m => m.GroupByGroup.ProductPicture1FileID)
+                            </td>
+                            <td width="100" align="center" valign="middle">
+                                <a href="javascript:if(checkImport('ProductPicture1File')){$('#ProductPicture1File').uploadifyUpload();}" class="button" style="width: 60px; height: 20px; font-size: large; text-align: center">上传</a>
+                            </td>
+                        }
+                        <td valign="middle">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<img id="Img1" width="100" height="100" src="@Url.UploadFileUrl(ProductPicture1File)" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td class="title">
+                产品图片2
+            </td>
+            <td colspan="7">
+                <table id="NoBorderTable" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        @if (fh.CalcField(m => m.GroupByGroup.ProductPicture2FileID) == GBGFlowEnumPermission.CanWrite)
+                        {
+
+                            <td width="400" valign="top">
+                                <input id="ProductPicture2File" name="ProductPicture2File" type="file" />
+                                @Html.ValidationMessageFor(m => m.GroupByGroup.ProductPicture2FileID)
+                            </td>
+                            <td width="100" align="center" valign="middle">
+                                <a href="javascript:if(checkImport('ProductPicture2File')){$('#ProductPicture2File').uploadifyUpload();}" class="button" style="width: 60px; height: 20px; font-size: large; text-align: center">上传</a>
+                            </td>
+                        }
+                        <td valign="middle">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<img id="Img2" width="100" height="100" src="@Url.UploadFileUrl(ProductPicture2File)" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td class="title">
+                资料路径
+            </td>
+            <td colspan="7">
+                <table id="NoBorderTable" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        @if (fh.CalcField(m => m.GroupByGroup.MaterialFileID) == GBGFlowEnumPermission.CanWrite)
+                        {
+
+                            <td width="400" valign="top">
+                                <input id="MaterialFile" name="MaterialFile" type="file" />
+                            </td>
+                            <td width="100" align="center" valign="middle">
+                                <a href="javascript:if(checkImport('MaterialFile')){$('#MaterialFile').uploadifyUpload();}" class="button" style="width: 60px; height: 20px; font-size: large; text-align: center">上传</a>
+                            </td>
+                        }
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<a id="aMaterialFile" href="@Url.UploadFileUrl(MaterialFile)">@(MaterialFile == null ? "" : MaterialFile.OriginalFileName)</a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td class="title">
+                聚划算历史案例
+            </td>
+            <td colspan="3">
+                XXX
+            </td>
+            <td class="title">
+                平均评分
+            </td>
+            <td colspan="3">
+                XXX
+            </td>
+        </tr>
+        <tr>
+            <td class="title">
+                其他历史案例
+            </td>
+            <td colspan="7" style="height: 100px" align="left" valign="top">
+                @fh.ShowField(m => m.GroupByGroup.OtherHistryCase, GBGFlowEnumEditType.TextArea)
+            </td>
+        </tr>
+        <tr>
+            <td class="title" nowrap="nowrap">
+                点评/口碑等网上评价(网址)
+            </td>
+            <td colspan="7" style="height: 100px" align="left" valign="top">
+                @fh.ShowField(m => m.GroupByGroup.DPOrKBAddress, GBGFlowEnumEditType.TextArea)
+            </td>
+        </tr>
+    </table>
+</fieldset>

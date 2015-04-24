@@ -1,0 +1,276 @@
+﻿@model IEnumerable<DSHOrder.Entity.OrderDetail>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script language="javascript" type="text/javascript">
+    function selectTag(showContent, selfObj) {
+        if (!validGroupByBaseInfoRequired()) {
+            return;
+        }
+        // 操作标签
+        var tag = document.getElementById("tags").getElementsByTagName("li");
+        var taglength = tag.length;
+        for (i = 0; i < taglength; i++) {
+            tag[i].className = "";
+        }
+        selfObj.parentNode.className = "selectTag";
+        // 操作内容
+        for (i = 0; j = document.getElementById("tagContent" + i); i++) {
+            j.style.display = "none";
+        }
+        document.getElementById(showContent).style.display = "block";
+    }
+</script>
+<h2>Index</h2>
+@using (Html.BeginForm())
+{
+    <div>
+      <table width="100%" border="0">
+     
+            <tr>
+                <th>
+                    团购编号
+                </th>
+                <td>@Html.TextBox("txtGroupNumber")
+                </td>
+                <th>
+                    业务员
+                </th>
+                <td>@Html.TextBox("txtUserName")
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    团购名称
+                </th>
+                <td>@Html.TextBox("txtGroupName")
+                </td>
+                <th>
+                    商家名称
+                </th>   
+                <td>@Html.TextBox("txtCustomerName")
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <input type="submit" id="btnSearch" value="查询" class="button" name="search" />
+                </td>
+            </tr>
+        </table>
+    </div>
+       <ul   id="tags" width="100%">
+                    <li  class="selectTag"><a  id="baseInfo" onclick="selectTag('tagContent0',this)"  href="#">团购基本信息</a> </li>
+                    <li><a  id="moneyInfo" onclick="selectTag('tagContent0',this)"  href="#">
+                        财务相关信息</a></li>
+                </ul>
+    
+       <div id="tagContent">
+                        <div class="tagContent selectTag" id="tagContent0">
+<table>
+    <tr>
+        <th></th>
+        <th>
+            GroupByItemID
+        </th>
+        <th>
+            LockBy
+        </th>
+        <th>
+            BuyerID
+        </th>
+        <th>
+            BuyerNick
+        </th>
+        <th>
+            ShippingType
+        </th>
+        <th>
+            Tid
+        </th>
+        <th>
+            Oid
+        </th>
+        <th>
+            AlipayNo
+        </th>
+        <th>
+            TotalFee
+        </th>
+        <th>
+            ApplyRefundTime
+        </th>
+        <th>
+            UpdateRefundTime
+        </th>
+        <th>
+            HasGoodReturn
+        </th>
+        <th>
+            RefundFee
+        </th>
+        <th>
+            Payment
+        </th>
+        <th>
+            Reason
+        </th>
+        <th>
+            Desc
+        </th>
+        <th>
+            GoodReturnTime
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            PayTime
+        </th>
+        <th>
+            DealTime
+        </th>
+        <th>
+            Remark
+        </th>
+        <th>
+            CreateBy
+        </th>
+        <th>
+            CreateTime
+        </th>
+        <th>
+            LastModifyBy
+        </th>
+        <th>
+            LastModifyTime
+        </th>
+        <th>
+            DeleteInd
+        </th>
+        <th>
+            LockTime
+        </th>
+        <th>
+            DealBy
+        </th>
+        <th>
+            OrderStatus
+        </th>
+        <th>
+            RefundStatus
+        </th>
+        <th>
+            IssueType
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.OrderDetailID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.OrderDetailID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.OrderDetailID })
+        </td>
+        <td>
+            @item.GroupByItemID
+        </td>
+        <td>
+            @item.LockBy
+        </td>
+        <td>
+            @item.BuyerID
+        </td>
+        <td>
+            @item.BuyerNick
+        </td>
+        <td>
+            @item.ShippingType
+        </td>
+        <td>
+            @item.Tid
+        </td>
+        <td>
+            @item.Oid
+        </td>
+        <td>
+            @item.AlipayNo
+        </td>
+        <td>
+            @String.Format("{0:F}", item.TotalFee)
+        </td>
+        <td>
+            @String.Format("{0:g}", item.ApplyRefundTime)
+        </td>
+        <td>
+            @String.Format("{0:g}", item.UpdateRefundTime)
+        </td>
+        <td>
+            @item.HasGoodReturn
+        </td>
+        <td>
+            @String.Format("{0:F}", item.RefundFee)
+        </td>
+        <td>
+            @String.Format("{0:F}", item.Payment)
+        </td>
+        <td>
+            @item.Reason
+        </td>
+        <td>
+            @item.Desc
+        </td>
+        <td>
+            @String.Format("{0:g}", item.GoodReturnTime)
+        </td>
+        <td>
+            @item.Address
+        </td>
+        <td>
+            @String.Format("{0:g}", item.PayTime)
+        </td>
+        <td>
+            @String.Format("{0:g}", item.DealTime)
+        </td>
+        <td>
+            @item.Remark
+        </td>
+        <td>
+            @item.CreateBy
+        </td>
+        <td>
+            @String.Format("{0:g}", item.CreateTime)
+        </td>
+        <td>
+            @item.LastModifyBy
+        </td>
+        <td>
+            @String.Format("{0:g}", item.LastModifyTime)
+        </td>
+        <td>
+            @item.DeleteInd
+        </td>
+        <td>
+            @String.Format("{0:g}", item.LockTime)
+        </td>
+        <td>
+            @item.DealBy
+        </td>
+        <td>
+            @item.OrderStatus
+        </td>
+        <td>
+            @item.RefundStatus
+        </td>
+        <td>
+            @item.IssueType
+        </td>
+    </tr>
+}
+
+</table>
+</div>
+</div>
+
+}

@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using DSHOrder.Service.Interface;
+using DSHOrder.Repository;
+using DSHOrder.Entity;
+
+namespace DSHOrder.Service
+{
+    public class GroupByItemService:IGroupByItemService
+    {
+        GroupByItemRepository repository = null;
+         public GroupByItemService()
+        {
+            repository = new GroupByItemRepository();
+        }
+        #region IGroupByItemService 成员
+
+        public GroupByItem Add(GroupByItem entity)
+        {
+            return repository.Add<GroupByItem>(entity);
+        }
+
+        public GroupByItem GetById(int groupByItemID)
+        {
+            return repository.GetBy<GroupByItem>(p => p.GroupByItemID == groupByItemID);
+        }
+
+        public GroupByItem Update(GroupByItem entity)
+        {
+            return repository.Update<GroupByItem>(entity);
+        }
+<<<<<<< GroupByItemService.cs
+
+        public int Add(List<GroupByItem> list)
+        {
+            foreach (GroupByItem item in list)
+            {
+                repository.Add<GroupByItem>(item, true);
+            }
+            return repository.SaveChanges();
+        }
+
+        public IList<GroupByItem> GetItemsById(int id)
+        {
+            return repository.GetItemsById(id);
+        }
+
+        public int Update(List<GroupByItem> list)
+        {
+            foreach (GroupByItem item in list)
+            {
+                repository.Update<GroupByItem>(item, true);
+            }
+            return repository.SaveChanges();
+        }
+=======
+
+        public IList<GroupByItem> GetAll() 
+        {
+            return repository.GetAll<GroupByItem>();
+        }
+
+>>>>>>> 1.6
+        #endregion
+    }
+}

@@ -1,0 +1,11 @@
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\MvcEFTest\MvcEFTest.Service\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\MvcEFTest\MvcEFTest.Service\bin\Debug\MvcEFTest.Service.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\MvcEFTest\MvcEFTest.Service\bin\Debug\MvcEFTest.Service.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\MvcEFTest\MvcEFTest.Service\bin\Debug\MvcEFTest.Entity.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\MvcEFTest\MvcEFTest.Service\bin\Debug\MvcEFTest.Repository.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\MvcEFTest\MvcEFTest.Service\bin\Debug\MvcEFTest.Service.Interface.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\MvcEFTest\MvcEFTest.Service\bin\Debug\MvcEFTest.Entity.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\MvcEFTest\MvcEFTest.Service\bin\Debug\MvcEFTest.Repository.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\MvcEFTest\MvcEFTest.Service\bin\Debug\MvcEFTest.Service.Interface.pdb
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\MvcEFTest\MvcEFTest.Service\obj\Debug\MvcEFTest.Service.dll
+C:\Documents and Settings\huanglan\My Documents\Visual Studio 10\Projects\MvcEFTest\MvcEFTest.Service\obj\Debug\MvcEFTest.Service.pdb

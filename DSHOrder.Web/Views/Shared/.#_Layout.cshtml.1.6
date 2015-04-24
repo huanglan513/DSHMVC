@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+@*    <link rel="stylesheet" href="@Url.Content("~/Content/reset.css")" type="text/css" />*@
+    <!-- Main Stylesheet -->
+ @*   <link rel="stylesheet" href="@Url.Content("~/Content/style.css")" type="text/css" />*@
+     <link rel="stylesheet" href="@Url.Content("~/Content/skin.css")" type="text/css" />
+    <!-- Invalid Stylesheet. This makes stuff look pretty. Remove it if you want the CSS completely valid -->
+@*    <link rel="stylesheet" href="@Url.Content("~/Content/invalid.css")" type="text/css" />*@
+
+    <!-- jQuery Configuration -->
+ @*   <script type="text/javascript" src="@Url.Content("~/Scripts/simpla.jquery.configuration.js")"></script>
+    <!-- Facebox jQuery Plugin -->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/facebox.js")"></script>
+    <!-- jQuery WYSIWYG Plugin -->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.wysiwyg.js")"></script>*@
+ <script src="@Url.Content("~/Scripts/jquery.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/prototype.lite.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/moo.fx.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/moo.fx.pack.js")"  type="text/javascript"></script>
+</head>
+<body id="mainBody">
+  @*  <div id="body-wrapper">
+        <!-- Wrapper for the radial gradient background -->
+        <div id="sidebar">
+            <div id="sidebar-wrapper">
+                <!-- Sidebar with logo and menu -->
+                <h1 id="sidebar-title">
+                    <a href="#">Simpla Admin</a></h1>
+                <!-- Logo (221px wide) -->
+                <a href="#">
+                    <img id="logo" src="/Content/Images/logo.png" alt="Simpla Admin logo" /></a>
+                <!-- Sidebar Profile links -->
+                <div id="profile-links">
+                    @Html.Partial("_LogOnPartial")
+                </div>
+                @{Html.RenderAction("Menu", "Common");}
+            </div>
+        </div>
+        <!-- End #sidebar -->
+        <div id="main-content">
+            <!-- Main Content Section with everything -->
+            <div class="clear">
+            </div>
+            <!-- End .clear -->
+            @RenderBody()
+            <div id="footer">
+                <small>
+                    <!-- Remove this notice or replace it with whatever you want -->
+                    &#169; Copyright 2011 都市惠 </small>
+                <!-- End #footer -->
+            </div>
+        </div>
+    </div>*@
+
+    <table width="100%"  border="0" cellpadding="0" cellspacing="0"  class="admin_topbg">
+  <tr>
+    <td width="61%"><img src="../../Content/Images/logo.gif" alt="都市惠" width="262" height="64"></td>
+    <td width="39%" valign="top">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="height:60">
+      <tr>
+        <td width="74%" height="38" class="admin_txt"> @Html.Partial("_LogOnPartial")
+        @*管理员：<b><%=session("admin_name")%></b> 您好,感谢登陆使用！*@</td>
+        <td width="22%">@*<a href="#" target="_self" onClick="logout();"><img src="../../Content/Images/out.gif" alt="安全退出" width="46" height="20" border="0"></a>*@</td>
+        <td width="4%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="19" colspan="3">&nbsp;</td>
+        </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+<table>
+<tr valign="top">
+<td style="width:200px">
+<table width="100%" style="height:280" border="0" cellpadding="0" cellspacing="0" bgcolor="#EEF2FB">
+  <tr>
+    <td width="182" valign="top">
+    <div id="container">
+        @{Html.RenderAction("Menu", "Common");}
+      </div>
+        <script type="text/javascript">
+            var contents = document.getElementsByClassName('content');
+            var toggles = document.getElementsByClassName('type');
+
+            var myAccordion = new fx.Accordion(
+			toggles, contents, { opacity: true, duration: 400 }
+		);
+            myAccordion.showThisHideOpen(contents[0]);
+	</script>
+        </td>
+  </tr>
+</table>
+</td>
+<td valign="top" style="width:95%" >
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="17" valign="top" background="../../Content/Images/mail_leftbg.gif"><img src="../../Content/Images/left-top-right.gif" width="17" height="29" /></td>
+    <td valign="top" background="../../Content/Images/content-bg.gif"><table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" class="left_topbg" id="table2">
+      <tr>
+        <td height="31"><div class="titlebt">@ViewBag.Title</div></td>
+      </tr>
+    </table></td>
+    <td width="16" valign="top" background="../../Content/Images/mail_rightbg.gif"><img src="../../Content/Images/nav-right-bg.gif" width="16" height="29" /></td>
+  </tr>
+  <tr>
+    <td valign="middle" background="../../Content/Images/mail_leftbg.gif">&nbsp;</td>
+    <td valign="top" bgcolor="#F7F8F9">
+    <div>
+     @RenderBody()
+     </div>
+   </td>
+    <td background="../../Content/Images/mail_rightbg.gif">&nbsp;</td>
+  </tr>
+  <tr>
+    <td valign="bottom" background="../../Content/Images/mail_leftbg.gif"><img src="../../Content/Images/buttom_left2.gif" width="17" height="17" /></td>
+    <td background="../../Content/Images/buttom_bgs.gif"><img src="../../Content/Images/buttom_bgs.gif" width="17" height="17"></td>
+    <td valign="bottom" background="../../Content/Images/mail_rightbg.gif"><img src="../../Content/Images/buttom_right2.gif" width="16" height="17" /></td>
+  </tr>
+</table>
+<div id="footer">
+                <small>
+                    <!-- Remove this notice or replace it with whatever you want -->
+                    &#169; Copyright 2012 都市惠 www.dushihui.com</small>
+                <!-- End #footer -->
+            </div>
+ 
+</td></tr>
+</table>
+</body>
+</html>

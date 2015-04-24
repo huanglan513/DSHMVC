@@ -1,0 +1,334 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using DSHOrder.Entity;
+using System.Data.Objects.DataClasses;
+using DSHOrder.Service.Interface;
+using DSHOrder.Service;
+using System.Web.Mvc;
+using System.Collections;
+using DSHOrder.Web.Common.Application.GroupByGroup;
+
+namespace DSHOrder.Web.Models
+{
+    public class GroupByFlowInfo
+    {
+        private int _GroupByGroupId = -1;
+        private int _GroupByItemId = -1;
+
+        public GBGFlowEnumFLowNode CurrentNode
+        {
+            get
+            {
+                return (GBGFlowEnumFLowNode)Enum.Parse(typeof(GBGFlowEnumFLowNode), this.GroupByGroup.CurrentNode);
+            }
+        }
+
+        public GroupByFlowInfo()
+        {
+            this.GroupByGroup = new GroupByGroup();
+            this.GroupByGroup.CurrentNode = GBGFlowEnumFLowNode.YWYTXTGSQB.ToString();
+            this.GroupByGroup.CurrentStatus = GBGFlowEnumFLowNode.None.ToString();
+        }
+        public GroupByFlowInfo(int GroupByGroupId)
+        {
+            IGroupByGroupService service = new GroupByGroupService();
+            this.GroupByGroup = service.GetById(GroupByGroupId);
+
+            this._GroupByGroupId = GroupByGroupId;
+        }
+        public GroupByFlowInfo(int GroupByGroupId, int GroupByItemId)
+        {
+            IGroupByItemService service = new GroupByItemService();
+            var item = service.GetById(GroupByItemId);
+
+            if (item.GroupByGroupID == GroupByItemId)
+            {
+                this.GroupByItem = item;
+                this.GroupByGroup = item.GroupByGroup;
+
+                this._GroupByGroupId = GroupByGroupId;
+                this._GroupByItemId = GroupByItemId;
+            }
+        }
+
+        #region all objects for model
+
+        #region objects for model
+
+        public StartFormModel StartForm { get; set; }
+        public List<GroupByItem> GroupByItemModel { get; set; }
+        public GroupByItem GroupByItem { get; set; }
+        public List<Payment> PaymentModel { get; set; }
+        public string Sales { get; set; }
+        public GroupByGroup GroupByGroup { get; set; }
+        public GroupGeneral GroupGeneralModel { get; set; }
+        public string GroupByItemIds { get; set; }
+
+
+
+        public int IndustryID { get; set; }
+
+        #endregion
+
+        #region objects for model (read only)
+
+        public SelectList PaymentTypeList
+        {
+            get
+            {
+                ICodeTableService codeTableService = new CodeTableService();
+                IList<CodeTable> paymentTypeList = codeTableService.GetCodeTablesByType((int)ComUtil.CodeType.PaymentType);
+                var list = new SelectList(paymentTypeList, "CodeValue", "CodeDesc");
+
+                return list;
+            }
+        }
+        public SelectList CityList
+        {
+            get
+            {
+                ICityService cityService = new CityService();
+                IList<City> cityList = cityService.GetAllCities();
+
+                Entity.City city = new Entity.City();
+                city.CityID = -1;
+                city.CityName = "请选择城市";
+                cityList.Insert(0, city);
+
+                var list = new SelectList(cityList, "CityID", "CityName");
+
+                return list;
+            }
+        }
+        public SelectList DepartmentList
+        {
+            get
+            {
+                IDepartmentService departmentService = new DepartmentService();
+                var departmentList = departmentService.GetAllDepartments();
+
+                Entity.Department department = new Entity.Department();
+                department.DepartmentID = -1;
+                department.DepartmentName = "请选择部门";
+                departmentList.Insert(0, department);
+
+                var list = new SelectList(departmentList, "DepartmentID", "DepartmentName");
+
+                return list;
+            }
+        }
+        public SelectList EmptySelectList
+        {
+            get
+            {
+                var al = new ArrayList();
+                var list = new SelectList(al);
+
+                return list;
+            }
+        }
+
+        public SelectList SettlementDateList
+        {
+            get
+            {
+                var al = new List<int>();
+                for (int i = 1; i <= 31; i++)
+                {
+                    al.Add(i);
+                }
+                var list = new SelectList(al);
+
+                return list;
+            }
+        }
+
+        public IList<GroupByPortal> ListGroupByPortal
+        {
+            get
+            {
+                IGroupByPortalService service = new GroupByPortalService();
+                return service.GetAllPortals();
+            }
+        }
+
+        public IList<City> ListCity
+        {
+            get
+            {
+                ICityService cityService = new CityService();
+                return cityService.GetAllCities();
+            }
+        }
+
+        public IList<ApproveRecordGroupBy> ThisPortalApproveRecords
+        {
+            get
+            {
+                if (this._GroupByGroupId != -1)
+                {
+                    return this.GroupByGroup.ApproveRecordGroupBy.Where(m =>
+                               m.GroupByPortalID == null
+                            || (this._GroupByItemId != -1 && m.GroupByPortalID == this.GroupByItem.GroupByPortalID)
+                        ).ToList();
+                }
+
+                return null;
+            }
+        }
+
+
+        #endregion
+
+        #endregion
+
+
+        #region parse method
+
+        public void ParseToModel()
+        {
+            // this.GroupByItemModel
+            if (this.GroupByItemModel == null)
+            {
+                this.GroupByItemModel = new List<GroupByItem>();
+                foreach (var item in ListGroupByPortal)
+                {
+                    var gbi = this.GroupByGroup.GroupByItem.ToList().Find(m => m.GroupByPortalID == item.GroupByPortalID);
+                    if (gbi == null)
+                    {
+                        gbi = new GroupByItem();
+                        gbi.GroupByPortalID = item.GroupByPortalID;
+                    }
+                    this.GroupByItemModel.Add(gbi);
+                }
+            }
+
+            // this.GroupByItemIds
+            this.GroupByItemIds = "";
+            if (this.GroupByGroup.GroupByItem != null)
+            {
+                this.GroupByGroup.GroupByItem.ToList().ForEach(s => this.GroupByItemIds += "|" + s.GroupByPortalID.ToString());
+                this.GroupByItemIds = this.GroupByItemIds.Trim('|');
+            }
+
+            //this.PaymentModel 
+            //表结构修改，GroupByGroup 与Payment之间无外键关联了，因此暂时屏蔽
+          //  this.PaymentModel = GetListFromEntityCollection(this.GroupByGroup.Payment);
+
+            // this.Sales
+            this.Sales = "";
+            if (this.GroupByGroup.GroupBySales != null)
+            {
+                this.GroupByGroup.GroupBySales.ToList().ForEach(s => this.Sales += "|" + s.GroupBySalesID.ToString());
+                this.Sales = this.Sales.Trim('|');
+            }
+
+            // this.GroupGeneralModel
+            if (this.GroupByGroup.GroupGeneral != null && this.GroupByGroup.GroupGeneral.Count > 0)
+            {
+                this.GroupGeneralModel = this.GroupByGroup.GroupGeneral.ToList()[0];
+            }
+        }
+        public void ParseFromModel(FormCollection form)
+        {
+            // this.GroupByGroup.GroupByItem
+            this.GroupByGroup.GroupByItem = new EntityCollection<GroupByItem>();
+            this.GroupByItemIds = this.GroupByItemIds.Trim('|');
+            var ids = this.GroupByItemIds.Split('|');
+            foreach (string portalId in ids)
+            {
+                var p = this.GroupByItemModel.Find(m => m.GroupByPortalID == int.Parse(portalId));
+                this.GroupByGroup.GroupByItem.Add(p);
+
+                // p.GroupByCity
+                p.GroupByCity = new EntityCollection<GroupByCity>();
+                string strCities = form[string.Concat("City_", portalId)];
+                var cityIds = strCities.Split(',');
+                foreach (var cid in cityIds)
+                {
+                    GroupByCity gbc = new GroupByCity();
+                    gbc.CityID = int.Parse(cid);
+
+                    p.GroupByCity.Add(gbc);
+                }
+            }
+
+            // this.GroupByGroup.Payment
+            //表结构修改，GroupByGroup 与Payment之间无外键关联了，因此暂时屏蔽
+         //   this.GroupByGroup.Payment = GetEntityCollectionFromList(this.PaymentModel);
+
+            // this.GroupByGroup.GroupBySales
+            this.Sales = this.Sales.Trim('|');
+            this.GroupByGroup.GroupBySales = new EntityCollection<GroupBySales>();
+            this.Sales.Split('|').ToList().ForEach(id =>
+                {
+                    Entity.GroupBySales s = new GroupBySales();
+                    s.UserID = int.Parse(id);
+                    s.GroupByGroupID = this.GroupByGroup.GroupByGroupID;
+
+                    this.GroupByGroup.GroupBySales.Add(s);
+                }
+            );
+
+            // this.GroupByGroup.GroupGeneral
+            if (this.GroupGeneralModel != null)
+            {
+                this.GroupByGroup.GroupGeneral = new EntityCollection<GroupGeneral>();
+                this.GroupByGroup.GroupGeneral.Add(this.GroupGeneralModel);
+            }
+
+        }
+
+        #endregion
+
+        #region private method
+
+        private List<TEntity> GetListFromEntityCollection<TEntity>(EntityCollection<TEntity> ec) where TEntity : class
+        {
+            var listReturn = new List<TEntity>();
+
+            if (ec != null)
+            {
+                ec.ToList().ForEach(m => listReturn.Add(m));
+            }
+
+            return listReturn;
+        }
+        private EntityCollection<TEntity> GetEntityCollectionFromList<TEntity>(List<TEntity> l) where TEntity : class
+        {
+            var ecReturn = new EntityCollection<TEntity>();
+
+            if (l != null)
+            {
+                l.ForEach(m => ecReturn.Add(m));
+            }
+
+            return ecReturn;
+        }
+
+        #endregion
+
+        public string GetFLowActionDesc(string strEnum)
+        {
+            GBGFlowEnumFLowAction action = (GBGFlowEnumFLowAction)Enum.Parse(typeof(GBGFlowEnumFLowAction), strEnum);
+            return EnumDescriptionAttribute.GetEnumDescription(action);
+        }
+
+        public static string GetCheckBoxChecked_GroupByCity(int CityID, GroupByItem gbi)
+        {
+            string strReturn = "";
+            var list = gbi.GroupByCity.ToList();
+            if (list.Exists(m => m.CityID == CityID))
+            {
+                strReturn = "checked";
+            }
+
+            return strReturn;
+        }
+
+
+
+    }
+}

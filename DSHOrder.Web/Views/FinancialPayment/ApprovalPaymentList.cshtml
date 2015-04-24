@@ -1,0 +1,222 @@
+﻿@model DSHOrder.Web.Models.ApplyPaymentSearchModel
+
+@{
+    ViewBag.Title = "付款审批列表";
+}
+@using Webdiyer.WebControls.Mvc;
+@using DSHOrder.Entity;
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("#cbxAll").click(function () {
+            if (!$(this).prop("checked")) {
+                $(":checkbox[id^='cbxSelected']").prop("checked", false);
+                $("#hdSelectedItem").val("");
+                $("#hdSelectedCustomer").val("");
+            }
+            else {
+                var strLength = 'cbxSelected '.length;
+                var selectedIds = "", selectedCustomerIds = "";
+                $(":checkbox[id^='cbxSelected']").each(function () {
+                    selectedIds += $(this).attr("id").substr(strLength) + ",";
+                    if (selectedCustomerIds == "" || selectedCustomerIds.indexOf($(this).prop("alt")) == -1) {
+                        selectedCustomerIds += $(this).prop("alt") + ",";
+                    }
+                    $(this).attr("checked", true);
+                });
+                if (selectedIds.length > 0) {
+                    $("#hdSelectedItem").val(selectedIds.substr(0, selectedIds.length - 1));
+                    $("#hdSelectedCustomer").val(selectedCustomerIds.substr(0, selectedCustomerIds.length - 1));
+                }
+            }
+        });
+
+        $(":checkbox[id^='cbxSelected']").click(function () {
+            $("#cbxAll").prop("checked", false);
+            var strLength = 'cbxSelected '.length;
+            var selectedIds = "", selectedCustomerIds = "";
+            $("input:checked[id^='cbxSelected']").each(function () {
+                selectedIds += $(this).attr("id").substr(strLength) + ",";
+                if (selectedCustomerIds == "" || selectedCustomerIds.indexOf($(this).prop("alt")) == -1) {
+                    selectedCustomerIds += $(this).prop("alt") + ",";
+                }
+            });
+            if (selectedIds.length > 0) {
+                $("#hdSelectedItem").val(selectedIds.substr(0, selectedIds.length - 1));
+                $("#hdSelectedCustomer").val(selectedCustomerIds.substr(0, selectedCustomerIds.length - 1));
+            }
+
+        });
+    });
+
+    function ValidateSelected() {
+        var customerIds = $("#hdSelectedCustomer").val();
+        var itemIds = $("#hdSelectedItem").val();
+        if (customerIds == "" || itemIds.split(",").length == 1) {
+            alert("合并申请至少要选择2条同一商家的记录！");
+            return false;
+        }
+        else if (customerIds.split(",").length > 1) {
+            alert("合并申请必须是选择同一商家的记录！");
+            return false;
+        }
+        else {
+            window.location.href = "/FinancialPayment/ApprovalPaymentMerger?itemIds=" + itemIds;
+            return true;
+        }
+    }
+</script>
+@using (Html.BeginForm("ApprovalPaymentList", "FinancialPayment", new { id = 1 }, FormMethod.Get))
+{
+    <table width="95%">
+       <tr>
+        <td>@Html.LabelFor(model => model.CustomerCityID)</td>
+        <td>@Html.DropDownListFor(model => model.CustomerCityID, Model.CityList, "全部")</td>
+        <td>@Html.LabelFor(model => model.GroupByPortalID)</td>
+        <td>@Html.DropDownListFor(model => model.GroupByPortalID, Model.PortalList, "全部")</td>
+       </tr>
+       <tr>
+        <td>@Html.LabelFor(model => model.GroupByName)</td>
+        <td>@Html.TextBoxFor(model => model.GroupByName)</td>
+        <td>@Html.LabelFor(model => model.Seller)</td>
+        <td>@Html.TextBoxFor(model => model.Seller)</td>
+       </tr>
+       <tr>
+        <td>@Html.LabelFor(model => model.CustomerName)</td>
+        <td>@Html.TextBoxFor(model => model.CustomerName)</td>
+        <td colspan="2" align="right">
+            @Html.HiddenFor(model=>model.ViewType)
+        <input type="submit" class="button"  id="btnSearch" value="查询" />
+         @if (Model.ViewType == 0)
+         { 
+         <input type="button" class="button" id="btnMergeApproval" value="合并审批" onclick="return ValidateSelected();" />
+         }
+       </td>
+       </tr>
+    </table>
+}
+ <div>
+        <div class="content-box-header">
+            <ul id="tabDealType" class="content-box-tabs" style="float: left">
+                @if (Model.ViewType == 0)
+                { 
+                    <li><a href="@Url.Action("ApprovalPaymentList", "FinancialPayment", new { @id = 1, @GroupByName = Request["GroupByName"], @Seller = Request["Seller"], @CustomerName = Request["CustomerName"], @CustomerCityID = Request["CustomerCityID"], @GroupByPortalID = Request["GroupByPortalID"], @ViewType = 0 })"  class="default-tab">
+                        待审批的团购列表</a></li>
+                    <li><a href="@Url.Action("ApprovalPaymentList", "FinancialPayment", new { @id = 1, @GroupByName = Request["GroupByName"], @Seller = Request["Seller"], @CustomerName = Request["CustomerName"], @CustomerCityID = Request["CustomerCityID"], @GroupByPortalID = Request["GroupByPortalID"], @ViewType = 1 })">
+                        已审批的团购列表</a></li>        
+                }
+                else if (Model.ViewType == 1)
+                {
+                    <li><a href="@Url.Action("ApprovalPaymentList", "FinancialPayment", new { @id = 1, @GroupByName = Request["GroupByName"], @Seller = Request["Seller"], @CustomerName = Request["CustomerName"], @CustomerCityID = Request["CustomerCityID"], @GroupByPortalID = Request["GroupByPortalID"], @ViewType = 0 })">
+                         待审批的团购列表</a></li>
+                    <li><a href="@Url.Action("ApprovalPaymentList", "FinancialPayment", new { @id = 1, @GroupByName = Request["GroupByName"], @Seller = Request["Seller"], @CustomerName = Request["CustomerName"], @CustomerCityID = Request["CustomerCityID"], @GroupByPortalID = Request["GroupByPortalID"], @ViewType = 1 })"  class="default-tab">
+                       已审批的团购列表</a></li>     
+                }
+            </ul>
+        </div>
+        <div class="tab-content default-tab" id="tab">
+<table class="tbList">
+    <tr>
+     @if (Model.ViewType == 0)
+      { 
+       <th style="width:5px">
+        <input type="checkbox" id="cbxAll" />
+       <input type="hidden" id="hdSelectedItem" />
+       <input type="hidden" id="hdSelectedCustomer" />
+       </th>
+         }
+        <th style="width:100px">
+            团购名称
+        </th>
+         <th>团购编号</th>
+        <th>
+            商家名称
+        </th>
+        <th>
+            商家城市
+        </th>
+      
+        <th>
+            业务员
+        </th>
+        <th>
+            平台
+        </th>
+        <th>
+        团购状态
+        </th>
+        <th>
+            上架日期
+        </th>
+        <th>
+            下架日期
+        </th>
+        <th></th>
+    </tr>
+
+@{
+    PagedList<GroupByPaymentInfo> list = Model.GroupByPaymentList;
+    for (int i = 0; i < list.Count; i++)
+    {
+       var item=list[i];
+      
+          <tr>
+           @if (Model.ViewType == 0)
+           { 
+            <td>
+             <input type="checkbox" id="cbxSelected @item.GroupByItemID" alt="@item.CustomerID" />
+            </td>
+           }
+            <td style="width:100px; word-break:break-all;">
+                @item.GroupByGroupName
+            </td>
+            <td>
+                @item.GroupByCodeNo
+            </td>
+            <td style="width:100px; word-break:break-all;">
+                @item.CustomerName
+            </td>
+             <td>
+                @item.CustomerCityName
+            </td>
+           
+            <td>
+                @item.Seller
+            </td>
+            <td>
+                @item.GroupByPortal
+            </td>
+            <td>
+            @{ string statusLable = string.Empty;
+                   if (item.ItemStatus == (int)DSHOrder.Common.Utils.GroupByItemStatus.Shelf)
+                   {
+                       statusLable = "确认下线";
+                   }
+                   else if (item.ItemStatus == (int)DSHOrder.Common.Utils.GroupByItemStatus.StopRefund)
+                   {
+                       statusLable = "停止退款";
+                   }
+                   else if (item.ItemStatus == (int)DSHOrder.Common.Utils.GroupByItemStatus.Paied)
+                   {
+                       statusLable = "付款完毕";
+                   }
+                   <b>@statusLable</b>
+    }
+            </td>
+            <td>
+                @String.Format("{0:d}", item.StartDate)
+            </td>
+            <td>
+                @String.Format("{0:d}", item.EndDate)
+            </td>
+            <td>
+             <input type="button"  value="付款审批" class="button" onclick="window.location='@Url.Action("ApprovalPayment", new { groupByItemID = item.GroupByItemID })'" />
+            </td>
+        </tr>
+    }
+}
+</table>
+@Html.Pager(Model.GroupByPaymentList, new PagerOptions { PageIndexParameterName = "id" }, new { @class = "pagination" })
+    </div>
+</div>
+
+

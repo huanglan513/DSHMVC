@@ -1,0 +1,126 @@
+﻿@model DSHOrder.Entity.Customer
+
+@{
+    ViewBag.Title = "查看客户详情";
+}
+
+@*<h2>查看客户详情</h2>*@
+<br />
+<fieldset>
+      <table width="100%"  class="tbList">
+            <tr>
+                <td>
+                    <div class="display-label">
+                        客户名称
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Model.CustomerName
+                    </div>
+                </td>
+                <td>
+                    <div class="display-label">
+                        结算方式
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @ViewData["paymentType"]
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="display-label">
+                       所在城市
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Model.City.CityName
+                    </div>
+                </td>
+                <td>
+                    <div class="display-label">
+                        收款银行
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Model.BankName
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="display-label">
+                        所在区
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Model.District.DistrictName
+                    </div>
+                </td>
+                <td>
+                    <div class="display-label">
+                       银行账户
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Model.BankAccount
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="display-label">
+                        联系人
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Model.ContactName
+                    </div>
+                </td>
+                <td>
+                    <div class="display-label">
+                       收款人
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Model.BankReceiver
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="display-label">
+                       联系电话
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Model.ContactPhoneNo
+                    </div>
+                </td>
+                <td>
+                    <div class="display-label">
+                        地址
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Model.Address
+                    </div>
+                </td>
+            </tr>
+        </table>
+</fieldset>
+<p>
+   <input type="submit" id="btnBack" value="返回" class="button" onclick="window.location='@Url.Action("Index")'" />
+</p>
+

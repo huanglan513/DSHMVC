@@ -1,0 +1,97 @@
+﻿@model DSHOrder.Web.Models.GroupByFlowInfo
+@using DSHOrder.Web.Models;
+@using DSHOrder.Web.Common.Application.GroupByGroup;
+@{
+    GBGField fh = ViewData["fh"] as GBGField;
+    var htmlAttr = new { width = "150px" };
+    var ApproveXSZLIsCrossCityPermission = fh.CalcField(m => m.GroupByGroup.ApproveXSZLIsCrossCity);
+}
+@if (fh.CalcField(m => m.GroupByGroup.ApproveXSZLIsCrossCity) == GBGFlowEnumPermission.CanWrite)
+{
+    <script language="javascript" type="text/javascript">
+    $(function () {
+        $("select[id$='GroupByGroup_ApproveXSZLCrossCityID']").change(
+            function(){ 
+                ChangeCity_Cross();
+        });
+
+        ChangeCity_Cross();
+
+        SetControlSize_Cross();
+    })
+
+    function SetControlSize_Cross()
+    {
+        $("#GroupByGroup_ApproveXSZLCrossCityID").width(150);
+        $("#GroupByGroup_ApproveXSZLCrossCityUserID").width(150);
+    }
+
+    function ChangeCity_Cross()
+    {
+        var cityId = $("select[id$='GroupByGroup_ApproveXSZLCrossCityID']").val();
+        var url ="@Url.Action("GetUsersByCityId", "Application")"; 
+        var params = { 'cityId': cityId };
+
+        BindSelect("GroupByGroup_ApproveXSZLCrossCityUserID", url, params);
+    }
+    </script>
+}
+@Html.HiddenFor(m => m.Sales)
+<table id="NoBorderTable" border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 100%">
+    <tr>
+        @{
+            bool IsCrossCity = false;
+            if (Model.GroupByGroup.ApproveXSZLIsCrossCity.HasValue)
+            {
+                IsCrossCity = Model.GroupByGroup.ApproveXSZLIsCrossCity.Value;
+            }
+        }
+        @if (ApproveXSZLIsCrossCityPermission == GBGFlowEnumPermission.CanWrite)
+        { 
+            <td width="150">
+                @Html.CheckBox("GroupByGroup_ApproveXSZLIsCrossCity", IsCrossCity)
+                是否跨城市
+            </td>
+            <td width="40">
+                城市:
+            </td>
+            <td width="160">
+                @Html.DropDownList("GroupByGroup_ApproveXSZLCrossCityID", GroupByFlowInfo.CityList, htmlAttr)
+            </td>
+            <td width="50">
+                业务员:
+            </td>
+            <td width="150">
+                @Html.DropDownList("GroupByGroup_ApproveXSZLCrossCityUserID", GroupByFlowInfo.EmptySelectList, htmlAttr)
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        }
+        else if (ApproveXSZLIsCrossCityPermission == GBGFlowEnumPermission.CanRead)
+        {
+            <td width="150">
+                @Html.CheckBox("GroupByGroup_ApproveXSZLIsCrossCity", IsCrossCity, new { disabled = "disabled" })
+                是否跨城市
+            </td>
+           if (IsCrossCity)
+           {
+            <td width="40">
+                城市:
+            </td>
+            <td width="160">
+                @Html.DisplayFor(m => m.GroupByGroup.City.CityName)
+            </td>
+            <td width="50">
+                业务员:
+            </td>
+            <td width="150">
+                @Html.DisplayFor(m => m.GroupByGroup.ApproveXSZLCrossCityUser.UserName)
+            </td>
+           }
+            <td>
+                &nbsp;
+            </td>                     
+        }
+    </tr>
+</table>

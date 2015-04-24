@@ -1,0 +1,149 @@
+﻿@model IEnumerable<DSHOrder.Entity.OrderDetail>
+@{
+    ViewBag.Title = "订单管理";
+}
+@*
+<h2>淘宝订单管理</h2>*@
+@using (Html.BeginForm())
+{
+    <table width="100%" border="0">
+        <tr>
+            <td>
+                <input type="submit" id="btnGetLatest" value="获取最新订单数据" class="button" name="getlatest" />
+            </td>
+            @if (ViewBag.IsEmptyOrders != null && ViewBag.IsEmptyOrders)
+            {
+                <td>
+                    <input type="submit" id="btnGetAll" value="获取全部订单数据" class="button" name="getAll" />
+                    <span>（初始化数据库数据，只执行一次）</span>
+                </td>     
+            }
+            <td>
+                淘宝页数
+                @Html.TextBox("PageIndex")
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <span>@ViewBag.OutputResult</span>
+            </td>
+        </tr>
+    </table> 
+}
+@if (Model != null && Model.Count() > 0)
+{
+    <table>
+        <tr>
+            <th>
+                GroupByItemID
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                BuyerNick
+            </th>
+            <th>
+                ShippingType
+            </th>
+            <th>
+                Tid
+            </th>
+            <th>
+                Oid
+            </th>
+            <th>
+                AlipayNo
+            </th>
+            <th>
+                TotalFee
+            </th>
+             <th>
+                ApplyRefundTime
+            </th>
+             <th>
+                UpdateRefundTime
+            </th>
+             <th>
+                OrderStatus
+            </th>
+             <th>
+                RefundStatus
+            </th>
+             <th>
+                HasGoodReturn
+            </th>
+             <th>
+                GoodReturnTime
+            </th>
+             <th>
+                RefundFee
+            </th>
+             <th>
+                Payment
+            </th>
+             <th>
+                Reason
+            </th>
+             <th>
+                Desc
+            </th>
+             <th>
+                CreateBy
+            </th>
+             <th>
+                CreateTime.ToString()
+            </th>
+             <th>
+                TaobaoProductID
+            </th>            
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.GroupByItemID
+                </td>
+                <td>@item.Address
+                </td>
+                <td>@item.BuyerNick
+                </td>
+                <td>@item.ShippingType
+                </td>
+                <td>@item.Tid
+                </td>
+                <td>@item.Oid
+                </td>
+                <td>@item.AlipayNo
+                </td>
+                <td>@item.TotalFee
+                </td>
+                <td>@item.ApplyRefundTime
+                </td>
+                <td>@item.UpdateRefundTime
+                </td>
+                <td>@item.OrderStatus
+                </td>
+                <td>@item.RefundStatus
+                </td>
+                <td>@item.HasGoodReturn
+                </td>
+                <td>@item.GoodReturnTime
+                </td>
+                <td>@item.RefundFee
+                </td>
+                <td>@item.Payment                
+                </td>
+                <td>@item.Reason
+                </td>
+                <td>@item.Desc
+                </td>
+                <td>@item.CreateBy
+                </td>
+                <td>@item.CreateTime.ToString()
+                </td>
+                <td>@item.TaobaoProductID
+                </td>               
+            </tr>     
+        }
+    </table> 
+}

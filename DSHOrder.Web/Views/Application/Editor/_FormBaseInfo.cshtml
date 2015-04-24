@@ -1,0 +1,749 @@
+﻿@model DSHOrder.Web.Models.GroupByFlowInfo
+@{
+    ViewBag.Title = "_FormBaseInfo";
+}
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("#btnSelectCustomer").click(
+                function () {
+                    $("#dialog-form").dialog("open");
+                }
+                );
+
+    });
+
+    function SelectCustomer(customerID) {
+        $("#dialog-form").dialog("close");
+
+        $.ajaxSetup({ async: false}); 
+
+        var urlCustomer="@Url.Action("GetCustomer", "Application")";
+        $.getJSON(urlCustomer,{'customerID':customerID},function(data){
+            alert(data);
+        });
+    }
+
+
+
+    
+
+</script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <table width="100%" border="1">
+            <tr>
+                <td style="width: 150px" align="right">
+                    团购合同编号
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table style="width: 100%" border="1">
+                        <tr>
+                            <td style="width: 150px" align="right">
+                                所属行业
+                            </td>
+                            <td style="width: 250px">
+                                @Html.DisplayFor(model => model.StartForm.IndustryName)
+                            </td>
+                            <td style="width: 50px" rowspan="3">
+                                业务员
+                            </td>
+                            <td rowspan="3">
+                                业务员value
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                行业细类
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.StartForm.SubIndustryName)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                商家公司全称
+                            </td>
+                            <td>
+                                <input id="btnSelectCustomer" type="button" class="button" value="选择" />
+                                商家公司全称value
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    服务产品名称
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table style="width: 100%" border="1">
+                        <tr>
+                            <td style="width: 150px" align="right">
+                                产品市场价
+                            </td>
+                            <td>
+                                产品市场价value
+                            </td>
+                            <td align="right">
+                                产品结算价
+                            </td>
+                            <td>
+                                产品结算价value
+                            </td>
+                            <td align="right">
+                                建议上线价格
+                            </td>
+                            <td>
+                                建议上线价格value
+                            </td>
+                            <td align="right">
+                                其它服务费用
+                            </td>
+                            <td>
+                                其它服务费用value
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table style="width: 100%" border="1">
+                        <tr>
+                            <td style="width: 150px" align="right">
+                                参团店数
+                            </td>
+                            <td style="width: 200px">
+                                参团店数value
+                            </td>
+                            <td align="right" style="width: 150px">
+                                参团店名
+                            </td>
+                            <td>
+                                参团店名value
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    服务产品描述
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    结算方式
+                </td>
+                <td>
+                    结算方式value
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table style="width: 100%" border="1">
+                        <tr>
+                            <td style="width: 150px">
+                                第一次计划打款日期
+                            </td>
+                            <td>
+                                第一次计划打款日期value
+                            </td>
+                            <td style="width: 150px">
+                                第二次计划打款日期
+                            </td>
+                            <td>
+                                第二次计划打款日期value
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 150px">
+                                第三次计划打款日期
+                            </td>
+                            <td>
+                                第三次计划打款日期value
+                            </td>
+                            <td style="width: 150px">
+                                第四次计划打款日期
+                            </td>
+                            <td>
+                                第四次计划打款日期value
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 150px">
+                                第五次计划打款日期
+                            </td>
+                            <td>
+                                第五次计划打款日期value
+                            </td>
+                            <td style="width: 150px">
+                                第六次计划打款日期
+                            </td>
+                            <td>
+                                第六次计划打款日期value
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 150px">
+                                第七次计划打款日期
+                            </td>
+                            <td>
+                                第七次计划打款日期value
+                            </td>
+                            <td style="width: 150px">
+                                第八次计划打款日期
+                            </td>
+                            <td>
+                                第八次计划打款日期value
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 150px">
+                                第九次计划打款日期
+                            </td>
+                            <td>
+                                第九次计划打款日期value
+                            </td>
+                            <td style="width: 150px">
+                                第十次计划打款日期
+                            </td>
+                            <td>
+                                第十次计划打款日期value
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table style="width: 100%" border="1">
+                        <tr>
+                            <td style="width: 150px" rowspan="4">
+                                乙方相关对接人
+                            </td>
+                            <td>
+                                对接环节
+                            </td>
+                            <td>
+                                联系人
+                            </td>
+                            <td>
+                                固定电话
+                            </td>
+                            <td>
+                                手机号码
+                            </td>
+                            <td>
+                                QQ号码
+                            </td>
+                            <td>
+                                E-mail
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                页面设计
+                            </td>
+                            <td>
+                                联系人
+                            </td>
+                            <td>
+                                固定电话
+                            </td>
+                            <td>
+                                手机号码
+                            </td>
+                            <td>
+                                QQ号码
+                            </td>
+                            <td>
+                                E-mail
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                投诉处理
+                            </td>
+                            <td>
+                                联系人
+                            </td>
+                            <td>
+                                固定电话
+                            </td>
+                            <td>
+                                手机号码
+                            </td>
+                            <td>
+                                QQ号码
+                            </td>
+                            <td>
+                                E-mail
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                财务对账
+                            </td>
+                            <td>
+                                联系人
+                            </td>
+                            <td>
+                                固定电话
+                            </td>
+                            <td>
+                                手机号码
+                            </td>
+                            <td>
+                                QQ号码
+                            </td>
+                            <td>
+                                E-mail
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    产品图片1
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    产品图片2
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    资料路径
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table style="width: 100%" border="1">
+                        <tr>
+                            <td style="width: 150px">
+                                聚划算历史案例
+                            </td>
+                            <td style="width: 300px">
+                            </td>
+                            <td style="width: 150px">
+                                平均评分
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    其他历史案例
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    点评/口碑等网上评价(网址)
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    团购平台
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+        ====================
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.GroupByGroupName)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.GroupByGroupName)
+                    @Html.ValidationMessageFor(model => model.GroupByGroupName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.CustomerID)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.CustomerID)
+                    @Html.ValidationMessageFor(model => model.CustomerID)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.SubIndustryID)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.SubIndustryID)
+                    @Html.ValidationMessageFor(model => model.SubIndustryID)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.OriginalPrice)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.OriginalPrice)
+                    @Html.ValidationMessageFor(model => model.OriginalPrice)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.GroupByContent)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.GroupByContent)
+                    @Html.ValidationMessageFor(model => model.GroupByContent)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.SettlementType)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.SettlementType)
+                    @Html.ValidationMessageFor(model => model.SettlementType)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.RefundType)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.RefundType)
+                    @Html.ValidationMessageFor(model => model.RefundType)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.LogisticCharge)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.LogisticCharge)
+                    @Html.ValidationMessageFor(model => model.LogisticCharge)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Status)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Status)
+                    @Html.ValidationMessageFor(model => model.Status)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.GroupByContractNo)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.GroupByContractNo)
+                    @Html.ValidationMessageFor(model => model.GroupByContractNo)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.CreateBy)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.CreateBy)
+                    @Html.ValidationMessageFor(model => model.CreateBy)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.CreateTime)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.CreateTime)
+                    @Html.ValidationMessageFor(model => model.CreateTime)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.LastModifyBy)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.LastModifyBy)
+                    @Html.ValidationMessageFor(model => model.LastModifyBy)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.LastModifyTime)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.LastModifyTime)
+                    @Html.ValidationMessageFor(model => model.LastModifyTime)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.DeleteInd)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.DeleteInd)
+                    @Html.ValidationMessageFor(model => model.DeleteInd)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.GroupByCodeNo)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.GroupByCodeNo)
+                    @Html.ValidationMessageFor(model => model.GroupByCodeNo)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.FinalProfit)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.FinalProfit)
+                    @Html.ValidationMessageFor(model => model.FinalProfit)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ProductPicture1FileID)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ProductPicture1FileID)
+                    @Html.ValidationMessageFor(model => model.ProductPicture1FileID)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ProductPicture2FileID)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ProductPicture2FileID)
+                    @Html.ValidationMessageFor(model => model.ProductPicture2FileID)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.MaterialFileID)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.MaterialFileID)
+                    @Html.ValidationMessageFor(model => model.MaterialFileID)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveBMJLUserID)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveBMJLUserID)
+                    @Html.ValidationMessageFor(model => model.ApproveBMJLUserID)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveBMJLActionTime)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveBMJLActionTime)
+                    @Html.ValidationMessageFor(model => model.ApproveBMJLActionTime)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveBMJLResult)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveBMJLResult)
+                    @Html.ValidationMessageFor(model => model.ApproveBMJLResult)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveBMJLMemo)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveBMJLMemo)
+                    @Html.ValidationMessageFor(model => model.ApproveBMJLMemo)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveFKRBUserID)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveFKRBUserID)
+                    @Html.ValidationMessageFor(model => model.ApproveFKRBUserID)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveFKRBActionTime)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveFKRBActionTime)
+                    @Html.ValidationMessageFor(model => model.ApproveFKRBActionTime)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveFKRBResult)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveFKRBResult)
+                    @Html.ValidationMessageFor(model => model.ApproveFKRBResult)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveFKRBMemo)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveFKRBMemo)
+                    @Html.ValidationMessageFor(model => model.ApproveFKRBMemo)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveZJLUserID)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveZJLUserID)
+                    @Html.ValidationMessageFor(model => model.ApproveZJLUserID)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveZJLActionTime)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveZJLActionTime)
+                    @Html.ValidationMessageFor(model => model.ApproveZJLActionTime)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveZJLResult)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveZJLResult)
+                    @Html.ValidationMessageFor(model => model.ApproveZJLResult)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveZJLMemo)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveZJLMemo)
+                    @Html.ValidationMessageFor(model => model.ApproveZJLMemo)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveXSZLUserID)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveXSZLUserID)
+                    @Html.ValidationMessageFor(model => model.ApproveXSZLUserID)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveXSZLActionTime)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveXSZLActionTime)
+                    @Html.ValidationMessageFor(model => model.ApproveXSZLActionTime)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveXSZLIsCrossCity)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveXSZLIsCrossCity)
+                    @Html.ValidationMessageFor(model => model.ApproveXSZLIsCrossCity)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveXSZLCrossCityID)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveXSZLCrossCityID)
+                    @Html.ValidationMessageFor(model => model.ApproveXSZLCrossCityID)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveXSZLCrossCityUserID)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveXSZLCrossCityUserID)
+                    @Html.ValidationMessageFor(model => model.ApproveXSZLCrossCityUserID)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ApproveXSZLContractFileID)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ApproveXSZLContractFileID)
+                    @Html.ValidationMessageFor(model => model.ApproveXSZLContractFileID)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.CurrentNode)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.CurrentNode)
+                    @Html.ValidationMessageFor(model => model.CurrentNode)
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
